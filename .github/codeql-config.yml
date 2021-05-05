@@ -12,3 +12,4 @@ paths-ignore:
   - '**/assets/js/chart*.js'
   - '**/*.html'
   - '**/*.css'
+  - '**/public/static/js/**/*chunk*.*'
