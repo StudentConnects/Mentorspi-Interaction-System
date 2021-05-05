@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/492321cf19fd41cbab5fd2d74e040e2b)](https://app.codacy.com/gh/StudentConnects/Mentorspi-Interaction-System?utm_source=github.com&utm_medium=referral&utm_content=StudentConnects/Mentorspi-Interaction-System&utm_campaign=Badge_Grade_Settings)
 [![Node.js CI](https://github.com/StudentConnects/Mentorspi-Interaction-System/actions/workflows/node.js.yml/badge.svg?branch=main&event=push)](https://github.com/StudentConnects/Mentorspi-Interaction-System/actions/workflows/node.js.yml)
 
 [![CodeQL](https://github.com/StudentConnects/Mentorspi-Interaction-System/actions/workflows/codeql-analysis.yml/badge.svg?branch=main&event=push)](https://github.com/StudentConnects/Mentorspi-Interaction-System/actions/workflows/codeql-analysis.yml)
