@@ -1,0 +1,15 @@
+name: "CodeQL"
+
+
+queries:
+  - uses: security-and-quality
+paths-ignore: 
+  - node_modules
+  - '**/*.test.js'
+  - '**/assets/js/Chart.bundle.js'
+  - '**/assets/plugins/**/*.*'
+  - '**/assets/js/material*.js'
+  - '**/assets/js/chart*.js'
+  - '**/*.html'
+  - '**/*.css'
+  - '**/public/static/js/**/*chunk*.*'
