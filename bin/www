@@ -4,8 +4,11 @@
 /**
  * Module dependencies.
  */
+if(! process.env.NODE_ENV || process.env.NODE_ENV !== "production") {
+  const dotenv = require("dotenv").config()
+}
 
-const debug = require('debug')('abc:server');
+const debug = require('debug')('mentorship:server:www');
 const http = require('http');
 const app = require('../server');
 
