@@ -4,6 +4,9 @@
   "description": "",
   "main": "server.js",
   "private": true,
+  "engines": {
+    "node": ">=14.15.4"
+  },
   "scripts": {
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
@@ -48,8 +51,17 @@
     "chai": "4.2.0",
     "cors": "2.8.5",
     "dotenv": "8.2.0",
+    "eslint": "7.26.0",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-security": "1.4.0",
     "mocha": "8.1.0",
     "morgan": "1.10.0",
     "nodemon": "2.0.4"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "public/*",
+      "*.test.js"
+    ]
   }
 }
