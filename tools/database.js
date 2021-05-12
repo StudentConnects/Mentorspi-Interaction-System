@@ -1,9 +1,11 @@
+/* eslint-disable node/no-unpublished-require */
 const redis = require('ioredis');
 const {
     Pool
 } = require('pg');
 
 if (!process.env.NODE_ENV || process.env.NODE_ENV !== "production") {
+    // eslint-disable-next-line no-unused-vars 
     const dotenv = require("dotenv").config()
 }
 

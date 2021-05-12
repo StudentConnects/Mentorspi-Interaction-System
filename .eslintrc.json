@@ -16,7 +16,7 @@
     "parserOptions": {
         "ecmaVersion": 12
     },
-    "ignorePatterns": ["**/plugins/**/*.*", "**/*.min.js", "**/core/**/*.*", "/public/**/*.js", "**/node_modules/**/*.*"],
+    "ignorePatterns": ["**/plugins/**/*.*", "**/*.min.js", "**/core/**/*.*", "/public/**/*.js", "**/node_modules/**/*.*", "**/*.spec.js", "./bin/www"],
     "rules": {
     }
 }
