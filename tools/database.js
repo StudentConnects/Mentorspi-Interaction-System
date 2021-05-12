@@ -4,20 +4,25 @@ const {
     Pool
 } = require('pg');
 
+let postgreDatabase;
 if (!process.env.NODE_ENV || process.env.NODE_ENV !== "production") {
     // eslint-disable-next-line no-unused-vars 
-    const dotenv = require("dotenv").config()
+    const dotenv = require("dotenv").config();
+    postgreDatabase = new Pool({
+        connectionString: process.env.DATABASE_URL,
+        max: 20,
+        ssl: {
+            rejectUnauthorized: false
+        }
+    });
+} else {
+    postgreDatabase = new Pool({
+        connectionString: process.env.DATABASE_URL,
+        max: 20
+    });
 }
 
 const redisDatabase = new redis(process.env.STACKHERO_REDIS_URL_TLS);
-
-const postgreDatabase = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    max: 20,
-    ssl: {
-        rejectUnauthorized: false
-    }
-});
 
 /**
  * @param  {String} userName Username of the user
@@ -138,8 +143,6 @@ const registerUser = (userName, organization, email, password, phoneNumber, phot
     query += queryValues;
     return (postgreDatabase.query(query, values));
 }
-
-
 
 module.exports = {
     redisDatabase,
