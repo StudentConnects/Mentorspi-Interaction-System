@@ -1,7 +1,7 @@
 {
-  "name": "new-view",
+  "name": "mentorship-interaction-system",
   "version": "1.0.0",
-  "description": "Many times, I want to watch a movie so I google whether the movie/season is available on my streaming service Netflix/Amazon video. So a central directory where I could search it and maybe even set notification about when it will be available. That would be awesome.",
+  "description": "",
   "main": "server.js",
   "private": true,
   "scripts": {
@@ -36,14 +36,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Omkaragrawal/NEW-VIEW.git"
+    "url": "git+https://github.com/StudentConnects/Mentorspi-Interaction-System.git"
   },
   "author": "OMKAR AGRAWAL <omkar3654@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Omkaragrawal/NEW-VIEW/issues"
+    "url": "https://github.com/StudentConnects/Mentorspi-Interaction-System/issues"
   },
-  "homepage": "https://github.com/Omkaragrawal/NEW-VIEW#readme",
+  "homepage": "https://github.com/StudentConnects/Mentorspi-Interaction-System#readme",
   "devDependencies": {
     "chai": "4.2.0",
     "cors": "2.8.5",

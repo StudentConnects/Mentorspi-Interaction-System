@@ -44,11 +44,11 @@ try {
   debug("Trial");
 
   const redisClient = new redis(process.env.STACKHERO_REDIS_URL_TLS);
-// (async () => {
-//   debug("into IIFE");
-//   // console.log(redisClient);
-//   debug(await redisClient.get("abcd"));
-// })()
+  // (async () => {
+  //   debug("into IIFE");
+  //   // console.log(redisClient);
+  //   debug(await redisClient.get("abcd"));
+  // })()
   const sessionStore = new RedisStore({
     client: redisClient,
     ttl: ONE_DAY
@@ -118,6 +118,7 @@ try {
       // rolling: true
     }));
   }
+
   app.use((req, res, next) => {
     req.db = pool;
     next();
