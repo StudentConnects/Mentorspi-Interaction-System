@@ -3,13 +3,15 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const {
-  Pool
-} = require('pg');
+// const {
+//   Pool
+// } = require('pg');
+
+const { redisDatabase:redisClient, postgreDatabase:pool } = require('./tools/database');
 const helmet = require("helmet");
 const compression = require("compression");
 const session = require('express-session');
-const redis = require('ioredis');
+// const redis = require('ioredis');
 const RedisStore = require('connect-redis')(session);
 const {
   RateLimiterRedis
@@ -27,35 +29,22 @@ const usersRouter = require('./routes/users');
 const app = express();
 const ONE_DAY = 1000 * 60 * 60 * 24;
 const hrs_2 = 1000 * 60 * 60 * 2;
-// const session_options = {
-//     ttl: ONE_DAY,
-//     checkExpirationInterval: hrs_2,
-//     createDatabaseTable: true,
-//     schema: {
-//         tableName: 'sessions',
-//         columnNames: {
-//             session_id: 'session_id',
-//             expires: 'expires',
-//             data: 'data'
-//         }
-//     }
-// };
 try {
   debug("Trial");
 
-  const redisClient = new redis(process.env.STACKHERO_REDIS_URL_TLS);
-// (async () => {
-//   debug("into IIFE");
-//   // console.log(redisClient);
-//   debug(await redisClient.get("abcd"));
-// })()
+  // const redisClient = new redis(process.env.STACKHERO_REDIS_URL_TLS);
+  // (async () => {
+  //   debug("into IIFE");
+  //   // console.log(redisClient);
+  //   debug(await redisClient.get("abcd"));
+  // })()
   const sessionStore = new RedisStore({
     client: redisClient,
     ttl: ONE_DAY
   });
-  const pool = new Pool({
-    connectionString: process.env.DATABASE_URL
-  });
+  // const pool = new Pool({
+  //   connectionString: process.env.DATABASE_URL
+  // });
 
   // attach all the middleware
   app.use(compression());
@@ -118,6 +107,7 @@ try {
       // rolling: true
     }));
   }
+
   app.use((req, res, next) => {
     req.db = pool;
     next();

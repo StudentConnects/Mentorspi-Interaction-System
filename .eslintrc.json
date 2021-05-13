@@ -1,0 +1,22 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es2021": true,
+        "node": true
+    },
+    "plugins": [
+        "node",
+        "security"
+      ],
+    "extends": ["eslint:recommended",
+        "plugin:node/recommended",
+        "plugin:security/recommended"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 12
+    },
+    "ignorePatterns": ["**/plugins/**/*.*", "**/*.min.js", "**/core/**/*.*", "/public/**/*.js", "**/node_modules/**/*.*", "**/*.spec.js", "./bin/www"],
+    "rules": {
+    }
+}
