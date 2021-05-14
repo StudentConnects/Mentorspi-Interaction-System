@@ -3,6 +3,9 @@ const redis = require('ioredis');
 const {
     Pool
 } = require('pg');
+const MongoClient = require('mongodb').MongoClient;
+const assert = require('assert');
+
 
 let postgreDatabase;
 if (!process.env.NODE_ENV || process.env.NODE_ENV !== "production") {
@@ -23,7 +26,7 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV !== "production") {
 }
 
 const redisDatabase = new redis(process.env.STACKHERO_REDIS_URL_TLS);
-
+const client = new MongoClient(process.env.MongoURL);
 /**
  * @param  {String} userName Username of the user
  * @param  {Number} organization The organization that user registers for
@@ -35,10 +38,8 @@ const redisDatabase = new redis(process.env.STACKHERO_REDIS_URL_TLS);
  * @param  {String} googleId='' GoogleID of the user can be Empty
  * @param  {Boolean} isVerified=false Is user verified? Default to false
  * @param  {Boolean} isActive=false Is user allowed to access the system? Default to false
- * @param  {String} userType='student' UserType of the user (for future use) current default to student
- * @param  {String} userType='mentor' 
- * @param  {String} userType='subAdmin'
- * @param  {String} userType='superAdmin'
+ * @param  {'student' | 'mentor' | 'subAdmin' | 'superAdmin'} userType UserType of the user (for future use) current default to student
+ * @returns {Promise} promise
  */
 const registerUser = (userName, organization, email, password, phoneNumber, photoUrl = '', description = 'No description provided', googleId = '', isVerified = false, isActive = false, userType = 'student') => {
 
@@ -142,10 +143,62 @@ const registerUser = (userName, organization, email, password, phoneNumber, phot
     queryValues += ') returning *;';
     query += queryValues;
     return (postgreDatabase.query(query, values));
-}
+};
+
+/**
+ * @param  {String} userEmail The email to get login details
+ * @returns {Promise} promise
+ */
+const loginUser = (userEmail) => {
+    if (!userEmail) {
+        return (Promise.reject(new Error('Now Email Provided')));
+    }
+    return (postgreDatabase.query('Select user_table.*, o."subscriptionLeft" as "orgSubscription", o.name as "orgName", o."isActive" as "orgIsActive", o."isVerified" as "orgIsVerified" from user_table inner join organisations o on user_table.organization = o.id  where user_table.email =$1', [userEmail]));
+};
+
+/**
+ * @param  {String} orgName Organization's Name
+ * @param  {String} address Organization's Address
+ * @param  {Number} orgAdmin Organization Admin user ID
+ * @param  {String} contactEmail Organization Contact Email
+ * @param  {String} contactPhone Organization Contact Phone
+ * @param  {Number} subscriptionLeft Subscription time for the Organization
+ * @param  {URL} photoUrl="https://google.com/imghp"
+ * @param  {Boolean} isVerified=false Is organization Verified by defaults to false
+ * @param  {Boolean} isActive=false Set organization Active defaults to false
+ */
+const registerCompany = (orgName, address, orgAdmin, contactEmail, contactPhone, subscriptionLeft = 0, photoUrl = "https://google.com/imghp", isVerified = false, isActive = false) => {
+    if(!orgName) {
+        return(Promise.reject(new Error('Organization Name not supplied')));
+    }
+
+    if(!address) {
+        return(Promise.reject(new Error('Address not supplied')));
+    }
+
+    if(!orgAdmin) {
+        return(Promise.reject(new Error('Organization Admin not set')));
+    }
+
+    if(!contactEmail) {
+        return(new Error('Contact Email not provided'));
+    }
+
+    if(!contactPhone) {
+        return(new Error('Contact Phone not provided'));
+    }
+
+    if(subscriptionLeft < 0) {
+        return(new Error('Invalid Subscription provided'));
+    }
+
+    return(postgreDatabase.query("insert into organisations (name, address, orgAdmin, contactEmail, contactPhone, subscriptionLeft, photoUrl, isVerified, isActive) values ($1, $2, $3, $4, $5, $6, $7, $8, $9) and update user_table set user_type='subAdmin' where id=$3 returning *;", [orgName, address, orgAdmin, contactEmail, contactPhone, subscriptionLeft, photoUrl, isVerified, isActive]))
+};
 
 module.exports = {
-    redisDatabase,
     postgreDatabase,
-    registerUser
+    redisDatabase,
+    registerUser,
+    loginUser,
+    registerCompany
 }
