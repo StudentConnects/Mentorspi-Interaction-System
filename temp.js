@@ -1,12 +1,16 @@
 if (!process.env.NODE_ENV || process.env.NODE_ENV !== "production") {
-    const dotenv = require("dotenv").config()
-}
+  const dotenv = require("dotenv").config()
+};
 
-const { expect } = require("chai");
-const Ioredis = require('ioredis');
-const { post } = require("./server");
+// const {
+//   expect
+// } = require("chai");
 
 // (async () => {
+// const Ioredis = require('ioredis');
+// const {
+//   post
+// } = require("./server");
 
 //   const redis = new Ioredis(process.env.STACKHERO_REDIS_URL_TLS);
 
@@ -48,18 +52,16 @@ const { post } = require("./server");
 
 
 (async () => {
-  const MongoClient = require('mongodb').MongoClient;
-  const assert = require('assert');
-  const client = new MongoClient(process.env.MongoURL, { useNewUrlParser: true, useUnifiedTopology: true });
+  const {
+    chatDatabase,
+    mongoClient
+  } = require('./tools/database');
 
-  client.connect(async (err) => {
-    assert.strictEqual(null, err);
-  });
-  const collection = client.db("Chats").collection("Chats");
-  // perform actions on the collection object
+  const collection = await (await chatDatabase).collection('Chats');
+
   const reply = await collection.insertOne({
-    "Name" : 'Trial Entry',
-    "Value" : 'Chat System'
+    "Name": 'Trial Entry',
+    "Value": 'Chat System'
   });
   console.log(reply.insertedCount, reply.insertedId, reply.ops[0])
 
@@ -67,8 +69,15 @@ const { post } = require("./server");
     "_id": reply.insertedId
   });
 
-  console.log(deleteReply.deletedCount);
-  console.log(deleteReply.result);
-  await client.close();
+  console.log(await deleteReply.deletedCount);
+  console.log(await deleteReply.result);
+  try {
+    console.log(await mongoClient.isConnected());
+    const close = await mongoClient.close();
+    console.log(await mongoClient.isConnected());
+    console.log(await close);
+  } catch (error) {
+    console.log(error);
+  }
 
-})()
+})();

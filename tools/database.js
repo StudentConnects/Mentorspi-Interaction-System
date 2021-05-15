@@ -4,7 +4,6 @@ const {
     Pool
 } = require('pg');
 const MongoClient = require('mongodb').MongoClient;
-const assert = require('assert');
 
 
 let postgreDatabase;
@@ -26,7 +25,25 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV !== "production") {
 }
 
 const redisDatabase = new redis(process.env.STACKHERO_REDIS_URL_TLS);
-const client = new MongoClient(process.env.MongoURL);
+const mongoClient = new MongoClient(process.env.MongoURL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    maxPoolSize: 490,
+    minPoolSize: 5
+});
+let chatDatabase;
+
+(async () => {
+    try {
+        await mongoClient.connect();
+        chatDatabase = await mongoClient.db("Chats");
+    } catch (err) {
+        chatDatabase = err;
+        console.log(err);
+        return (err);
+    }
+})();
+
 /**
  * @param  {String} userName Username of the user
  * @param  {Number} organization The organization that user registers for
@@ -168,35 +185,37 @@ const loginUser = (userEmail) => {
  * @param  {Boolean} isActive=false Set organization Active defaults to false
  */
 const registerCompany = (orgName, address, orgAdmin, contactEmail, contactPhone, subscriptionLeft = 0, photoUrl = "https://google.com/imghp", isVerified = false, isActive = false) => {
-    if(!orgName) {
-        return(Promise.reject(new Error('Organization Name not supplied')));
+    if (!orgName) {
+        return (Promise.reject(new Error('Organization Name not supplied')));
     }
 
-    if(!address) {
-        return(Promise.reject(new Error('Address not supplied')));
+    if (!address) {
+        return (Promise.reject(new Error('Address not supplied')));
     }
 
-    if(!orgAdmin) {
-        return(Promise.reject(new Error('Organization Admin not set')));
+    if (!orgAdmin) {
+        return (Promise.reject(new Error('Organization Admin not set')));
     }
 
-    if(!contactEmail) {
-        return(new Error('Contact Email not provided'));
+    if (!contactEmail) {
+        return (new Error('Contact Email not provided'));
     }
 
-    if(!contactPhone) {
-        return(new Error('Contact Phone not provided'));
+    if (!contactPhone) {
+        return (new Error('Contact Phone not provided'));
     }
 
-    if(subscriptionLeft < 0) {
-        return(new Error('Invalid Subscription provided'));
+    if (subscriptionLeft < 0) {
+        return (new Error('Invalid Subscription provided'));
     }
 
-    return(postgreDatabase.query("insert into organisations (name, address, orgAdmin, contactEmail, contactPhone, subscriptionLeft, photoUrl, isVerified, isActive) values ($1, $2, $3, $4, $5, $6, $7, $8, $9) and update user_table set user_type='subAdmin' where id=$3 returning *;", [orgName, address, orgAdmin, contactEmail, contactPhone, subscriptionLeft, photoUrl, isVerified, isActive]))
+    return (postgreDatabase.query("insert into organisations (name, address, orgAdmin, contactEmail, contactPhone, subscriptionLeft, photoUrl, isVerified, isActive) values ($1, $2, $3, $4, $5, $6, $7, $8, $9) and update user_table set user_type='subAdmin' where id=$3 returning *;", [orgName, address, orgAdmin, contactEmail, contactPhone, subscriptionLeft, photoUrl, isVerified, isActive]))
 };
 
 module.exports = {
     postgreDatabase,
+    chatDatabase,
+    mongoClient,
     redisDatabase,
     registerUser,
     loginUser,
