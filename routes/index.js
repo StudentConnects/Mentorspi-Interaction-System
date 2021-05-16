@@ -18,6 +18,9 @@ const ValidatorPizzaClient = require("validator-pizza-node");
 const formidable = require('formidable');
 const passport = require("passport");
 
+//imorting db functions
+const db = require('../tools/database')
+
 const emailVerifier = new ValidatorPizzaClient().validate;
 const formOptions = {
     uploadDir: path.join(__dirname, "..", "custom-images"),
@@ -32,6 +35,7 @@ const formOptions = {
 
 router.get("/", (req, res) => {
     debug("into /");
+    console.log('into path');
     res.send(path.join(__dirname, "..", "public", "index.html"));
 });
 router.all('/test', function (req, res) {
@@ -76,7 +80,7 @@ router.post("/login", (req, res, next) => {
 
 router.post('/register',
     checkSchema({
-        "fullname": {
+        "userName": {
             in: ["body"],
             notEmpty: true,
             isString: true,
@@ -163,16 +167,16 @@ router.post('/register',
                 }
             }
         },
-        "institute_name": {
+        "institute_id": {
             in: ["body"],
             notEmpty: true,
-            isString: true,
-            isAlpha: true,
+            // isString: true,
+            // isAlpha: true,
             trim: true,
             isLength: {
                 options: {
                     max: 50,
-                    min: 4
+                    min: 1
                 },
                 errorMessage: "Needs to be min: 4 Max 50"
             }
@@ -264,43 +268,60 @@ router.post('/register',
                 errors: results.array()
             });
         } else {
-            const verificationID = nanoid();
+            console.log(req.body)
+            
+            
+            db.registerUser(req.body.userName, req.body.institute_id, req.body.email, req.body.password, req.body.mobile, req.body.address, req.body.city, req.body.country, req.body.state, req.body.postcode, req.body.photo)
+            .then((data) =>{
+                console.log(data)
+                res.send(' Signup Sucessful.');
+            }).catch((err)=>{
+                console.log(err)
+                if(err.code == '23505'){
+                    res.send('User already Exists.')
+                }else{
+                    res.send(err.detail);
+                }
+            })
+
+
+            // const verificationID = nanoid();
             // console.table([{
             //     ...req.body
             // }]);
-
+            
             // debug("Received at /register");
-            req.db.query("CALL Reg(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", [req.body.email, req.body.password, req.body.fullname, req.body.mobile, req.body.address, req.body.city, req.body.country, req.body.postcode, req.body.institute_name, req.body.photo, verificationID])
-                .then((...results) => {
-                    const data = results[0][0][0];
-                    console.log(...results);
-                    console.table([{
-                        id: data.id,
-                        email: data.email,
-                        status: data["@status"],
-                        isVerified: data.isVerified
-                    }]);
-                    // res.json(req.body);
-                    // res.redirect("/registrationSuccess")
-                    // debug("Response Sent successfully");
-                    // res.send("Registration Successful");
+            // req.db.query("CALL Reg(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", [req.body.email, req.body.password, req.body.fullname, req.body.mobile, req.body.address, req.body.city, req.body.country, req.body.postcode, req.body.institute_name, req.body.photo, verificationID])
+            //     .then((...results) => {
+            //         const data = results[0][0][0];
+            //         console.log(...results);
+            //         console.table([{
+            //             id: data.id,
+            //             email: data.email,
+            //             status: data["@status"],
+            //             isVerified: data.isVerified
+            //         }]);
+            //         // res.json(req.body);
+            //         // res.redirect("/registrationSuccess")
+            //         // debug("Response Sent successfully");
+            //         // res.send("Registration Successful");
 
-                    return sendVerificationMail(req.body.email, verificationID);
-                })
-                .then(results => {
-                    if (results[0].statusCode == 202) {
-                        debug("sent code:  " + verificationID);
-                        res.send("<h1>SUCCESSFULLY REGISTERED Please verify from your mail</h1>");
-                    } else throw results;
-                })
-                .catch((err) => {
-                    debug(err);
-                    res.json({
-                        body: req.body,
-                        error: err
-                    });
-                    debug("Response Sent with error");
-                });
+            //         return sendVerificationMail(req.body.email, verificationID);
+            //     })
+            //     .then(results => {
+            //         if (results[0].statusCode == 202) {
+            //             debug("sent code:  " + verificationID);
+            //             res.send("<h1>SUCCESSFULLY REGISTERED Please verify from your mail</h1>");
+            //         } else throw results;
+            //     })
+            //     .catch((err) => {
+            //         debug(err);
+            //         res.json({
+            //             body: req.body,
+            //             error: err
+            //         });
+            //         debug("Response Sent with error");
+            //     });
 
             // res.json(req.body);
         }

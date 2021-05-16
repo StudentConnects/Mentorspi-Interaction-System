@@ -76,6 +76,14 @@ const registerUser = (userName, organization, email, password, phoneNumber, addr
     } else {
         return (Promise.reject(new Error('User Name not provided'), null));
     }
+    // if (userName) {
+    //     query += ', user_name' ;
+    //     count++
+    //     queryValues +=  `$${count}`;
+    //     values.push(userName);
+    // } else {
+    //     return (Promise.reject(new Error('User Name not provided'), null));
+    // }
 
     if (organization) {
         query += ', organization';
