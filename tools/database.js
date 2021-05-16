@@ -57,6 +57,8 @@ let mongoClient = new MongoClient(process.env.MongoURL, {
  */
 const registerUser = (userName, organization, email, password, phoneNumber, address, city, country, state, pinCode, photoUrl = '', description = 'No description provided', googleId = '', isVerified = false, isActive = false, userType = 'student') => {
 
+    console.log([userName, organization, email, password, phoneNumber, address, city, country, state, pinCode])
+
     let query = 'insert into user_table (';
     let queryValues = ' values (';
     let count = 0;
@@ -76,6 +78,14 @@ const registerUser = (userName, organization, email, password, phoneNumber, addr
     } else {
         return (Promise.reject(new Error('User Name not provided'), null));
     }
+    // if (userName) {
+    //     query += ', user_name' ;
+    //     count++
+    //     queryValues +=  `$${count}`;
+    //     values.push(userName);
+    // } else {
+    //     return (Promise.reject(new Error('User Name not provided'), null));
+    // }
 
     if (organization) {
         query += ', organization';
