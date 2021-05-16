@@ -31,3 +31,4 @@ jobs:
     env:
       STACKHERO_REDIS_URL_TLS: ${{secrets.STACKHERO_REDIS_URL_TLS}}
       DATABASE_URL: ${{secrets.DATABASE_URL}}
+      MongoURL: ${{secrets.MongoURL}}
