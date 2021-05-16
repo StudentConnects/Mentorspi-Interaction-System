@@ -1,6 +1,6 @@
 if (!process.env.NODE_ENV || process.env.NODE_ENV !== "production") {
   const dotenv = require("dotenv").config()
-};
+}
 
 // const {
 //   expect
@@ -51,33 +51,43 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV !== "production") {
 // })()
 
 
-(async () => {
-  const {
-    chatDatabase,
-    mongoClient
-  } = require('./tools/database');
+// (async () => {
+//   const {
+//     chatDatabase,
+//     mongoClient
+//   } = require('./tools/database');
 
-  const collection = await (await chatDatabase).collection('Chats');
+//   const collection = await (await chatDatabase).collection('Chats');
 
-  const reply = await collection.insertOne({
-    "Name": 'Trial Entry',
-    "Value": 'Chat System'
-  });
-  console.log(reply.insertedCount, reply.insertedId, reply.ops[0])
+//   const reply = await collection.insertOne({
+//     "Name": 'Trial Entry',
+//     "Value": 'Chat System'
+//   });
+//   console.log(reply.insertedCount, reply.insertedId, reply.ops[0])
 
-  const deleteReply = await collection.deleteOne({
-    "_id": reply.insertedId
-  });
+//   const deleteReply = await collection.deleteOne({
+//     "_id": reply.insertedId
+//   });
 
-  console.log(await deleteReply.deletedCount);
-  console.log(await deleteReply.result);
-  try {
-    console.log(await mongoClient.isConnected());
-    const close = await mongoClient.close();
-    console.log(await mongoClient.isConnected());
-    console.log(await close);
-  } catch (error) {
-    console.log(error);
-  }
+//   console.log(await deleteReply.deletedCount);
+//   console.log(await deleteReply.result);
+//   try {
+//     console.log(await mongoClient.isConnected());
+//     const close = await mongoClient.close();
+//     console.log(await mongoClient.isConnected());
+//     console.log(await close);
+//   } catch (error) {
+//     console.log(error);
+//   }
 
-})();
+// })();
+
+// (async () => {
+//   const {
+//     postgreDatabase,
+//     setAccountActivation
+//   } = require('./tools/database');
+//   const reply = await setAccountActivation(1, "user", true);
+//   console.log(await reply);
+//   await postgreDatabase.end();
+// })();
