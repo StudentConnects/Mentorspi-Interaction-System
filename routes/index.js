@@ -275,7 +275,7 @@ router.post('/register',
             .then((data) =>{
                 console.log(data)
                 res.send(' Signup Sucessful.');
-            }).catch(err=>{
+            }).catch((err)=>{
                 console.log(err)
                 if(err.code == '23505'){
                     res.send('User already Exists.')
