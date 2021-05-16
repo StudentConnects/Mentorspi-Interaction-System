@@ -272,7 +272,7 @@ router.post('/register',
             
             
             db.registerUser(req.body.userName, req.body.institute_id, req.body.email, req.body.password, req.body.mobile, req.body.address, req.body.city, req.body.country, req.body.state, req.body.postcode, req.body.photo)
-            .then((data)=>{
+            .then((data) =>{
                 console.log(data)
                 res.send(' Signup Sucessful.');
             }).catch(err=>{
