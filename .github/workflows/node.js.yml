@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 14.x, 15.x]
+        node-version: [12.x, 14.x, 15.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -31,3 +31,4 @@ jobs:
     env:
       STACKHERO_REDIS_URL_TLS: ${{secrets.STACKHERO_REDIS_URL_TLS}}
       DATABASE_URL: ${{secrets.DATABASE_URL}}
+      MongoURL: ${{secrets.MongoURL}}

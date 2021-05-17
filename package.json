@@ -29,6 +29,7 @@
     "helmet": "3.23.3",
     "http-errors": "1.6.3",
     "ioredis": "4.26.0",
+    "mongodb": "3.6.6",
     "nanoid": "3.1.22",
     "passport": "0.4.1",
     "passport-custom": "1.1.1",
