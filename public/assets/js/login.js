@@ -1,6 +1,6 @@
 // document.getElementById("btn_login").addEventListener("click", login);
 
-document.getElementById("form_login").addEventListener("submit",login);
+// document.getElementById("form_login").addEventListener("submit",login);
 
 // document.getElementById("btn_recover").addEventListener("click", recover);
 
@@ -22,7 +22,7 @@ function login(e) {
     if (!(isFormEmpty(email, password))) {
         if (validateEmail(email)) {
             if (validatePassword(password)) {
-                submit_login(email, password);
+                // submit_login(email, password);
                 return true
             }else{
                 return false
@@ -99,10 +99,10 @@ function submit_login( email, password) {
                 "Content-type": "application/json; charset=UTF-8"
             }
         })
-        .then(response => response.text())
-        .then(text=>alert(text))
-        // .then(response => response.json())
-        // .then(json => console.log(json))
+        // .then(response => response.text())
+        // .then(text=>alert(text))
+        .then(response => response.json())
+        .then(json => console.log(json))
         .catch(err => console.log(err));
 }
 
