@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 const router = express.Router();
 const debug = require('debug')('backend:server:index.js');
 // debug("Into Index File");
-// const studentRouter = require('./student');
+const studentRouter = require('./student');
 // const adminRouter = require('./admin');
 
 router.all("/", (_req, res) => {
@@ -53,5 +53,5 @@ function checkLogin(req, res, next) {
 // router.use('/admin', (req, _, next) => {req.allowedUserType = "admin"; req.differentUserType = "student"; next();}, checkLogin, adminRouter);
 // router.use('/student', (req, _, next) => {req.allowedUserType = "student"; req.differentUserType = "admin"; next();}, checkLogin, studentRouter);
 // router.use('/admin', adminRouter);
-// router.use('/student', studentRouter);
+router.use('/student', studentRouter);
 module.exports = router;
