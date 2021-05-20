@@ -213,12 +213,12 @@ const registerUser = (userName, organization, email, password, phoneNumber, addr
 };
 
 /**
- * @param  {String} userEmail The email to get login details
+ * @param  {String} userEmail - The email to get login details
  * @returns {Promise} promise
  */
 const loginUser = (userEmail) => {
     if (!userEmail) {
-        return (Promise.reject(new Error('Now Email Provided')));
+        return (Promise.reject(new Error('No Email Provided')));
     }
     return (postgreDatabase.query('Select user_table.*, o."subscriptionLeft" as "orgSubscription", o.name as "orgName", o."isActive" as "orgIsActive", o."isVerified" as "orgIsVerified" from user_table inner join organisations o on user_table.organization = o.id  where user_table.email =$1', [userEmail]));
 };
@@ -289,6 +289,16 @@ const setAccountActivation = (accountId, accountType = 'user', setActive = true)
     }
 };
 
+/**
+ * @param {Number} id - User id for which the profile details has to be retrieved
+ * @returns {Promise} Promise
+ */
+const getProfileData = (id) => {
+    if(id) {
+        return(postgreDatabase.query('Select user_name, organization, email, phone_number, photo_url, description, address, city, country state, pincode, from user_table where id = $1', [id]));
+    } 
+    return(Promise.reject('Invalid User id'));
+} 
 
 module.exports = {
     postgreDatabase,
@@ -298,4 +308,6 @@ module.exports = {
     registerUser,
     loginUser,
     setAccountActivation,
+    getProfileData
 }
+
