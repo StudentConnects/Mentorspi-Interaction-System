@@ -91,3 +91,9 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV !== "production") {
 //   console.log(await reply);
 //   await postgreDatabase.end();
 // })();
+
+// (async () => {
+//   const {
+//     loginUser  } = require('./tools/database');
+//     console.log(await loginUser('andharikar@gmail.com'))
+//   })();

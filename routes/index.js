@@ -9,7 +9,7 @@ const {
 } = require('../tools/sendEmails');
 
 const router = express.Router();
-const debug = require('debug')('backend:server:index.js');
+const debug = require('debug')('abc:server:index.js');
 const {
     checkSchema,
     validationResult
@@ -66,6 +66,9 @@ router.get("/login", function (req, res, next) {
 });
 
 router.post("/login", (req, res, next) => {
+    console.log(req.body)
+    // console.log(req.user)
+    // res.send('redirect sucessful')
     if (req.isAuthenticated()) {
         debug("Is Authenticated");
         res.redirect(301, "/users/student");
@@ -364,6 +367,18 @@ router.post("/uploadImage", (req, res) => {
     }
 });
 
+router.get('/logout' ,(req, res) => {
+    req.logOut();        
+    req.session.destroy((err) => {
+        if(err){
+            console.log(err);
+        }
+        req.user = '';
+        res.redirect('/');
+        req.allowedUserType = req.differentUserType = '';
+    });
+    
+});
 
 router.use("/images", express.static(path.join(__dirname, "..", "custom-images")));
 module.exports = router;
