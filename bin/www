@@ -1,9 +1,9 @@
-#!/usr/bin/env node
-/* eslint-disable no-use-before-define */
+// #!/usr/bin/env node
+// /* eslint-disable no-use-before-define */
 
-/**
- * Module dependencies.
- */
+// /**
+//  * Module dependencies.
+//  */
 if(! process.env.NODE_ENV || process.env.NODE_ENV !== "production") {
   const dotenv = require("dotenv").config()
 }
@@ -22,8 +22,27 @@ app.set('port', port);
 /**
  * Create HTTP server.
  */
-
+// making socketio to listen to server
 const server = http.createServer(app);
+const io = require('socket.io')(server, {
+  cors: {
+    origin: '*',
+  }
+});
+
+// on connection
+
+io.on('connection',(socket,req)=>{
+  // console.log(socket)
+  socket.emit('welcome','Welcome to websocket server')
+  socket.on('message',(msg)=>{
+      console.log(msg)
+  })
+  socket.on('newmessagetoServer',(newdata)=>{
+    console.log(newdata);
+    io.emit('messagetoClients',{message:newdata});
+});
+});
 
 /**
  * Listen on provided port, on all network interfaces.

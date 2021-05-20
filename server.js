@@ -7,7 +7,7 @@ const logger = require('morgan');
 //   Pool
 // } = require('pg');
 
-const { redisDatabase:redisClient, postgreDatabase:pool } = require('./tools/database');
+const { redisDatabase:redisClient, postgreDatabase:pool , loginUser } = require('./tools/database');
 const helmet = require("helmet");
 const compression = require("compression");
 const session = require('express-session');
@@ -16,7 +16,7 @@ const RedisStore = require('connect-redis')(session);
 const {
   RateLimiterRedis
 } = require('rate-limiter-flexible');
-// const bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 const passport = require('passport');
 const passportLocal = require('passport-local').Strategy;
 
@@ -114,35 +114,31 @@ try {
   });
 
 
+
   passport.use(new passportLocal({
     usernameField: 'email',
     passwordField: 'password'
   }, async function (email, givenPassword, done) {
     debug("LINE 20");
     debug(email, givenPassword);
-    return pool.query('Select id, password, name, uType, isActive, isVerified, verificationLink from user where email = ?;', [email])
-      .then(results => {
-        if (results[0].length > 0) {
-          const {
-            id,
-            password,
-            name,
-            uType,
-            isActive,
-            isVerified,
-            verificationLink
-          } = results[0][0];
+    // return pool.query(`Select * from user_table where email = '${email}'`)
+    // pool.query('Select * from user_table')  
+    return loginUser(email)
+    .then(results => {
+      if(results){
+        console.log(results.rows)
+      }else{
+        debug("Invalid Email");
+          done(null, false);
+      }
+      
+        if (results.rows.length > 0) {
+          const {id,password,user_name,user_type,isActive,isVerified,verificationLink} = results.rows[0];
           if (password == givenPassword) {
             console.log("Success");
-            done(null, {
-              id,
-              name,
-              uType,
-              isActive,
-              isVerified,
-              verificationLink
-            });
-          } else {
+            done(null, {id,user_name,user_type,isActive,isVerified,verificationLink});
+          } 
+          else {
             debug("Invalid Password");
             done(null, false);
           }
