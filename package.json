@@ -9,7 +9,8 @@
   },
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www"
+    "dev": "nodemon ./bin/www",
+    "test": "mocha"
   },
   "dependencies": {
     "axios": "0.21.1",
