@@ -3,10 +3,12 @@ const path = require('path');
 const bcrypt = require('bcrypt');
 
 const router = express.Router();
-const debug = require('debug')('backend:server:index.js');
+const debug = require('debug')('abc:server:index.js');
 // debug("Into Index File");
 const studentRouter = require('./student');
-// const adminRouter = require('./admin');
+const mentorRouter = require('./mentor');
+const subadminRouter = require('./subadmin');
+const superadminRouter = require('./superadmin');
 
 router.all("/", (_req, res) => {
     debug("into /");
@@ -32,26 +34,32 @@ router.get('/verify', (req, res) => {
     });
 })
 
-router.use("/assets", express.static(path.join(__dirname, "..", "public", "assets")));
-router.use("/admin", express.static(path.join(__dirname, "..", "public", "admin")))
+// router.use("/assets", express.static(path.join(__dirname, "..", "public", "assets")));
+router.use("/subadmin", express.static(path.join(__dirname, "..", "public", "subadmin")))
+router.use("/superadmin", express.static(path.join(__dirname, "..", "public", "superadmin")))
+router.use("/mentor", express.static(path.join(__dirname, "..", "public", "mentor")))
 router.use("/student", express.static(path.join(__dirname, "..", "public", "student")))
 
 function checkLogin(req, res, next) {
-    if(req.user.uType == req.differentUserType){
-            res.redirect(301, `/users/${req.differentUserType}`);
-        } else if(req.user.uType == req.allowedUserType) {
+  console.log(req.user)
+    if(req.user.user_type == req.allowedUserType) {
             next();
-        } else {
-            res.redirect("/login");
+        }else if (req.user.user_type != req.allowedUserType) {
+          res.redirect(301, `/users/${req.user.user_type}`)
+        }else{
+          res.redirect('/login')
         }
     // } else {
     //     console.warn("in secured in not authenticated");
     //     res.redirect("/login");
     // }
 }
-
 // router.use('/admin', (req, _, next) => {req.allowedUserType = "admin"; req.differentUserType = "student"; next();}, checkLogin, adminRouter);
 // router.use('/student', (req, _, next) => {req.allowedUserType = "student"; req.differentUserType = "admin"; next();}, checkLogin, studentRouter);
-// router.use('/admin', adminRouter);
-router.use('/student', studentRouter);
+
+router.use('/superAdmin',(req, _, next) => {req.allowedUserType = "superAdmin";next();},checkLogin,superadminRouter)
+router.use('/subAdmin',(req, _, next) => {req.allowedUserType = "subAdmin";next();},checkLogin, subadminRouter);
+router.use('/mentor',(req, _, next) => {req.allowedUserType = "mentor";next();},checkLogin,mentorRouter)
+router.use('/student',(req, _, next) => {req.allowedUserType = "student";next();},checkLogin, studentRouter);
+
 module.exports = router;
