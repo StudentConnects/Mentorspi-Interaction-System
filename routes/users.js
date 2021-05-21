@@ -42,7 +42,7 @@ router.use("/student", express.static(path.join(__dirname, "..", "public", "stud
 
 function checkLogin(req, res, next) {
   console.log(req.user)
-    if(req.user.user_type == req.allowedUserType) {
+    if(req.user.user_type === req.allowedUserType) {
             next();
         }else if (req.user.user_type != req.allowedUserType) {
           res.redirect(301, `/users/${req.user.user_type}`)
