@@ -58,7 +58,7 @@ function checkLogin(req, res, next) {
 // router.use('/student', (req, _, next) => {req.allowedUserType = "student"; req.differentUserType = "admin"; next();}, checkLogin, studentRouter);
 
 router.use('/super-admin',(req, _, next) => {req.allowedUserType = "superAdmin";next();},checkLogin,superadminRouter)
-router.use('/subAdmin',(req, _, next) => {req.allowedUserType = "subAdmin";next();},checkLogin, subadminRouter);
+router.use('/admin',(req, _, next) => {req.allowedUserType = "subAdmin";next();},checkLogin, subadminRouter);
 router.use('/mentor',(req, _, next) => {req.allowedUserType = "mentor";next();},checkLogin,mentorRouter)
 router.use('/student',(req, _, next) => {req.allowedUserType = "student";next();},checkLogin, studentRouter);
 
