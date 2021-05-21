@@ -44,7 +44,7 @@ function checkLogin(req, res, next) {
   console.log(req.user)
     if(req.user.user_type === req.allowedUserType) {
             next();
-        }else if (req.user.user_type != req.allowedUserType) {
+        }else if (req.user.user_type && req.user.user_type  !==  req.allowedUserType) {
           res.redirect(301, `/users/${req.user.user_type}`)
         }else{
           res.redirect('/login')
