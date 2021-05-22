@@ -9,7 +9,7 @@ const db = require('../tools/database')
 router.get("/", (req, res) => {
     debug("into /");
     console.log('into path');
-    res.send(path.join(__dirname, "..", "public", "index.html"));
+    res.sendFile(path.join(__dirname, "..", "public", "superadmin", "user.html"));
 });
 router.all('/test', function (req, res) {
     debug("into /test");
@@ -20,4 +20,19 @@ router.all('/test', function (req, res) {
     }
     res.send(`<h1>you visited ${req.session.viewCount}</h1>`);
 });
+router.get('/userdata',(req,res)=>{
+    console.log('entered in user data router')
+    // console.log(req.user)
+    // req.db
+    //   .query('Select * from user where id = ?;', [req.user.id])
+    db.getProfileData(req.user.id)
+      .then((results) => {
+        console.log(results.rows)
+        res.send(results.rows);
+      })
+      .catch((err) => {
+        debug(err);
+        res.status(500).send(err);
+      });
+  });
 module.exports = router;
