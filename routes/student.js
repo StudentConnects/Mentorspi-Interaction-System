@@ -9,7 +9,7 @@ const db = require('../tools/database')
 router.get("/", (req, res) => {
     debug("into /");
     console.log('into path');
-    res.sendFile(path.join(__dirname, "..", "public/student", "user.html"));
+    res.sendFile(path.join(__dirname, "..", "public/student", "profile.html"));
 });
 router.all('/test', function (req, res) {
     debug("into /test");
@@ -24,7 +24,7 @@ router.all('/test', function (req, res) {
 // get user data
 
 router.get('/userdata',(req,res)=>{
-    console.log('route hit')
+    // console.log('route hit')
     // console.log(req.user)
     // req.db
     //   .query('Select * from user where id = ?;', [req.user.id])
@@ -42,11 +42,11 @@ router.get('/userdata',(req,res)=>{
 // Submit user data
 
 router.post('/updateuserdata',(req,res)=>{
+
     // console.log('here come')
-    console.log(req.body)
+    // console.log(req.body)
     // console.log(req.body.email)
-    req.db
-      .query('UPDATE `user` SET `name`= ? ,`mobile`= ?,`address`= ? ,`city`= ?,`country`= ? ,`postalcode`= ? WHERE id = ?', [req.body.name,req.body.mobile,req.body.address,req.body.city,req.body.country,req.body.postal,req.user.id])
+    db.updateProfileData(req.body.phone_number, req.body.address, req.body.city, req.body.country, '', req.body.pincode, req.user.id)
       .then((results) => {
         console.log(results[0])
         res.redirect('/users/student')

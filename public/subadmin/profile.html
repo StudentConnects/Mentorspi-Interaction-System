@@ -35,11 +35,11 @@
           </button>
           <a
             class="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
-            href="index.html"
+            href="../../index.html"
           >
             Student Mentorship System
           </a>
-          <ul class="md:hidden items-center flex flex-wrap list-none">
+          <ul class=" items-center flex flex-wrap list-none">
             <li class="inline-block relative">
               <a
                 class="text-blueGray-500 block"
@@ -51,15 +51,15 @@
                     ><img
                       alt="..."
                       class="w-full rounded-full align-middle border-none shadow-lg"
-                      src="../../assets/img/team-4.png"
+                      src="../../assets/img/team-1.jpg"
                   /></span></div
               ></a>
               <div
-                class="hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
+                class="bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
                 id="user-responsive-dropdown"
               >
                 <a
-                  href="#"
+                  href="/logout"
                   class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
                   >Logout</a
                 >
@@ -77,7 +77,7 @@
                 <div class="w-6/12">
                   <a
                     class="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
-                    href="index.html"
+                    href="../../index.html"
                   >
                     Student Mentorship System
                   </a>
@@ -103,11 +103,11 @@
                   class="text-xs uppercase py-3 font-bold block text-red-500 hover:text-red-600"
                 >
                   <i class="fas fa-user mr-2 text-sm opacity-75"></i>
-                  User Profile
+                  Sub-Admin Profile
                 </a>
               </li>
 
-              <li class="items-center">
+              <!-- <li class="items-center">
                 <a
                   href="chat.html"
                   class="text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500"
@@ -115,7 +115,7 @@
                   <i class="fas fa-list mr-2 text-sm text-blueGray-300"></i>
                   Chats
                 </a>
-              </li>
+              </li> -->
             </ul>
 
             <!-- Divider -->
@@ -132,8 +132,8 @@
           >
             <a
               class="text-white text-sm uppercase hidden lg:inline-block font-semibold"
-              href="user.html"
-              >Student Profile</a
+              href="./user.html"
+              >User Profile</a
             >
             <ul
               class="flex-col md:flex-row list-none items-center hidden md:flex"
@@ -149,16 +149,16 @@
                     ><img
                       alt="..."
                       class="w-full rounded-full align-middle border-none shadow-lg"
-                      src="../../assets/img/team-4.png"
+                      src="../../assets/img/team-1.jpg"
                   /></span>
                 </div>
               </a>
               <div
-                class="bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
+                class="hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
                 id="user-dropdown"
               >
                 <a
-                  href="/logout"
+                  href=""
                   class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
                   >Logout</a
                 >
@@ -189,7 +189,7 @@
                   </div>
                 </div>
                 <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-                  <form>
+                  <form action="/users/subAdmin/updateuserdata" method="POST">
                     <h6
                       class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase"
                     >
@@ -207,6 +207,7 @@
                           <input
                             type="text"
                             id ="name"
+                            name="name"
                             class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="Name"/>
                         </div>
@@ -222,6 +223,7 @@
                           <input
                             type="email"
                             id="email"
+                            name="email"
                             class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="Email"/>
                         </div>
@@ -237,6 +239,7 @@
                           <input
                             type="text"
                             id="org"
+                            name="org"
                             class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="Institute Name">
                         </div>
@@ -252,6 +255,7 @@
                           <input
                             type="text"
                             id="mobile"
+                            name="phone_number"
                             class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="Mobile No."/>
                         </div>
@@ -269,6 +273,7 @@
                           <input
                             type="text"
                             id="address"
+                            name="address"
                             class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="Address"/>
                         </div>
@@ -284,6 +289,7 @@
                           <input
                             type="text"
                             id="city"
+                            name="city"
                             class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="City"/>
                         </div>
@@ -299,6 +305,7 @@
                           <input
                             type="text"
                             id="country"
+                            name="country"
                             class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="Country"/>
                         </div>
@@ -314,6 +321,7 @@
                           <input
                             type="text"
                             id="pincode"
+                            name="pincode"
                             class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="Postal Code"/>
                         </div>
@@ -321,7 +329,7 @@
                     </div>
                     <button
                       class="bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
-                      type="button"
+                      type="submit"
                     >
                       Update
                     </button>
@@ -340,7 +348,7 @@
                       <div class="relative">
                         <img
                           alt="..."
-                          src="../../assets/img/team-4.png"
+                          src="../../assets/img/team-1.jpg"
                           class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
                         />
                       </div>
@@ -360,7 +368,7 @@
                       <i
                         class="fas fa-user mr-2 text-lg text-blueGray-400"
                       ></i>
-                      Student
+                      Admin
                     </div>
                   </div>
                   <div
@@ -405,6 +413,6 @@
         document.getElementById(dropdownID).classList.toggle("block");
       }
     </script>
-    <script src="../../assets/js/userdata.js"></script>
+    <script src="../../assets/js/admindata.js"></script>
   </body>
 </html>
