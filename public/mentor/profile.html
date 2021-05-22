@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <link rel="shortcut icon" href="../../assets/img/favicon.ico" />
+    <!-- <link rel="shortcut icon" href="../../assets/img/favicon.ico" /> -->
     <link
       rel="apple-touch-icon"
       sizes="76x76"
@@ -15,7 +15,7 @@
       href="../../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"
     />
     <link rel="stylesheet" href="../../assets/styles/tailwind.css" />
-    <title>User Profile | Student Mentorship System</title>
+    <title>My Profile | Student Mentorship System</title>
   </head>
   <body class="text-blueGray-700 antialiased">
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -99,11 +99,11 @@
             <ul class="md:flex-col md:min-w-full flex flex-col list-none">
               <li class="items-center">
                 <a
-                  href="user.html"
+                  href="profile.html"
                   class="text-xs uppercase py-3 font-bold block text-red-500 hover:text-red-600"
                 >
                   <i class="fas fa-user mr-2 text-sm opacity-75"></i>
-                  User Profile
+                  My Profile
                 </a>
               </li>
 
@@ -132,8 +132,8 @@
           >
             <a
               class="text-white text-sm uppercase hidden lg:inline-block font-semibold"
-              href="user.html"
-              >User Profile</a
+              href="./profile.html"
+              >My Profile</a
             >
             <ul
               class="flex-col md:flex-row list-none items-center hidden md:flex"
@@ -154,11 +154,11 @@
                 </div>
               </a>
               <div
-                class=" bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
+                class="hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
                 id="user-dropdown"
               >
                 <a
-                  href="/logout"
+                  href=""
                   class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
                   >Logout</a
                 >
@@ -176,7 +176,6 @@
         </div>
         <div class="px-4 md:px-10 mx-auto w-full -m-24">
           <div class="flex flex-wrap">
-
             <div class="w-full lg:w-8/12 px-4">
               <div
                 class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0"
@@ -337,7 +336,6 @@
                 </div>
               </div>
             </div>
-
             <div class="w-full lg:w-4/12 px-4">
               <div
                 class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16"
@@ -382,7 +380,7 @@
         </div>
       </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
     <script type="text/javascript">
       /* Make dynamic date appear */
       (function () {
@@ -414,5 +412,5 @@
       }
     </script>
     <script src="../../assets/js/mentordata.js"></script>
-  </body>
+</body>
 </html>

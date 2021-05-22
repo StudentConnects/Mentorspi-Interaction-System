@@ -51,7 +51,7 @@
                     ><img
                       alt="..."
                       class="w-full rounded-full align-middle border-none shadow-lg"
-                      src="../../assets/img/team-4.png"
+                      src="../../assets/img/team-2.jpg"
                   /></span></div
               ></a>
               <div
@@ -98,22 +98,27 @@
             <!-- Navigation -->
             <ul class="md:flex-col md:min-w-full flex flex-col list-none">
               <li class="items-center">
-                <a
-                  href="profile.html"
-                  class="text-xs uppercase py-3 font-bold block text-red-500 hover:text-red-600"
-                >
+                <a href="profile.html" class="text-xs uppercase py-3 font-bold block text-red-500 hover:text-red-600">
                   <i class="fas fa-user mr-2 text-sm opacity-75"></i>
                   My Profile
                 </a>
               </li>
-
               <li class="items-center">
-                <a
-                  href="chat.html"
-                  class="text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500"
-                >
-                  <i class="fas fa-list mr-2 text-sm text-blueGray-300"></i>
-                  Chats
+                <a href="companies.html" class="text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500">
+                  <i class="fas fa-briefcase mr-2 text-sm text-blueGray-300"></i>
+                  Companies
+                </a>
+              </li>
+              <li class="items-center">
+                <a href="users.html" class="text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500">
+                  <i class="fas fa-users mr-2 text-sm text-blueGray-300"></i>
+                  Users
+                </a>
+              </li>
+              <li class="items-center">
+                <a href="report.html" class="text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500">
+                  <i class="fas fa-exclamation-circle mr-2 text-sm text-blueGray-300"></i>
+                  Report
                 </a>
               </li>
             </ul>
@@ -132,7 +137,7 @@
           >
             <a
               class="text-white text-sm uppercase hidden lg:inline-block font-semibold"
-              href="./profile.html"
+              href="profile.html"
               >My Profile</a
             >
             <ul
@@ -149,7 +154,7 @@
                     ><img
                       alt="..."
                       class="w-full rounded-full align-middle border-none shadow-lg"
-                      src="../../assets/img/team-4.png"
+                      src="../../assets/img/team-2.jpg"
                   /></span>
                 </div>
               </a>
@@ -188,7 +193,7 @@
                   </div>
                 </div>
                 <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-                  <form action="/users/student/updateuserdata" method="POST">
+                  <form>
                     <h6
                       class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase"
                     >
@@ -205,8 +210,6 @@
                           </label>
                           <input
                             type="text"
-                            id ="name"
-                            name="name"
                             class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="Name"/>
                         </div>
@@ -221,8 +224,6 @@
                           </label>
                           <input
                             type="email"
-                            id="email"
-                            name="email"
                             class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="Email"/>
                         </div>
@@ -237,8 +238,6 @@
                           </label>
                           <input
                             type="text"
-                            id="org"
-                            name="org"
                             class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="Institute Name">
                         </div>
@@ -253,8 +252,6 @@
                           </label>
                           <input
                             type="text"
-                            id="mobile"
-                            name="phone_number"
                             class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="Mobile No."/>
                         </div>
@@ -271,8 +268,6 @@
                           </label>
                           <input
                             type="text"
-                            id="address"
-                            name="address"
                             class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="Address"/>
                         </div>
@@ -286,9 +281,7 @@
                             City
                           </label>
                           <input
-                            type="text"
-                            id="city"
-                            name="city"
+                            type="email"
                             class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="City"/>
                         </div>
@@ -303,8 +296,6 @@
                           </label>
                           <input
                             type="text"
-                            id="country"
-                            name="country"
                             class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="Country"/>
                         </div>
@@ -319,8 +310,6 @@
                           </label>
                           <input
                             type="text"
-                            id="pincode"
-                            name="pincode"
                             class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="Postal Code"/>
                         </div>
@@ -328,7 +317,7 @@
                     </div>
                     <button
                       class="bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
-                      type="submit"
+                      type="button"
                     >
                       Update
                     </button>
@@ -346,7 +335,7 @@
                       <div class="relative">
                         <img
                           alt="..."
-                          src="../../assets/img/team-4.png"
+                          src="../../assets/img/team-2.jpg"
                           class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
                         />
                       </div>
@@ -366,7 +355,7 @@
                       <i
                         class="fas fa-user mr-2 text-lg text-blueGray-400"
                       ></i>
-                      Student
+                      Super - Admin
                     </div>
                   </div>
                   <div
@@ -411,6 +400,5 @@
         document.getElementById(dropdownID).classList.toggle("block");
       }
     </script>
-    <script src="../../assets/js/userdata.js"></script>
   </body>
 </html>
