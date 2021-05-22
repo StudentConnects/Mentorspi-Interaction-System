@@ -97,3 +97,13 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV !== "production") {
 //     loginUser  } = require('./tools/database');
 //     console.log(await loginUser('andharikar@gmail.com'))
 //   })();
+
+// (async () => {
+//   const {
+//     postgreDatabase,
+//     registerCompany
+//   } = require('./tools/database');
+//   const results = await postgreDatabase.query("select * from organisations");
+//   console.log(await results.rows);
+//   await postgreDatabase.end();
+// })();
