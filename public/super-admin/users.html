@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <!-- <link rel="shortcut icon" href="../../assets/img/favicon.ico" /> -->
+    <link
+      rel="apple-touch-icon"
+      sizes="76x76"
+      href="../../assets/img/apple-icon.png"
+    />
+    <link
+      rel="stylesheet"
+      href="../../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/styles/tailwind.css" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
+    <title>Users | Student Mentorship System</title>
+  </head>
+  <body class="text-blueGray-700 antialiased">
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root">
+      <nav
+        class="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6"
+      >
+        <div
+          class="md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap items-center justify-between w-full mx-auto"
+        >
+          <button
+            class="cursor-pointer text-black opacity-50 md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent"
+            type="button"
+            onclick="toggleNavbar('example-collapse-sidebar')"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
+          <a
+            class="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
+            href="../../index.html"
+          >
+            Student Mentorship System
+          </a>
+          <ul class="md:hidden items-center flex flex-wrap list-none">
+            <li class="inline-block relative">
+              <a
+                class="text-blueGray-500 block"
+                href="#"
+                onclick="openDropdown(event,'user-responsive-dropdown')"
+                ><div class="items-center flex">
+                  <span
+                    class="w-12 h-12 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center rounded-full"
+                    ><img
+                      alt="..."
+                      class="w-full rounded-full align-middle border-none shadow-lg"
+                      src="../../assets/img/team-2.jpg"
+                  /></span></div
+              ></a>
+              <div
+                class="hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
+                id="user-responsive-dropdown"
+              >
+                <a
+                  href="#"
+                  class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+                  >Logout</a
+                >
+              </div>
+            </li>
+          </ul>
+          <div
+            class="md:flex md:flex-col md:items-stretch md:opacity-100 md:relative md:mt-4 md:shadow-none shadow absolute top-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded hidden"
+            id="example-collapse-sidebar"
+          >
+            <div
+              class="md:min-w-full md:hidden block pb-4 mb-4 border-b border-solid border-blueGray-200"
+            >
+              <div class="flex flex-wrap">
+                <div class="w-6/12">
+                  <a
+                    class="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
+                    href="../../index.html"
+                  >
+                    Student Mentorship System
+                  </a>
+                </div>
+                <div class="w-6/12 flex justify-end">
+                  <button
+                    type="button"
+                    class="cursor-pointer text-black opacity-50 md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent"
+                    onclick="toggleNavbar('example-collapse-sidebar')"
+                  >
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <hr class="my-4 md:min-w-full" />
+            <!-- Heading -->
+            <!-- Navigation -->
+            <ul class="md:flex-col md:min-w-full flex flex-col list-none">
+              <li class="items-center">
+                <a
+                  href="profile.html"
+                  class="text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500"
+                >
+                  <i class="fas fa-user mr-2 text-sm text-blueGray-300"></i>
+                  My Profile
+                </a>
+              </li>
+              <li class="items-center">
+                <a href="companies.html" class="text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500">
+                  <i class="fas fa-briefcase mr-2 text-sm text-blueGray-300"></i>
+                  Companies
+                </a>
+              </li>
+              <li class="items-center">
+                <a href="users.html" class="text-xs uppercase py-3 font-bold block text-red-500 hover:text-red-600">
+                  <i class="fas fa-users mr-2 text-sm opacity-75"></i>
+                  Users
+                </a>
+              </li>
+              <li class="items-center">
+                <a href="report.html" class="text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500">
+                  <i class="fas fa-exclamation-circle mr-2 text-sm text-blueGray-300"></i>
+                  Report
+                </a>
+              </li>
+            </ul>
+
+            <!-- Divider -->
+            <hr class="my-4 md:min-w-full" />
+          </div>
+        </div>
+      </nav>
+      <div class="relative md:ml-64 bg-blueGray-50">
+        <nav
+          class="absolute top-0 left-0 w-full z-10 bg-transparent md:flex-row md:flex-nowrap md:justify-start flex items-center p-4"
+        >
+          <div
+            class="w-full mx-autp items-center flex justify-between md:flex-nowrap flex-wrap md:px-10 px-4"
+          >
+            <a
+              class="text-white text-sm uppercase hidden lg:inline-block font-semibold"
+              href="users.html"
+              >Users</a
+            >
+            <ul
+              class="flex-col md:flex-row list-none items-center hidden md:flex"
+            >
+              <a
+                class="text-blueGray-500 block"
+                href="#"
+                onclick="openDropdown(event,'user-dropdown')"
+              >
+                <div class="items-center flex">
+                  <span
+                    class="w-12 h-12 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center rounded-full"
+                    ><img
+                      alt="..."
+                      class="w-full rounded-full align-middle border-none shadow-lg"
+                      src="../../assets/img/team-2.jpg"
+                  /></span>
+                </div>
+              </a>
+              <div
+                class="hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
+                id="user-dropdown"
+              >
+                <a
+                  href=""
+                  class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+                  >Logout</a
+                >
+              </div>
+            </ul>
+          </div>
+        </nav>
+        <!-- Header -->
+        <div class="relative bg-pink-600 md:pt-8 pb-32 pt-12">
+        </div>
+        <div class="px-4 md:px-10 mx-auto w-full -m-24">
+          <div class="flex flex-wrap mt-4" id="tabs-id">
+            <div class="w-full mb-12 px-4">
+              <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-white">
+                <div class="rounded-t mb-0 px-4 py-3 border-0">
+                  <div class="flex flex-wrap items-center">
+                    <div class="relative w-full px-4 max-w-full flex-grow flex-1">
+                      <h3 class="font-semibold text-lg text-blueGray-700">
+                        Users List
+                      </h3>
+                    </div>
+                    <button
+                      class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      type="button" onclick="toggleModal('add-company')">
+                      <i class="fas fa-plus"></i>
+                      ADD
+                    </button>
+                  </div>
+                </div>
+                <div class="w-full">
+                  <ul class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row">
+                    <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                      <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal text-white bg-pink-600"
+                        onclick="changeAtiveTab(event,'tab-student')">
+                        Students
+                      </a>
+                    </li>
+                    <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                      <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal text-pink-600 bg-white"
+                        onclick="changeAtiveTab(event,'tab-mentor')">
+                        Mentors
+                      </a>
+                    </li>
+                  </ul>
+                  <div class="tab-content tab-space">
+                    <div class="block w-full overflow-x-auto" id="tab-student"> 
+                      <table class="items-center w-full bg-transparent border-collapse">
+                        <thead>
+                          <tr>
+                            <th
+                              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100">
+                              <b>#</b>
+                            </th>
+                            <th
+                              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100">
+                              <b>Name</b>
+                            </th>
+                            <th
+                              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100">
+                              <b>Email</b>
+                            </th>
+                            <th
+                              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100">
+                              <b>Role</b>
+                            </th>
+                            <th
+                              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100">
+                              <b>Mobile No.</b>
+                            </th>
+                            <th
+                              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100">
+                              <b>Address</b>
+                            </th>
+                            <th
+                              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100">
+                              <b>City</b>
+                            </th>
+                            <th
+                              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100">
+                              <b>Postal Code</b>
+                            </th>
+                            <th
+                              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100">
+                              <b>State</b>
+                            </th>
+                            <th
+                              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100">
+                              <b>Country</b>
+                            </th>
+                            <th
+                              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100">
+                              <b>Edit</b>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="hidden w-full overflow-x-auto" id="tab-mentor">
+                      <table class="items-center w-full bg-transparent border-collapse">
+                        <thead>
+                          <tr>
+                            <th
+                              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100">
+                              <b>#</b>
+                            </th>
+                            <th
+                              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100">
+                              <b>Name</b>
+                            </th>
+                            <th
+                              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100">
+                              <b>Email</b>
+                            </th>
+                            <th
+                              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100">
+                              <b>Role</b>
+                            </th>
+                            <th
+                              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100">
+                              <b>Mobile No.</b>
+                            </th>
+                            <th
+                              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100">
+                              <b>Address</b>
+                            </th>
+                            <th
+                              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100">
+                              <b>City</b>
+                            </th>
+                            <th
+                              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100">
+                              <b>Postal Code</b>
+                            </th>
+                            <th
+                              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100">
+                              <b>State</b>
+                            </th>
+                            <th
+                              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100">
+                              <b>Country</b>
+                            </th>
+                            <th
+                              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100">
+                              <b>Edit</b>
+                            </th>
+                          </tr>
+                        </thead>
+                      </table>
+                    </div>
+                  </div>  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Add User Modal -->
+      <div
+        class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex flex-col w-11/12 sm:w-5/6 lg:w-1/2 max-w-2xl mx-auto rounded-lg"
+        id="add-company">
+        <div class="relative w-auto my-6 mx-auto max-w-3xl">
+          <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+            <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+              <h3 class="text-3xl font-semibold">
+                Add User
+              </h3>
+              <button
+                class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                onclick="toggleModal('add-company')">
+                <span class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                  ×
+                </span>
+              </button>
+            </div>
+            <div class="relative p-10 flex-auto">
+              <div class="w-full  px-30">
+                <div class="flex flex-col sm:flex-row items-center mb-5 sm:space-x-5">
+                  <div class="w-full sm:w-1/2">
+                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                      Name
+                    </label>
+                    <input type="text"
+                      class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      placeholder="Name" />
+                  </div>
+                  <div class="w-full sm:w-1/2 mt-2 sm:mt-0">
+                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                      Email
+                    </label>
+                    <input type="text"
+                      class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      placeholder="Email" />
+                  </div>
+                </div>
+                <div class="flex flex-col sm:flex-row items-center mb-5 sm:space-x-5">
+                  <div class="w-full sm:w-1/3">
+                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                      Password
+                    </label>
+                    <input type="password"
+                      class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      placeholder="Password" />
+                  </div>
+                  <div class="w-full sm:w-1/3 mt-2 sm:mt-0">
+                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                      Mobile No.
+                    </label>
+                    <input type="text"
+                      class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      placeholder="Mobile No." />
+                  </div>
+                  <div class="w-full sm:w-1/3 mt-2 sm:mt-0">
+                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                      Institute ID
+                    </label>
+                    <input type="number"
+                      class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      placeholder="Institute ID" />
+                  </div>
+                </div>
+                <div class="relative w-full mb-3">
+                  <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                    Address
+                  </label>
+                  <input type="text"
+                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    placeholder="Address" />
+                </div>
+                <div class="flex flex-col sm:flex-row items-center mb-5 sm:space-x-5">
+                  <div class="w-full sm:w-1/2">
+                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                      City
+                    </label>
+                    <input type="text"
+                      class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      placeholder="City" />
+                  </div>
+                  <div class="w-full sm:w-1/2 mt-2 sm:mt-0">
+                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                      Postal Code
+                    </label>
+                    <input type="text"
+                      class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      placeholder="Postal Code" />
+                  </div>
+                </div>
+                <div class="flex flex-col sm:flex-row items-center mb-5 sm:space-x-5">
+                  <div class="w-full sm:w-1/2">
+                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                      State
+                    </label>
+                    <input type="text"
+                      class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      placeholder="State" />
+                  </div>
+                  <div class="w-full sm:w-1/2 mt-2 sm:mt-0">
+                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                      Country
+                    </label>
+                    <input type="text"
+                      class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      placeholder="Country" />
+                  </div>
+                </div>
+                <div class="flex flex-col sm:flex-row items-center mb-5 sm:space-x-5">
+                  <div class="w-full sm:w-1/2">
+                    <label for="isActive"></label>
+                    <input type="checkbox" id="isActive" /><strong> Active </strong>
+                  </div>
+                  <div class="w-full sm:w-1/2 mt-2 sm:mt-0">
+                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                      Role
+                    </label>
+                    <select type="text" name="" class="w-full p-5 bg-white border border-gray-200 rounded shadow-sm appearance-none" id="">
+                      <option> --Select--</option>
+                      <option value="student"> Student </option>
+                      <option value="mentor"> Mentor </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+              <button
+                class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                type="button" onclick="toggleModal('add-company')">
+                Close
+              </button>
+              <button
+                class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                type="button" onclick="toggleModal('add-company')">
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hidden opacity-25 fixed inset-0 z-40 bg-black" id="add-company-backdrop"></div>
+    </div>
+    <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
+    <script src="../assets/js/users.js"></script>
+    <script type="text/javascript">
+      /* Make dynamic date appear */
+      (function () {
+        if (document.getElementById("get-current-year")) {
+          document.getElementById(
+            "get-current-year"
+          ).innerHTML = new Date().getFullYear();
+        }
+      })();
+      /* Sidebar - Side navigation menu on mobile/responsive mode */
+      function toggleNavbar(collapseID) {
+        document.getElementById(collapseID).classList.toggle("hidden");
+        document.getElementById(collapseID).classList.toggle("bg-white");
+        document.getElementById(collapseID).classList.toggle("m-2");
+        document.getElementById(collapseID).classList.toggle("py-3");
+        document.getElementById(collapseID).classList.toggle("px-6");
+      }
+      /* Function for dropdowns */
+      function openDropdown(event, dropdownID) {
+        let element = event.target;
+        while (element.nodeName !== "A") {
+          element = element.parentNode;
+        }
+        Popper.createPopper(element, document.getElementById(dropdownID), {
+          placement: "bottom-start",
+        });
+        document.getElementById(dropdownID).classList.toggle("hidden");
+        document.getElementById(dropdownID).classList.toggle("block");
+      }
+    </script>
+  </body>
+</html>
