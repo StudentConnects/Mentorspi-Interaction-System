@@ -35,8 +35,8 @@ router.get('/verify', (req, res) => {
 })
 
 // router.use("/assets", express.static(path.join(__dirname, "..", "public", "assets")));
-router.use("/admin", express.static(path.join(__dirname, "..", "public", "subadmin")))
-router.use("/super-admin", express.static(path.join(__dirname, "..", "public", "superadmin")))
+router.use("/subAdmin", express.static(path.join(__dirname, "..", "public", "subadmin")))
+router.use("/superAdmin", express.static(path.join(__dirname, "..", "public", "superadmin")))
 router.use("/mentor", express.static(path.join(__dirname, "..", "public", "mentor")))
 router.use("/student", express.static(path.join(__dirname, "..", "public", "student")))
 
@@ -57,8 +57,8 @@ function checkLogin(req, res, next) {
 // router.use('/admin', (req, _, next) => {req.allowedUserType = "admin"; req.differentUserType = "student"; next();}, checkLogin, adminRouter);
 // router.use('/student', (req, _, next) => {req.allowedUserType = "student"; req.differentUserType = "admin"; next();}, checkLogin, studentRouter);
 
-router.use('/super-admin',(req, _, next) => {req.allowedUserType = "superAdmin";next();},checkLogin,superadminRouter)
-router.use('/admin',(req, _, next) => {req.allowedUserType = "subAdmin";next();},checkLogin, subadminRouter);
+router.use('/superAdmin',(req, _, next) => {req.allowedUserType = "superAdmin";next();},checkLogin,superadminRouter)
+router.use('/subAdmin',(req, _, next) => {req.allowedUserType = "subAdmin";next();},checkLogin, subadminRouter);
 router.use('/mentor',(req, _, next) => {req.allowedUserType = "mentor";next();},checkLogin,mentorRouter)
 router.use('/student',(req, _, next) => {req.allowedUserType = "student";next();},checkLogin, studentRouter);
 
