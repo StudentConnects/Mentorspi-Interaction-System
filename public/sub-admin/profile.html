@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <!-- <link rel="shortcut icon" href="../../assets/img/favicon.ico" /> -->
+    <link rel="shortcut icon" href="../../assets/img/favicon.ico" />
     <link
       rel="apple-touch-icon"
       sizes="76x76"
@@ -15,7 +15,7 @@
       href="../../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"
     />
     <link rel="stylesheet" href="../../assets/styles/tailwind.css" />
-    <title>My Profile | Student Mentorship System</title>
+    <title>User Profile | Student Mentorship System</title>
   </head>
   <body class="text-blueGray-700 antialiased">
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -39,7 +39,7 @@
           >
             Student Mentorship System
           </a>
-          <ul class="md:hidden items-center flex flex-wrap list-none">
+          <ul class=" items-center flex flex-wrap list-none">
             <li class="inline-block relative">
               <a
                 class="text-blueGray-500 block"
@@ -55,11 +55,11 @@
                   /></span></div
               ></a>
               <div
-                class="hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
+                class="bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
                 id="user-responsive-dropdown"
               >
                 <a
-                  href="#"
+                  href="/logout"
                   class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
                   >Logout</a
                 >
@@ -100,7 +100,7 @@
               <li class="items-center">
                 <a href="profile.html" class="text-xs uppercase py-3 font-bold block text-red-500 hover:text-red-600">
                   <i class="fas fa-user mr-2 text-sm opacity-75"></i>
-                  My Profile
+                  Sub-Admin Profile
                 </a>
               </li>
               <li class="items-center">
@@ -131,8 +131,8 @@
           >
             <a
               class="text-white text-sm uppercase hidden lg:inline-block font-semibold"
-              href="./profile.html"
-              >My Profile</a
+              href="./user.html"
+              >User Profile</a
             >
             <ul
               class="flex-col md:flex-row list-none items-center hidden md:flex"
@@ -175,6 +175,7 @@
         </div>
         <div class="px-4 md:px-10 mx-auto w-full -m-24">
           <div class="flex flex-wrap">
+
             <div class="w-full lg:w-8/12 px-4">
               <div
                 class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0"
@@ -187,7 +188,7 @@
                   </div>
                 </div>
                 <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-                  <form>
+                  <form action="/users/subAdmin/updateuserdata" method="POST">
                     <h6
                       class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase"
                     >
@@ -204,6 +205,8 @@
                           </label>
                           <input
                             type="text"
+                            id ="name"
+                            name="name"
                             class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="Name"/>
                         </div>
@@ -218,6 +221,8 @@
                           </label>
                           <input
                             type="email"
+                            id="email"
+                            name="email"
                             class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="Email"/>
                         </div>
@@ -232,6 +237,8 @@
                           </label>
                           <input
                             type="text"
+                            id="org"
+                            name="org"
                             class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="Institute Name">
                         </div>
@@ -246,6 +253,8 @@
                           </label>
                           <input
                             type="text"
+                            id="mobile"
+                            name="phone_number"
                             class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="Mobile No."/>
                         </div>
@@ -262,6 +271,8 @@
                           </label>
                           <input
                             type="text"
+                            id="address"
+                            name="address"
                             class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="Address"/>
                         </div>
@@ -271,7 +282,10 @@
                           <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
                             City
                           </label>
-                          <input type="email"
+                          <input
+                            type="text"
+                            id="city"
+                            name="city"
                             class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                             placeholder="City" />
                         </div>
@@ -281,7 +295,10 @@
                           <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
                             Postal Code
                           </label>
-                          <input type="text"
+                          <input
+                            type="text"
+                            id="country"
+                            name="country"
                             class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                             placeholder="Postal Code" />
                         </div>
@@ -291,17 +308,10 @@
                           <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
                             State
                           </label>
-                          <input type="text"
-                            class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                            placeholder="State" />
-                        </div>
-                      </div>
-                      <div class="w-full lg:w-6/12 px-4">
-                        <div class="relative w-full mb-3">
-                          <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                            Country
-                          </label>
-                          <input type="text"
+                          <input
+                            type="text"
+                            id="pincode"
+                            name="pincode"
                             class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                             placeholder="Country" />
                         </div>
@@ -309,7 +319,7 @@
                     </div>
                     <button
                       class="bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
-                      type="button"
+                      type="submit"
                     >
                       Update
                     </button>
@@ -317,6 +327,7 @@
                 </div>
               </div>
             </div>
+
             <div class="w-full lg:w-4/12 px-4">
               <div
                 class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16"
@@ -347,7 +358,7 @@
                       <i
                         class="fas fa-user mr-2 text-lg text-blueGray-400"
                       ></i>
-                      Sub - Admin
+                      Admin
                     </div>
                   </div>
                   <div
@@ -361,7 +372,7 @@
         </div>
       </div>
     </div>
-    <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script type="text/javascript">
       /* Make dynamic date appear */
       (function () {
@@ -392,5 +403,6 @@
         document.getElementById(dropdownID).classList.toggle("block");
       }
     </script>
+    <script src="../../assets/js/admindata.js"></script>
   </body>
 </html>

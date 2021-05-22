@@ -92,12 +92,15 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV !== "production") {
 //   await postgreDatabase.end();
 // })();
 
+    // User Login
+
 // (async () => {
 //   const {
 //     loginUser  } = require('./tools/database');
 //     console.log(await loginUser('andharikar@gmail.com'))
 //   })();
 
+<<<<<<< HEAD
 // (async () => {
 //   const {
 //     postgreDatabase,
@@ -107,3 +110,28 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV !== "production") {
 //   console.log(await results.rows);
 //   await postgreDatabase.end();
 // })();
+=======
+    // Query pool for all users
+
+  // (async () => {
+  //   const {postgreDatabase:pool} = require('./tools/database');
+  //   const result =  await pool.query('Select * from user_table')
+  //   console.log(result.rows)
+  //   })();
+  
+      // Register a mentor
+
+  //   (async () => {
+  // const { registerUser  } = require('./tools/database');
+  //   const result =await registerUser('mentor', 1,'mentor@gmail.com', 'Pass@123', 9876543210, 'address', 'city', 'country', 'state', 431003, 'www.google.com', 'No description provided', '', false, false, 'mentor')
+  //   console.log(result.rows)
+  // })();
+
+  // Register a subAdmin
+
+  //   (async () => {
+  // const { registerUser } = require('./tools/database');
+  //   const result =await registerUser('subadmin', 1,'subadmin@gmail.com', 'Pass@1234', 9876543222, 'address', 'city', 'country', 'state', 431003, 'www.google.com', 'No description provided', '', false, false, 'subAdmin')
+  //   console.log(result.rows)
+  // })();
+>>>>>>> d74c1eaa47571709c2a125b7f61da5b51f0a1663

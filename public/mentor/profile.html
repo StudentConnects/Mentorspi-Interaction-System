@@ -39,7 +39,7 @@
           >
             Student Mentorship System
           </a>
-          <ul class="md:hidden items-center flex flex-wrap list-none">
+          <ul class="items-center flex flex-wrap list-none">
             <li class="inline-block relative">
               <a
                 class="text-blueGray-500 block"
@@ -55,11 +55,11 @@
                   /></span></div
               ></a>
               <div
-                class="hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
+                class="bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
                 id="user-responsive-dropdown"
               >
                 <a
-                  href="#"
+                  href="/logout"
                   class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
                   >Logout</a
                 >
@@ -188,7 +188,7 @@
                   </div>
                 </div>
                 <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-                  <form>
+                  <form action="/users/mentor/updateuserdata" method="POST">
                     <h6
                       class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase"
                     >
@@ -205,6 +205,8 @@
                           </label>
                           <input
                             type="text"
+                            id ="name"
+                            name="name"
                             class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="Name"/>
                         </div>
@@ -219,6 +221,8 @@
                           </label>
                           <input
                             type="email"
+                            id="email"
+                            name="email"
                             class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="Email"/>
                         </div>
@@ -233,6 +237,8 @@
                           </label>
                           <input
                             type="text"
+                            id="org"
+                            name="org"
                             class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="Institute Name">
                         </div>
@@ -247,6 +253,8 @@
                           </label>
                           <input
                             type="text"
+                            id="mobile"
+                            name="phone_number"
                             class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="Mobile No."/>
                         </div>
@@ -263,6 +271,8 @@
                           </label>
                           <input
                             type="text"
+                            id="address"
+                            name="address"
                             class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="Address"/>
                         </div>
@@ -272,7 +282,10 @@
                           <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
                             City
                           </label>
-                          <input type="email"
+                          <input
+                            type="text"
+                            id="city"
+                            name="city"
                             class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                             placeholder="City" />
                         </div>
@@ -282,7 +295,10 @@
                           <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
                             Postal Code
                           </label>
-                          <input type="text"
+                          <input
+                            type="text"
+                            id="country"
+                            name="country"
                             class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                             placeholder="Postal Code" />
                         </div>
@@ -310,7 +326,7 @@
                     </div>
                     <button
                       class="bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
-                      type="button"
+                      type="submit"
                     >
                       Update
                     </button>
@@ -393,5 +409,6 @@
         document.getElementById(dropdownID).classList.toggle("block");
       }
     </script>
-  </body>
+    <script src="../../assets/js/mentordata.js"></script>
+</body>
 </html>
