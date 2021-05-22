@@ -9,7 +9,7 @@ const db = require('../tools/database')
 router.get("/", (req, res) => {
     debug("into /");
     console.log('into path');
-    res.sendFile(path.join(__dirname, "..", "public", "superadmin", "profile.html"));
+    res.sendFile(path.join(__dirname, "..", "public", "super-admin", "profile.html"));
 });
 router.all('/test', function (req, res) {
     debug("into /test");
