@@ -67,7 +67,7 @@ router.get("/login", function (req, res, next) {
 
 router.post("/login", (req, res, next) => {
     console.log(req.body)
-    // console.log(req.user)
+    console.log(req.user)
     // res.send('redirect sucessful')
     if (req.isAuthenticated()) {
         debug("Is Authenticated");
@@ -375,9 +375,9 @@ router.get('/logout' ,(req, res) => {
         }
         req.user = '';
         res.redirect('/');
-        req.allowedUserType = req.differentUserType = '';
+        req.allowedUserType = '';
     });
-    
+    console.log([req.user,req.allowedUserType,req.cookies])
 });
 
 router.use("/images", express.static(path.join(__dirname, "..", "custom-images")));

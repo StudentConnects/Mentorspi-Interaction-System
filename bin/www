@@ -1,9 +1,9 @@
-// #!/usr/bin/env node
-// /* eslint-disable no-use-before-define */
+#!/usr/bin/env node
+/* eslint-disable no-use-before-define */
 
-// /**
-//  * Module dependencies.
-//  */
+/**
+ * Module dependencies.
+*/
 if(! process.env.NODE_ENV || process.env.NODE_ENV !== "production") {
   const dotenv = require("dotenv").config()
 }
@@ -11,7 +11,7 @@ if(! process.env.NODE_ENV || process.env.NODE_ENV !== "production") {
 const debug = require('debug')('mentorship:server:www');
 const http = require('http');
 const app = require('../server');
-
+const socketio = require('socket.io');
 /**
  * Get port from environment and store in Express.
  */
@@ -24,26 +24,26 @@ app.set('port', port);
  */
 // making socketio to listen to server
 const server = http.createServer(app);
-const io = require('socket.io')(server, {
-  cors: {
-    origin: '*',
-  }
+global.io = socketio(server, {
+ cors: {
+   origin: '*',
+ }
 });
 
-// on connection
+  // on connection
 
-io.on('connection',(socket,req)=>{
-  // console.log(socket)
-  socket.emit('welcome','Welcome to websocket server')
-  socket.on('message',(msg)=>{
-      console.log(msg)
-  })
-  socket.on('newmessagetoServer',(newdata)=>{
-    console.log(newdata);
-    io.emit('messagetoClients',{message:newdata});
-});
-});
-
+  global.io.on('connection',(socket,req)=>{
+    console.log(socket)
+   socket.emit('welcome','Welcome to websocket server')
+   socket.on('message',(msg)=>{
+       console.log(msg)
+   })
+   socket.on('newmessagetoServer',(newdata)=>{
+     console.log(newdata);
+      global.io.emit('messagetoClients',{message:newdata});
+  });
+  });
+  
 /**
  * Listen on provided port, on all network interfaces.
  */

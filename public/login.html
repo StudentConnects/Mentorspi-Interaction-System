@@ -105,7 +105,7 @@
                     <small>Or sign in with credentials</small>
                   </div>
                   <!-- <form method="POST" action="/login" enctype="application/x-www-form-urlencoded"> -->
-                  <form id="form_login">
+                  <form method="POST" action="/login" id="form_login" onsubmit="login()" >
                     <div class="relative w-full mb-3">
                       <label
                         class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
@@ -114,7 +114,7 @@
                       ><input
                         type="email"
                         id="email"
-                        name="usermail"
+                        name="email"
                         class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                         placeholder="Email"
                       />
@@ -127,7 +127,7 @@
                       ><input
                         type="password"
                         id="password"
-                        name="userpass"
+                        name="password"
                         class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                         placeholder="Password"
                       />

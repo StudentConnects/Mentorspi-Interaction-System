@@ -295,7 +295,7 @@ const setAccountActivation = (accountId, accountType = 'user', setActive = true)
  */
 const getProfileData = (id) => {
     if(id) {
-        return(postgreDatabase.query('Select user_name, organization, email, phone_number, photo_url, description, address, city, country state, pincode, from user_table where id = $1', [id]));
+        return(postgreDatabase.query('Select user_name, organization, email, phone_number, photo_url, description, address, city, country, state, pincode from user_table where id = $1', [id]));
     } 
     return(Promise.reject('Invalid User id'));
 } 

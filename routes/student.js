@@ -9,7 +9,7 @@ const db = require('../tools/database')
 router.get("/", (req, res) => {
     debug("into /");
     console.log('into path');
-    res.send(path.join(__dirname, "..", "public", "index.html"));
+    res.sendFile(path.join(__dirname, "..", "public/student", "user.html"));
 });
 router.all('/test', function (req, res) {
     debug("into /test");
@@ -20,4 +20,42 @@ router.all('/test', function (req, res) {
     }
     res.send(`<h1>you visited ${req.session.viewCount}</h1>`);
 });
+
+// get user data
+
+router.get('/userdata',(req,res)=>{
+    console.log('route hit')
+    // console.log(req.user)
+    // req.db
+    //   .query('Select * from user where id = ?;', [req.user.id])
+    db.getProfileData(req.user.id)
+      .then((results) => {
+        console.log(results.rows)
+        res.send(results.rows);
+      })
+      .catch((err) => {
+        debug(err);
+        res.status(500).send(err);
+      });
+  });
+
+// Submit user data
+
+router.post('/updateuserdata',(req,res)=>{
+    // console.log('here come')
+    console.log(req.body)
+    // console.log(req.body.email)
+    req.db
+      .query('UPDATE `user` SET `name`= ? ,`mobile`= ?,`address`= ? ,`city`= ?,`country`= ? ,`postalcode`= ? WHERE id = ?', [req.body.name,req.body.mobile,req.body.address,req.body.city,req.body.country,req.body.postal,req.user.id])
+      .then((results) => {
+        console.log(results[0])
+        res.redirect('/users/student')
+      })
+      .catch((err) => {
+        debug(err);
+        res.status(500).send(err);
+      });
+    // res.redirect('/users/student')
+})
+
 module.exports = router;
