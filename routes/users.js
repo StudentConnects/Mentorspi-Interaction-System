@@ -35,8 +35,8 @@ router.get('/verify', (req, res) => {
 })
 
 // router.use("/assets", express.static(path.join(__dirname, "..", "public", "assets")));
-router.use("/subAdmin", express.static(path.join(__dirname, "..", "public", "subadmin")))
-router.use("/superAdmin", express.static(path.join(__dirname, "..", "public", "superadmin")))
+router.use("/subAdmin", express.static(path.join(__dirname, "..", "public", "sub-admin")))
+router.use("/superAdmin", express.static(path.join(__dirname, "..", "public", "super-admin")))
 router.use("/mentor", express.static(path.join(__dirname, "..", "public", "mentor")))
 router.use("/student", express.static(path.join(__dirname, "..", "public", "student")))
 

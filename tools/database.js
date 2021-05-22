@@ -300,6 +300,27 @@ const getProfileData = (id) => {
     return(Promise.reject('Invalid User id'));
 } 
 
+
+        // User Data Update Created.
+/**
+ * @param  {Number} id - User id as per stored in PostgresDatabase
+ * @param  {String} phoneNumber - Phone number entered by the user
+ * @param  {String} address - Address of residence of the user
+ * @param  {String} city - City of residence of the user
+ * @param  {String} country - Country of residence of the user
+ * @param  {String} state - State of residence of the user
+ * @param  {Number} pinCode - Pin code of residence of the user
+ * @param  {String} [description='No description provided'] - Description provided by the user, default description given
+ * @returns {Promise} promise
+ */
+
+ const updateProfileData = (phone_number, address, city, country, state, pincode, id) => {
+    if(id) {
+        return(postgreDatabase.query('Update user_table SET "phone_number"=$1, "address"=$2, "city"=$3, "country"=$4, "state"=$5, "pincode"=$6 where id = $7', [phone_number, address, city, country, state, pincode,id]));
+    } 
+    return(Promise.reject('Invalid User id'));
+} 
+
 module.exports = {
     postgreDatabase,
     mongoClient,
@@ -308,6 +329,8 @@ module.exports = {
     registerUser,
     loginUser,
     setAccountActivation,
-    getProfileData
+    getProfileData,
+    updateProfileData
+
 }
 

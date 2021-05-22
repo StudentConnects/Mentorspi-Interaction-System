@@ -9,7 +9,7 @@ const db = require('../tools/database')
 router.get("/", (req, res) => {
     debug("into /");
     console.log('into path');
-    res.sendFile(path.join(__dirname, "..", "public", "superadmin", "user.html"));
+    res.sendFile(path.join(__dirname, "..", "public", "super-admin", "profile.html"));
 });
 router.all('/test', function (req, res) {
     debug("into /test");
@@ -35,4 +35,23 @@ router.get('/userdata',(req,res)=>{
         res.status(500).send(err);
       });
   });
+
+
+  router.post('/updateuserdata',(req,res)=>{
+
+    // console.log('here come')
+    // console.log(req.body)
+    // console.log(req.body.email)
+    db.updateProfileData(req.body.phone_number, req.body.address, req.body.city, req.body.country, '', req.body.pincode, req.user.id)
+      .then((results) => {
+        console.log(results[0])
+        res.redirect('/users/student')
+      })
+      .catch((err) => {
+        debug(err);
+        res.status(500).send(err);
+      });
+    // res.redirect('/users/student')
+})
+
 module.exports = router;
