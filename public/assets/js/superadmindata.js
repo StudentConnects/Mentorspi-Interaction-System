@@ -41,6 +41,8 @@ document.addEventListener(
                 let org = document.getElementById('org')
                 org.value = text[0].organization
                 // console.log(text[0].name);
+                let profile_name = document.getElementById('profile_name')
+                name.value = text[0].user_name
             
             }
             return response.status;
