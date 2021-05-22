@@ -100,6 +100,17 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV !== "production") {
 //     console.log(await loginUser('andharikar@gmail.com'))
 //   })();
 
+<<<<<<< HEAD
+// (async () => {
+//   const {
+//     postgreDatabase,
+//     registerCompany
+//   } = require('./tools/database');
+//   const results = await postgreDatabase.query("select * from organisations");
+//   console.log(await results.rows);
+//   await postgreDatabase.end();
+// })();
+=======
     // Query pool for all users
 
   // (async () => {
@@ -123,3 +134,4 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV !== "production") {
   //   const result =await registerUser('subadmin', 1,'subadmin@gmail.com', 'Pass@1234', 9876543222, 'address', 'city', 'country', 'state', 431003, 'www.google.com', 'No description provided', '', false, false, 'subAdmin')
   //   console.log(result.rows)
   // })();
+>>>>>>> d74c1eaa47571709c2a125b7f61da5b51f0a1663
