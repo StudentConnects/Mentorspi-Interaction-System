@@ -1,0 +1,9 @@
+routig to login.html
+profile photo change 
+profile name
+change password field to unique in db
+password hashing
+list users
+list companies
+authenticated routing setup alllll
+register user for super and subadmin

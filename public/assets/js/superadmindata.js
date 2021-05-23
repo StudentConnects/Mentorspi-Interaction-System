@@ -30,8 +30,8 @@ document.addEventListener(
                 city.value = text[0].city
                 let email = document.getElementById('email')
                 email.value = text[0].email
-                // let utype = document.getElementById('state')
-                // utype.value = text[0].state
+                let state = document.getElementById('state')
+                state.value = text[0].state
                 let add = document.getElementById('address')
                 add.value = text[0].address
                 let postal = document.getElementById('pincode')
@@ -42,7 +42,7 @@ document.addEventListener(
                 org.value = text[0].organization
                 // console.log(text[0].name);
                 let profile_name = document.getElementById('profile_name')
-                name.value = text[0].user_name
+                profile_name.innerHTML = text[0].user_name
             
             }
             return response.status;

@@ -48,17 +48,17 @@ try {
 
   // attach all the middleware
   app.use(compression());
-  app.use(helmet());
-  app.use(
-    helmet.contentSecurityPolicy({
-      directives: {
-        defaultSrc: ["'self'", "maxcdn.bootstrapcdn.com", "fonts.googleapis.com", "fonts.gstatic.com"],
-        scriptSrc: ["'self'", "cdnjs.cloudflare.com", "cdn.jsdelivr.net"],
-        // "style-src-elem": ["'self'", "cdnjs.cloudflare.com", "maxcdn.bootstrapcdn.com", "cdn.jsdelivr.net", "fonts.googleapis.com"],
-        "img-src": ["data:", "'self'"]
-      },
-    })
-  );
+  // app.use(helmet());
+  // app.use(
+  //   helmet.contentSecurityPolicy({
+  //     directives: {
+  //       defaultSrc: ["'self'", "'unsafe-inline'","fonts.googleapis.com", "fonts.gstatic.com","cdn.jsdelivr.net","cdnjs.cloudflare.com"],
+  //       scriptSrc: ["'self'","'unsafe-inline'","unpkg.com"],
+  //       // "style-src-elem": ["'self'", "cdnjs.cloudflare.com", "maxcdn.bootstrapcdn.com", "cdn.jsdelivr.net", "fonts.googleapis.com"],
+  //       "img-src": ["data:", "'self'"]
+  //     },
+  //   })
+  // );
 
   app.use(express.json());
   app.use(express.urlencoded({

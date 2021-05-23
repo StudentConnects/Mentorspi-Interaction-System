@@ -1,3 +1,4 @@
+console.log('in comny.js')
 // Active/Inactive companies list
 function changeAtiveTab(event, tabID) {
     let element = event.target;
@@ -69,7 +70,7 @@ function submit_addCompany() {
       };
       console.log("COMPANY DATA ----- ", company_Infoadd);
 
-      return fetch("/users/superadmin/addCompany", {
+      return fetch("/users/superAdmin/addCompany", {
         method: "POST",
         body: JSON.stringify(company_Infoadd),
         headers: {
@@ -91,7 +92,7 @@ function submit_addCompany() {
     });
 }
 
-document.getElementById("edit_company").addEventListener("click", showmodal);
+// document.getElementById("edit_company").addEventListener("click", showmodal);
 
 function showModal() {
   toggleModal('add-company');
@@ -100,7 +101,7 @@ function showModal() {
 document.addEventListener(
   "DOMContentLoaded",
   function () {
-    fetch("/users/superadmin/listActiveCompanies", {
+    fetch("/users/superAdmin/listActiveCompanies", {
       method: "GET",
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -127,13 +128,15 @@ function append_json_active(data) {
 
   var company = "";
   // ITERATING THROUGH OBJECTS
-  $.each(data, function (key, value) {
+  data.forEach((value,key) => {
+    console.log(key,value)
+  // $.each(data, function (key, value) {
     // Making Buttons
     var buttons =
-      '<button class="btn btn-success btn-fab btn-fab-mini btn-round" onclick="editcompany(this)">' +
+      '<button class="btn btn-success btn-fab btn-fab-mini btn-round" ">' +//onclick="editcompany(this)
       '                          <i class="material-icons">edit</i>' +
       "                        </button>" +
-      '                        <button class="btn btn-danger btn-fab btn-fab-mini btn-round" onclick="deletecompany(this)">' +
+      '                        <button class="btn btn-danger btn-fab btn-fab-mini btn-round" ">' +//onclick="deletecompany(this)
       '                          <i class="material-icons">delete</i>' +
       "                        </button>";
     // CONSTRUCTION OF ROWS HAVING
@@ -141,19 +144,26 @@ function append_json_active(data) {
     company += "<tr>";
     company += "<td>" + (key + 1) + "</td>";
     company += "<td>" + value.name + "</td>";
-    company += "<td>" + value.description + "</td>";
+    company += "<td>" + value.address + "</td>";
+    company += "<td>" + value.contactemail + "</td>";
+    company += "<td>" + value.contactphone + "</td>";
+    company += "<td>" + value.subscriptionleft + "</td>";
+    company += "<td>" + value.photourl + "</td>";
+    company += "<td>" + value.isverified + "</td>";
+    company += "<td>" + value.isactive + "</td>";
     company += "<td>" + buttons + "</td>";
     company += "</tr>";
   });
 
   // INSERTING ROWS INTO TABLE
-  $("#activeCompany_list").append(company);
+  // $("#activeCompany_list").append(company);
+  document.getElementById('activeCompany_list').innerHTML = company
 }
 
 document.addEventListener(
   "DOMContentLoaded",
   function () {
-    fetch("/users/superadmin/listInactiveCompanies", {
+    fetch("/users/superAdmin/listInactiveCompanies", {
       method: "GET",
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -179,13 +189,15 @@ function append_json_inactive(data) {
 
   var company = "";
   // ITERATING THROUGH OBJECTS
-  $.each(data, function (key, value) {
+  data.forEach((value,key) => {
+    console.log(key,value)
+    // $.each(data, function (key, value) {
     // Making Buttons
     var buttons =
-      '<button class="btn btn-success btn-fab btn-fab-mini btn-round" onclick="editcompany(this)">' +
+      '<button class="btn btn-success btn-fab btn-fab-mini btn-round" ">' +//onclick="editcompany(this)
       '                          <i class="material-icons">edit</i>' +
       "                        </button>" +
-      '                        <button class="btn btn-danger btn-fab btn-fab-mini btn-round" onclick="deletecompany(this)">' +
+      '                        <button class="btn btn-danger btn-fab btn-fab-mini btn-round" ">' +//onclick="deletecompany(this)
       '                          <i class="material-icons">delete</i>' +
       "                        </button>";
     // CONSTRUCTION OF ROWS HAVING
@@ -193,13 +205,20 @@ function append_json_inactive(data) {
     company += "<tr>";
     company += "<td>" + (key + 1) + "</td>";
     company += "<td>" + value.name + "</td>";
-    company += "<td>" + value.description + "</td>";
+    company += "<td>" + value.address + "</td>";
+    company += "<td>" + value.contactemail + "</td>";
+    company += "<td>" + value.contactphone + "</td>";
+    company += "<td>" + value.subscriptionleft + "</td>";
+    company += "<td>" + value.photourl + "</td>";
+    company += "<td>" + value.isverified + "</td>";
+    company += "<td>" + value.isactive + "</td>";
     company += "<td>" + buttons + "</td>";
     company += "</tr>";
   });
 
   // INSERTING ROWS INTO TABLE
-  $("#inactiveCompany_list").append(company);
+  // $("#inactiveCompany_list").append(company);
+  document.getElementById('inactiveCompany_list').innerHTML = company
 }
 
 function editcompany(x) {
@@ -218,7 +237,7 @@ function deletecompany(x) {
     let companyid = compList[i - 1].id;
     let companydata = { id: companyid };
 
-    fetch("/users/superadmin/disableCompany", {
+    fetch("/users/superAdmin/disableCompany", {
       method: "DELETE",
       body: JSON.stringify(companydata),
       headers: { "Content-type": "application/json; charset=UTF-8" },
