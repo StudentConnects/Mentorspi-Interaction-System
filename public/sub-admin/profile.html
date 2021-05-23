@@ -15,7 +15,7 @@
       href="../../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"
     />
     <link rel="stylesheet" href="../../assets/styles/tailwind.css" />
-    <title>User Profile | Student Mentorship System</title>
+    <title>My Profile | Student Mentorship System</title>
   </head>
   <body class="text-blueGray-700 antialiased">
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -39,30 +39,20 @@
           >
             Student Mentorship System
           </a>
-          <ul class=" items-center flex flex-wrap list-none">
+          <ul class="md:hidden items-center flex flex-wrap list-none">
             <li class="inline-block relative">
-              <a
-                class="text-blueGray-500 block"
-                href="#"
-                onclick="openDropdown(event,'user-responsive-dropdown')"
-                ><div class="items-center flex">
+              <a class="text-blueGray-500 block" href="" onclick="openDropdown(event,'user-responsive-dropdown')">
+                <div class="items-center flex">
                   <span
-                    class="w-12 h-12 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center rounded-full"
-                    ><img
-                      alt="..."
-                      class="w-full rounded-full align-middle border-none shadow-lg"
-                      src="../../assets/img/user.png"
-                  /></span></div
-              ></a>
-              <div
-                class="bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
-                id="user-responsive-dropdown"
-              >
-                <a
-                  href="/logout"
-                  class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-                  >Logout</a
-                >
+                    class="w-12 h-12 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center rounded-full"><img
+                      alt="..." class="w-full rounded-full align-middle border-none shadow-lg"
+                      src="../../assets/img/user.png" /></span>
+                </div>
+              </a>
+              <div class="hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
+                id="user-responsive-dropdown">
+                <a href="/logout"
+                  class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700">Logout</a>
               </div>
             </li>
           </ul>
@@ -100,7 +90,7 @@
               <li class="items-center">
                 <a href="profile.html" class="text-xs uppercase py-3 font-bold block text-red-500 hover:text-red-600">
                   <i class="fas fa-user mr-2 text-sm opacity-75"></i>
-                  Sub-Admin Profile
+                  My Profile
                 </a>
               </li>
               <li class="items-center">
@@ -134,33 +124,19 @@
               href="./user.html"
               >User Profile</a
             >
-            <ul
-              class="flex-col md:flex-row list-none items-center hidden md:flex"
-            >
-              <a
-                class="text-blueGray-500 block"
-                href="#"
-                onclick="openDropdown(event,'user-dropdown')"
-              >
+            <ul class="flex-col md:flex-row list-none items-center hidden md:flex">
+              <a class="text-blueGray-500 block" href="#" onclick="openDropdown(event,'user-dropdown')">
                 <div class="items-center flex">
                   <span
-                    class="w-12 h-12 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center rounded-full"
-                    ><img
-                      alt="..."
-                      class="w-full rounded-full align-middle border-none shadow-lg"
-                      src="../../assets/img/user.png"
-                  /></span>
+                    class="w-12 h-12 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center rounded-full"><img
+                      alt="..." class="w-full rounded-full align-middle border-none shadow-lg"
+                      src="../../assets/img/user.png" /></span>
                 </div>
               </a>
-              <div
-                class="hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
-                id="user-dropdown"
-              >
-                <a
-                  href=""
-                  class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-                  >Logout</a
-                >
+              <div class="hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
+                id="user-dropdown">
+                <a href=""
+                  class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700">Logout</a>
               </div>
             </ul>
           </div>
@@ -349,8 +325,9 @@
                   <div class="text-center mt-12">
                     <h3
                       class="text-xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2"
-                    >
-                      Jenna Stones
+                      id="profile_name"
+                      >
+                      
                     </h3>
                     <div
                       class="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase"
@@ -403,6 +380,6 @@
         document.getElementById(dropdownID).classList.toggle("block");
       }
     </script>
-    <script src="../../assets/js/admindata.js"></script>
+    <script src="../../assets/js/subadmindata.js"></script>
   </body>
 </html>
