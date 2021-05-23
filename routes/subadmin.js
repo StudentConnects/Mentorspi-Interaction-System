@@ -36,7 +36,7 @@ router.get('/userdata',(req,res)=>{
       });
 });
 
-  router.post('/updateuserdata',(req,res)=>{
+router.post('/updateuserdata',(req,res)=>{
 
     // console.log('here come')
     // console.log(req.body)
@@ -67,6 +67,31 @@ router.get('/userlist',(req,res)=>{
         res.status(500).send(err);
       });
     });
+});
+
+router.post('/userdata',(req,res)=>{
+    db.getProfileData(req.body.id)
+      .then((results) => {
+        console.log(results.rows)
+        res.send(results.rows);
+      })
+      .catch((err) => {
+        debug(err);
+        res.status(500).send(err);
+      });
+});
+
+router.post('/updateusers',(req,res)=>{
+    // db.updateUserData(req.body.name, req.body.email, req.body.password, req.body.mobile, req.body.org, req.body.add, req.body.city, req.body.postal, req.body.state, req.body.country, req.body.isActive, req.body.user_id)
+    db.updateUserData(req.body.name, req.body.email, req.body.password, req.body.mobile, req.body.org, req.body.add, req.body.city, req.body.postal, req.body.state, req.body.country, req.body.user_id)
+      .then((results) => {
+        // res.redirect('/users/subAdmin')
+        res.send(200);
+      })
+      .catch((err) => {
+        debug(err);
+        res.status(500).send(err);
+      });
 });
 
 module.exports = router;

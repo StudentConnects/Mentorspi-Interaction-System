@@ -295,7 +295,7 @@ const setAccountActivation = (accountId, accountType = 'user', setActive = true)
  */
 const getProfileData = (id) => {
     if(id) {
-        return(postgreDatabase.query('Select user_name, organization, email, phone_number, photo_url, description, address, city, country, state, pincode from user_table where id = $1', [id]));
+        return(postgreDatabase.query('Select user_name, password, organization, email, phone_number, photo_url, description, address, city, country, state, pincode from user_table where id = $1', [id]));
     } 
     return(Promise.reject('Invalid User id'));
 } 
@@ -343,6 +343,25 @@ const getUserList = (id) => {
     return(Promise.reject('Invalid Organization id'));
 } 
 
+// User Data Update from sub-admin dashboard.
+/**
+ * @param  {Number} id - User id as per stored in PostgresDatabase
+ * @param  {String} phoneNumber - Phone number entered by the user
+ * @param  {String} address - Address of residence of the user
+ * @param  {String} city - City of residence of the user
+ * @param  {String} country - Country of residence of the user
+ * @param  {String} state - State of residence of the user
+ * @param  {Number} pinCode - Pin code of residence of the user
+ * @param  {String} [description='No description provided'] - Description provided by the user, default description given
+ * @returns {Promise} promise
+ */
+
+ const updateUserData = (name, email, password, mobile, org, add, city, postal, state, country, user_id) => {
+    if(user_id) {
+        return(postgreDatabase.query('Update user_table SET "user_name"=$1 ,"email"=$2, "password"=$3, "phone_number"=$4, "organization"=$5, "address"=$6, "city"=$7, "pincode"=$8, "state"=$9, "country"=$10 where id = $11', [name, email, password, mobile, org, add, city, postal, state, country, user_id]));
+    } 
+    return(Promise.reject('Invalid User id'));
+} 
 
 module.exports = {
     postgreDatabase,
@@ -355,7 +374,8 @@ module.exports = {
     getProfileData,
     updateProfileData,
     getUserList,
-    getOrgId
+    getOrgId,
+    updateUserData
 
 }
 
