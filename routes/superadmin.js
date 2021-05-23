@@ -220,6 +220,67 @@ router.get("/listActiveCompanies", (req, res) => {
       });
   });
 
-
+  router.delete("/disableCompany",
+  checkSchema({
+    id: {
+      in: ["body"],
+      errorMessage: 'ID is wrong',
+      isInt: true,
+      toInt: true,
+    }
+  }),
+ (req, res) => {
+  const { id } = req.body;
+  db.postgreDatabase
+    .query("update organisations set isactive = false where id = $1", [id])
+    .then((results) => {
+      console.log(results);
+      res.send(results[0]);
+    //   let info = results[0].info.split(":");
+    //   if (info[1].includes("0") || info[2].includes("0")) {
+    //     console.log("INCORRECT ID");
+    //     console.log(results);
+    //     res.send("Incorrect ID");
+    //   } else if (info[1].includes("1") && info[2].includes("1")) {
+    //     res.send("Success");
+    //   } else {
+    //     console.log(info);
+    //     res.status(500).send(results.info);
+    //   }
+    }).catch(err=>{
+        res.status(500).send(err)
+    })
+});
   
+router.patch("/enableCompany",
+checkSchema({
+    id: {
+      in: ["body"],
+      errorMessage: 'ID is wrong',
+      isInt: true,
+      toInt: true,
+    }
+  }),
+  (req, res) => {
+  const { id } = req.body;
+  db.postgreDatabase
+    .query("update organisations set isactive = true where id = $1", [id])
+    .then((results) => {
+      console.log(results);
+      res.send(results[0]);
+    //   let info = results[0].info.split(":");
+    //   if (info[1].includes("0") || info[2].includes("0")) {
+    //     console.log("INCORRECT ID");
+    //     console.log(results);
+    //     res.send("Incorrect ID");
+    //   } else if (info[1].includes("1") && info[2].includes("1")) {
+    //     res.send("Success");
+    //   } else {
+    //     console.log(info);
+    //     res.status(500).send(results.info);
+    //   }
+    }).catch(err=>{
+        res.status(500).send(err)
+    });
+});
 module.exports = router;

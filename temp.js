@@ -165,3 +165,5 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV !== "production") {
   //   const result = await postgreDatabase.query('select * from user_table')
   //   console.log(await result.rows)
   // })();
+//   var a = 'sitfndsfjjfhf'
+//   console.log(`${a}`+' hdshfsdbffsdff')

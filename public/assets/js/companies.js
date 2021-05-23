@@ -25,15 +25,15 @@ function changeAtiveTab(event, tabID) {
   }
 
 // toggleModal function
-function toggleModal(modalID){
+function toggleModal(modalID,value){
     document.getElementById(modalID).classList.toggle("hidden");
     document.getElementById(modalID + "-backdrop").classList.toggle("hidden");
     document.getElementById(modalID).classList.toggle("flex");
-    document.getElementById(modalID + "-backdrop").classList.toggle("flex");
-  }  
+    document.getElementById(modalID + "-backdrop").classList.toggle("flex"); 
+  }
 
 document.getElementById("submit_addCompany").addEventListener("click", submit_addCompany);
-
+document.getElementById("submit_editCompany").addEventListener("click", submit_editCompany);
 // Adding new company function
 function submit_addCompany() {
   let company_name = document.getElementById("company_name").value;
@@ -91,7 +91,9 @@ function submit_addCompany() {
       console.log("Requestfailed", error);
     });
 }
-
+function submit_editCompany(id){
+  alert(id)
+}
 // document.getElementById("edit_company").addEventListener("click", showmodal);
 
 function showModal() {
@@ -132,13 +134,14 @@ function append_json_active(data) {
     console.log(key,value)
   // $.each(data, function (key, value) {
     // Making Buttons
-    var buttons =
-      '<button class="btn btn-success btn-fab btn-fab-mini btn-round" ">' +//onclick="editcompany(this)
-      '                          <i class="material-icons">edit</i>' +
-      "                        </button>" +
-      '                        <button class="btn btn-danger btn-fab btn-fab-mini btn-round" ">' +//onclick="deletecompany(this)
-      '                          <i class="material-icons">delete</i>' +
-      "                        </button>";
+    var button1 =
+    `<button class="btn btn-success btn-fab btn-fab-mini btn-round" onclick="editcompany(${value.id})">` +
+    '                          <i class="material-icons">edit</i>' +
+    "                        </button>" ;
+    var button2 =
+    `<button class="btn btn-danger btn-fab btn-fab-mini btn-round" onclick="disablecompany(${value.id})">` +
+    '                          <i class="material-icons">deactivate</i>' +
+    "                        </button>";
     // CONSTRUCTION OF ROWS HAVING
     // DATA FROM JSON OBJECT
     company += "<tr>";
@@ -151,7 +154,8 @@ function append_json_active(data) {
     company += "<td>" + value.photourl + "</td>";
     company += "<td>" + value.isverified + "</td>";
     company += "<td>" + value.isactive + "</td>";
-    company += "<td>" + buttons + "</td>";
+    company += "<td>" + button1 + "</td>";
+    company += "<td>" + button2 + "</td>";
     company += "</tr>";
   });
 
@@ -183,7 +187,7 @@ document.addEventListener(
   },
   false
 );
-
+// this function appends the json data to the table 'company_list'
 function append_json_inactive(data) {
   compList = data;
 
@@ -193,12 +197,13 @@ function append_json_inactive(data) {
     console.log(key,value)
     // $.each(data, function (key, value) {
     // Making Buttons
-    var buttons =
-      '<button class="btn btn-success btn-fab btn-fab-mini btn-round" ">' +//onclick="editcompany(this)
+    var button1 =
+      `<button class="btn btn-success btn-fab btn-fab-mini btn-round" onclick="editcompany(${value.id})">` +
       '                          <i class="material-icons">edit</i>' +
-      "                        </button>" +
-      '                        <button class="btn btn-danger btn-fab btn-fab-mini btn-round" ">' +//onclick="deletecompany(this)
-      '                          <i class="material-icons">delete</i>' +
+      "                        </button>" ;
+      var button2 =
+      `<button class="btn btn-danger btn-fab btn-fab-mini btn-round" onclick="enablecompany(${value.id})">` +
+      '                          <i class="material-icons">activate</i>' +
       "                        </button>";
     // CONSTRUCTION OF ROWS HAVING
     // DATA FROM JSON OBJECT
@@ -212,7 +217,8 @@ function append_json_inactive(data) {
     company += "<td>" + value.photourl + "</td>";
     company += "<td>" + value.isverified + "</td>";
     company += "<td>" + value.isactive + "</td>";
-    company += "<td>" + buttons + "</td>";
+    company += "<td>" + button1 + "</td>";
+    company += "<td>" + button2 + "</td>";
     company += "</tr>";
   });
 
@@ -222,20 +228,15 @@ function append_json_inactive(data) {
 }
 
 function editcompany(x) {
-  // company_edit = true;
-  let i = x.parentNode.parentNode.rowIndex;
-  // console.log(JSON.stringify(compList));
-  document.getElementById("company_name").value = compList[i - 1].name;
-  document.getElementById("company_description").value =
-    compList[i - 1].description;
-  showmodal();
+  toggleModal('edit-company',x);
 }
 
-function deletecompany(x) {
+function disablecompany(x) {
+  // alert('In edit func.'+'\nid ='+x)
   if (ConfirmDelete()) {
-    let i = x.parentNode.parentNode.rowIndex;
-    let companyid = compList[i - 1].id;
-    let companydata = { id: companyid };
+    // let i = x.parentNode.parentNode.rowIndex;
+    // let companyid = compList[i - 1].id;
+    let companydata = { id: x };
 
     fetch("/users/superAdmin/disableCompany", {
       method: "DELETE",
@@ -262,4 +263,38 @@ function ConfirmDelete() {
   var x = confirm("Are you sure you want to delete?");
   if (x) return true;
   else return false;
+}
+
+function ConfirmEnable() {
+  var x = confirm("Are you sure you want to enable?");
+  if (x) return true;
+  else return false;
+}
+
+function enablecompany(x) {
+  // alert('In edit func.'+'\nid ='+x)
+  if (ConfirmEnable()) {
+    // let i = x.parentNode.parentNode.rowIndex;
+    // let companyid = compList[i - 1].id;
+    let companydata = { id: x };
+
+    fetch("/users/superAdmin/enableCompany", {
+      method: "PATCH",
+      body: JSON.stringify(companydata),
+      headers: { "Content-type": "application/json; charset=UTF-8" },
+    })
+      .then((response) =>
+        response.text().then((text) => {
+          console.log(text);
+          if (response.ok) {
+            if (!alert("Successfully Enabled")) {
+              window.location.reload();
+            }
+          }
+          return text;
+        })
+      )
+      .then((json) => console.log(json))
+      .catch((err) => console.log(err));
+  }
 }
