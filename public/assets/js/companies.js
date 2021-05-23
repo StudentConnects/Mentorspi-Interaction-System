@@ -92,7 +92,45 @@ function submit_addCompany() {
     });
 }
 function submit_editCompany(id){
-  alert(id)
+  let id1 = document.getElementById("orgid").value;
+  let company_name1 = document.getElementById("company_name1").value;
+  let contact_person1 = document.getElementById("contact_person1").value;
+  let company_email1 = document.getElementById("company_email1").value;
+  let company_phone1 = document.getElementById("company_phone1").value;
+  let company_address1= document.getElementById("company_address1").value;
+  // alert([id1,company_name1,company_phone1,company_address1,company_email1,contact_person1])
+  
+      // console.log(JSON.stringify(data));
+
+      let company_Infoadd = {
+        id : id1,
+        company_name: company_name1,
+        contact_person: contact_person1,
+        company_email: company_email1,
+        company_phone: company_phone1,
+        company_address: company_address1,
+      };
+      console.log("COMPANY DATA ----- ", company_Infoadd);
+
+   fetch("/users/superAdmin/editOrgdata", {
+        method: "POST",
+        body: JSON.stringify(company_Infoadd),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }).then(function (response) {
+      return response.text();
+    })
+    .then(function (data) {
+      // do stuff with `data`
+      if (!alert("Successfully Added :" + data)) {
+        window.location.reload();
+      }
+    })
+    .catch(function (error) {
+      console.log("Requestfailed", error);
+    });
+
 }
 // document.getElementById("edit_company").addEventListener("click", showmodal);
 
@@ -228,6 +266,35 @@ function append_json_inactive(data) {
 }
 
 function editcompany(x) {
+  let companydata = { id: x };
+  fetch("/users/superAdmin/getOrgdata", {
+    method: "POST",
+    body: JSON.stringify(companydata),
+    headers: { "Content-type": "application/json; charset=UTF-8" },
+  })
+    .then((response) =>
+      response.json().then((text) => {
+        console.log(text);
+        if (response.ok) {
+          console.log(text)
+          let id = document.getElementById('orgid')
+                id.value = text.id
+              let name = document.getElementById('company_name1')
+                name.value = text.name
+              let adminid = document.getElementById('contact_person1')
+              adminid.value = text.orgadmin
+              let email = document.getElementById('company_email1')
+              email.value = text.contactemail
+              let mobile = document.getElementById('company_phone1')
+              mobile.value = text.contactphone
+              let address = document.getElementById('company_address1')
+              address.value = text.address
+        }
+        return text;
+      })
+    )
+    .then((json) => console.log(json))
+    .catch((err) => console.log(err));
   toggleModal('edit-company',x);
 }
 
