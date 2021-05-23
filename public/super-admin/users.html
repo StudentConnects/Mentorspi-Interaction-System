@@ -264,6 +264,7 @@
                           </tr>
                         </thead>
                         <tbody id="active_user_list">
+
                         </tbody>
                       </table>
                     </div>
@@ -462,7 +463,7 @@
                       <option> --Select--</option>
                       <option value="student"> Student </option>
                       <option value="mentor"> Mentor </option>
-                      <option value="sub-admin"> Sub Admin </option>
+                      <option value="subAdmin"> Sub Admin </option>
                     </select>
                   </div>
                 </div>
@@ -484,6 +485,167 @@
         </form>
         </div>
       </div>
+
+      <!-- Edit User Modal -->
+      <div
+        class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex flex-col w-11/12 sm:w-5/6 lg:w-1/2 max-w-2xl mx-auto rounded-lg"
+        id="edit-company">
+        <div class="relative w-auto my-6 mx-auto max-w-3xl">
+          <form action="/users/superAdmin/updatespecificuser" method="post">
+          <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+            <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+              <h3 class="text-3xl font-semibold">
+                Edit User
+              </h3>
+              <button
+                class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                onclick="toggleModal('edit-company')">
+                <span class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                  ×
+                </span>
+              </button>
+            </div>
+            <div class="relative px-10 py-1 flex-auto">
+              <div class="w-full px-15">
+                <div class="flex flex-col sm:flex-row items-center mb-5 sm:space-x-5">
+                  <div class="w-full sm:w-1/2">
+                    <input type="text" id="userid" name="id" hidden>
+                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                      Name
+                    </label>
+                    <input type="text"
+                      name="userName"
+                      id="name"
+                      class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      placeholder="Name" />
+                  </div>
+                  <div class="w-full sm:w-1/2 mt-2 sm:mt-0">
+                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                      Email
+                    </label>
+                    <input type="text"
+                      name="email"
+                      id="email"
+                      class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      placeholder="Email" />
+                  </div>
+                </div>
+                <div class="flex flex-col sm:flex-row items-center mb-5 sm:space-x-5">
+                  <div class="w-full sm:w-1/3">
+                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                      Password
+                    </label>
+                    <input type="password"
+                    name="password"
+                    id="password"
+                      class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      placeholder="Password" />
+                  </div>
+                  <div class="w-full sm:w-1/3 mt-2 sm:mt-0">
+                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                      Mobile No.
+                    </label>
+                    <input type="text"
+                      name="mobile"
+                      id="mobile"
+                      class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      placeholder="Mobile No." />
+                  </div>
+                  <div class="w-full sm:w-1/3 mt-2 sm:mt-0">
+                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                      Institute ID
+                    </label>
+                    <input type="number"
+                    name="institute_id"
+                    id="org"
+                      class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      placeholder="Institute ID" />
+                  </div>
+                </div>
+                <div class="relative w-full mb-3">
+                  <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                    Address
+                  </label>
+                  <input type="text"
+                  name="address"
+                  id="address"
+                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    placeholder="Address" />
+                </div>
+                <div class="flex flex-col sm:flex-row items-center mb-5 sm:space-x-5">
+                  <div class="w-full sm:w-1/2">
+                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                      City
+                    </label>
+                    <input type="text"
+                    name="city"
+                    id="city"
+                      class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      placeholder="City" />
+                  </div>
+                  <div class="w-full sm:w-1/2 mt-2 sm:mt-0">
+                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                      Postal Code
+                    </label>
+                    <input type="text"
+                    name="postcode"
+                    id="pincode"
+                      class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      placeholder="Postal Code" />
+                  </div>
+                </div>
+                <div class="flex flex-col sm:flex-row items-center mb-5 sm:space-x-5">
+                  <div class="w-full sm:w-1/2">
+                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                      State
+                    </label>
+                    <input type="text"
+                      name="state"
+                      id="state"
+                      class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      placeholder="State" />
+                  </div>
+                  <div class="w-full sm:w-1/2 mt-2 sm:mt-0">
+                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                      Country
+                    </label>
+                    <input type="text"
+                      name="country"
+                      id="country"
+                      class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      placeholder="Country" />
+                  </div>
+                  <div class="w-full sm:w-1/2 mt-2 sm:mt-0">
+                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                      Role
+                    </label>
+                    <select type="text" name="user_type" class="w-full p-5 bg-white border border-gray-200 rounded shadow-sm appearance-none" id="user_type">
+                      <option> --Select--</option>
+                      <option value="student"> Student </option>
+                      <option value="mentor"> Mentor </option>
+                      <option value="subAdmin"> SubAdmin </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center justify-end p-4 border-t border-solid border-blueGray-200 rounded-b">
+              <button
+                class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                type="button" onclick="toggleModal('edit-company')">
+                Close
+              </button>
+              <button
+                class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                type="submit" >
+                Submit
+              </button>
+            </div>
+          </div>
+        </form>
+        </div>
+      </div>
+
       <div class="hidden opacity-25 fixed inset-0 z-40 bg-black" id="add-company-backdrop"></div>
     </div>
     <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>

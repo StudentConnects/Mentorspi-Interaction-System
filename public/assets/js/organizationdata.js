@@ -173,13 +173,14 @@ function append_json_active(data) {
   // $.each(data, function (key, value) {
     // Making Buttons
     var button1 =
-    `<button class="btn btn-success btn-fab btn-fab-mini btn-round" onclick="editcompany(${value.id})">` +
-    '                          <i class="material-icons">edit</i>' +
-    "                        </button>" ;
+    `<button class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="editcompany(${value.id})">` +
+  '<i class="fas fa-edit"></i>' +
+  "</button>"
     var button2 =
-    `<button class="btn btn-danger btn-fab btn-fab-mini btn-round" onclick="disablecompany(${value.id})">` +
-    '                          <i class="material-icons">deactivate</i>' +
-    "                        </button>";
+    `<button class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="disablecompany(${value.id})">` +
+  '<i class="fas fa-trash-alt">' +
+  "</button>";
+    
     // CONSTRUCTION OF ROWS HAVING
     // DATA FROM JSON OBJECT
     company += "<tr>";
@@ -236,13 +237,13 @@ function append_json_inactive(data) {
     // $.each(data, function (key, value) {
     // Making Buttons
     var button1 =
-      `<button class="btn btn-success btn-fab btn-fab-mini btn-round" onclick="editcompany(${value.id})">` +
-      '                          <i class="material-icons">edit</i>' +
-      "                        </button>" ;
-      var button2 =
-      `<button class="btn btn-danger btn-fab btn-fab-mini btn-round" onclick="enablecompany(${value.id})">` +
-      '                          <i class="material-icons">activate</i>' +
-      "                        </button>";
+    `<button class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="editcompany(${value.id})">` +
+  '<i class="fas fa-edit"></i>' +
+  "</button>"
+    var button2 =
+    `<button class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="enablecompany(${value.id})">` +
+  '<i class="fas fa-trash-alt">' +
+  "</button>";
     // CONSTRUCTION OF ROWS HAVING
     // DATA FROM JSON OBJECT
     company += "<tr>";

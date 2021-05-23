@@ -112,11 +112,11 @@ var buttons =
   userDetails = document.createElement("td");
   // userDetails.innerHTML =  buttons;
   userDetails.innerHTML = `<button class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="edituser(${value.id})">` +
-    '<i class="fas fa-edit"></i>' +
-    "</button>" +
-    '<button class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">' +
-    '<i class="fas fa-trash-alt">' +
-    "</button>";
+  '<i class="fas fa-edit"></i>' +
+  "</button>" +
+  `<button class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="userdisable(${value.id})">` +
+  '<i class="fas fa-trash-alt">' +
+  "</button>";
   userDetails.classList = cssClass;
   user.appendChild(userDetails);
   userDetails = document.createElement("td");
@@ -139,7 +139,7 @@ document.addEventListener(
         response.json().then((text) => {
           if (response.ok) {
             console.log(text)
-              append_json(text)
+              append_json_new(text)
           }
           return response.status;
         })
@@ -151,16 +151,16 @@ document.addEventListener(
 );
 
 // creating dynamic rows for each record
-function append_json(data) {
+function append_json_new(data) {
 userList = data;
 var user = "";
-var buttons =
-    '<button class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="editcompany(value.id)">' +
-    '<i class="fas fa-edit"></i>' +
-    "</button>" +
-    '<button class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">' +
-    '<i class="fas fa-trash-alt">' +
-    "</button>";
+// var buttons =
+//     '<button class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="editcompany(value.id)">' +
+//     '<i class="fas fa-edit"></i>' +
+//     "</button>" +
+//     '<button class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">' +
+//     '<i class="fas fa-trash-alt">' +
+//     "</button>";
   let cssClass = 'user1Details.classList = "border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left";';
   data.forEach((value, key) => {
   let user = document.createElement("tr")
@@ -209,7 +209,7 @@ var buttons =
   userDetails.innerHTML = `<button class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="edituser(${value.id})">` +
     '<i class="fas fa-edit"></i>' +
     "</button>" +
-    '<button class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">' +
+    `<button class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="enableuser(${value.id})">` +
     '<i class="fas fa-trash-alt">' +
     "</button>";
   userDetails.classList = cssClass;
@@ -218,4 +218,118 @@ var buttons =
 
   document.getElementById("inactive_user_list").appendChild(user);
 });
+}
+
+function userdisable(x) {
+  // alert('In edit func.'+'\nid ='+x)
+  if (ConfirmDelete()) {
+    // let i = x.parentNode.parentNode.rowIndex;
+    // let companyid = compList[i - 1].id;
+    let companydata = { id: x };
+
+    fetch("/users/superAdmin/disableuser", {
+      method: "DELETE",
+      body: JSON.stringify(companydata),
+      headers: { "Content-type": "application/json; charset=UTF-8" },
+    })
+      .then((response) =>
+        response.text().then((text) => {
+          console.log(text);
+          if (response.ok) {
+            if (!alert("Successfully Deleted")) {
+              window.location.reload();
+            }
+          }
+          return text;
+        })
+      )
+      .then((json) => console.log(json))
+      .catch((err) => console.log(err));
+  }
+}
+
+function ConfirmDelete() {
+  var x = confirm("Are you sure you want to delete?");
+  if (x) return true;
+  else return false;
+}
+
+function ConfirmEnable() {
+  var x = confirm("Are you sure you want to enable?");
+  if (x) return true;
+  else return false;
+}
+
+function enableuser(x) {
+  // alert('In edit func.'+'\nid ='+x)
+  if (ConfirmEnable()) {
+    // let i = x.parentNode.parentNode.rowIndex;
+    // let companyid = compList[i - 1].id;
+    let companydata = { id: x };
+
+    fetch("/users/superAdmin/enableuser", {
+      method: "PATCH",
+      body: JSON.stringify(companydata),
+      headers: { "Content-type": "application/json; charset=UTF-8" },
+    })
+      .then((response) =>
+        response.text().then((text) => {
+          console.log(text);
+          if (response.ok) {
+            if (!alert("Successfully Enabled")) {
+              window.location.reload();
+            }
+          }
+          return text;
+        })
+      )
+      .then((json) => console.log(json))
+      .catch((err) => console.log(err));
+  }
+}
+
+function edituser(x) {
+  let companydata = { id: x };
+  fetch("/users/superAdmin/specificuser", {
+    method: "POST",
+    body: JSON.stringify(companydata),
+    headers: { "Content-type": "application/json; charset=UTF-8" },
+  })
+    .then((response) =>
+      response.json().then((text) => {
+        // console.log(text);
+        if (response.ok) {
+          // console.log(text)
+          let id = document.getElementById('userid')
+          id.value =text.id
+          let name = document.getElementById('name')
+                name.value = text.user_name
+                let pass =document.getElementById('password')
+                pass.value = text.password
+                let mobile = document.getElementById('mobile')
+                mobile.value = text.phone_number
+                let city = document.getElementById('city')
+                city.value = text.city
+                let email = document.getElementById('email')
+                email.value = text.email
+                let utype = document.getElementById('state')
+                utype.value = text.state
+                let add = document.getElementById('address')
+                add.value = text.address
+                let postal = document.getElementById('pincode')
+                postal.value = text.pincode
+                let country = document.getElementById('country')
+                country.value = text.country
+                let org = document.getElementById('org')
+                org.value = text.organization
+                let usertyper = document.getElementById('user_type')
+                usertyper.value = text.user_type
+                
+        }
+        return text;
+      })
+    )
+    .then((json) => console.log(json))
+    .catch((err) => console.log(err));
+  toggleModal('edit-company',x);
 }
