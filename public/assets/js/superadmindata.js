@@ -43,7 +43,8 @@ document.addEventListener(
                 // console.log(text[0].name);
                 let profile_name = document.getElementById('profile_name')
                 name.value = text[0].user_name
-            
+                let name1 = document.getElementById('profile_name')
+                name1.innerHTML = text[0].user_name
             }
             return response.status;
           })

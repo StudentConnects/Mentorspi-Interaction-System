@@ -20,6 +20,7 @@ router.all('/test', function (req, res) {
     }
     res.send(`<h1>you visited ${req.session.viewCount}</h1>`);
 });
+
 router.get('/userdata',(req,res)=>{
     // console.log(req.user)
     // req.db
@@ -33,7 +34,7 @@ router.get('/userdata',(req,res)=>{
         debug(err);
         res.status(500).send(err);
       });
-  });
+});
 
   router.post('/updateuserdata',(req,res)=>{
 
@@ -50,6 +51,22 @@ router.get('/userdata',(req,res)=>{
         res.status(500).send(err);
       });
     // res.redirect('/users/student')
-})
+});
+
+router.get('/userlist',(req,res)=>{
+  db.getOrgId(req.user.id)
+    .then((result) => {
+      orgID = result.rows[0].organization;
+      db.getUserList(orgID)
+      .then((results) => {
+        console.log(results.rows)
+        res.send(results.rows);
+      })
+      .catch((err) => {
+        debug(err);
+        res.status(500).send(err);
+      });
+    });
+});
 
 module.exports = router;

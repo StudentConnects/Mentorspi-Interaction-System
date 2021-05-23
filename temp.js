@@ -100,7 +100,6 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV !== "production") {
 //     console.log(await loginUser('andharikar@gmail.com'))
 //   })();
 
-<<<<<<< HEAD
 // (async () => {
 //   const {
 //     postgreDatabase,
@@ -110,12 +109,13 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV !== "production") {
 //   console.log(await results.rows);
 //   await postgreDatabase.end();
 // })();
-=======
+
     // Query pool for all users
 
   // (async () => {
   //   const {postgreDatabase:pool} = require('./tools/database');
-  //   const result =  await pool.query('Select * from user_table')
+  //   // await pool.query('Update user_table SET "isActive"=$1 where id=$2', ['false', 15]);
+  //   const result =  await pool.query('select organization from user_table where id=$1', [20]);
   //   console.log(result.rows)
   //   })();
   
@@ -134,4 +134,13 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV !== "production") {
   //   const result =await registerUser('subadmin', 1,'subadmin@gmail.com', 'Pass@1234', 9876543222, 'address', 'city', 'country', 'state', 431003, 'www.google.com', 'No description provided', '', false, false, 'subAdmin')
   //   console.log(result.rows)
   // })();
->>>>>>> d74c1eaa47571709c2a125b7f61da5b51f0a1663
+
+// (async () => {
+//   const {
+//     postgreDatabase,
+//     getOrgId
+//   } = require('./tools/database');
+//   const results = await getOrgId(20);
+//   console.log(await results.rows);
+//   await postgreDatabase.end();
+// })();  

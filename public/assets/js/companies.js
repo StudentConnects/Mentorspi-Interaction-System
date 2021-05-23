@@ -69,7 +69,7 @@ function submit_addCompany() {
       };
       console.log("COMPANY DATA ----- ", company_Infoadd);
 
-      return fetch("/users/superadmin/addCompany", {
+      return fetch("/users/superAdmin/addCompany", {
         method: "POST",
         body: JSON.stringify(company_Infoadd),
         headers: {

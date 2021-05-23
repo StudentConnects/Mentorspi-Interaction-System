@@ -321,6 +321,29 @@ const getProfileData = (id) => {
     return(Promise.reject('Invalid User id'));
 } 
 
+/**
+ * @param {Number} user_id - User id for which the OrgID has to be retrieved
+ * @returns {Promise} Promise
+ */
+const getOrgId = (user_id) => {
+    if(user_id) {
+        return(postgreDatabase.query('select organization from user_table where id=$1', [user_id]));
+    } 
+    return(Promise.reject('Invalid User id'));
+} 
+
+/**
+ * @param {Number} id - Organisation id for which the user list has to be retrieved
+ * @returns {Promise} Promise
+ */
+const getUserList = (id) => {
+    if(id) {
+        return(postgreDatabase.query('Select id, user_name, organization, email, phone_number, photo_url, description, address, city, country, state, pincode, user_type from user_table where organization = $1', [id]));
+    } 
+    return(Promise.reject('Invalid Organization id'));
+} 
+
+
 module.exports = {
     postgreDatabase,
     mongoClient,
@@ -330,7 +353,9 @@ module.exports = {
     loginUser,
     setAccountActivation,
     getProfileData,
-    updateProfileData
+    updateProfileData,
+    getUserList,
+    getOrgId
 
 }
 
