@@ -249,20 +249,20 @@ router.post('/register',
             },
             toInt: true,
         },
-        "photo": {
-            in: ["body"],
-            notEmpty: true,
-            isString: true,
-            trim: true,
-            isURL: true,
-            isLength: {
-                options: {
-                    max: 325,
-                    min: 11
-                },
-                errorMessage: "Needs to be min: 11 Max 325"
-            }
-        }
+        // "photo": {
+        //     in: ["body"],
+        //     notEmpty: true,
+        //     isString: true,
+        //     trim: true,
+        //     isURL: true,
+        //     isLength: {
+        //         options: {
+        //             max: 325,
+        //             min: 11
+        //         },
+        //         errorMessage: "Needs to be min: 11 Max 325"
+        //     }
+        // }
     }), (req, res) => {
         const results = validationResult(req)
         if (!results.isEmpty()) {
@@ -272,16 +272,20 @@ router.post('/register',
             });
         } else {
             console.log(req.body)
+            if(req.body.isActive){
+                req.body.isActive == true
+            }else{
+                req.body.isActive == false
+            }
             
-            
-            db.registerUser(req.body.userName, req.body.institute_id, req.body.email, req.body.password, req.body.mobile, req.body.address, req.body.city, req.body.country, req.body.state, req.body.postcode, req.body.photo)
+            db.registerUser(req.body.userName, req.body.institute_id, req.body.email, req.body.password, req.body.mobile, req.body.address, req.body.city, req.body.country, req.body.state, req.body.postcode, 'www.google.com' ,'Decription not Provided','',false,req.body.isActive,req.body.user_type)
             .then((data) =>{
                 console.log(data)
-                res.send(' Signup Sucessful.');
+                res.redirect('/login.html')
             }).catch((err)=>{
                 console.log(err)
                 if(err.code == '23505'){
-                    res.send('User already Exists.')
+                    res.json({message:'User already Exists.'})
                 }else{
                     res.send(err.detail);
                 }

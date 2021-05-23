@@ -220,7 +220,7 @@ const loginUser = (userEmail) => {
     if (!userEmail) {
         return (Promise.reject(new Error('No Email Provided')));
     }
-    return (postgreDatabase.query('Select user_table.*, o."subscriptionLeft" as "orgSubscription", o.name as "orgName", o."isActive" as "orgIsActive", o."isVerified" as "orgIsVerified" from user_table inner join organisations o on user_table.organization = o.id  where user_table.email =$1', [userEmail]));
+    return (postgreDatabase.query('Select user_table.*, o."subscriptionleft" as "orgSubscription", o.name as "orgName", o."isactive" as "orgIsActive", o."isverified" as "orgIsVerified" from user_table inner join organisations o on user_table.organization = o.id  where user_table.email =$1', [userEmail]));
 };
 
 /**
@@ -231,7 +231,7 @@ const loginUser = (userEmail) => {
 /**
  * @param  {String} orgName - Organization's Name
  * @param  {String} address - Organization's Address
- * @param  {Number} orgAdmin - Organization Admin user ID
+ * @param  {String} orgAdmin - Organization Admin user email
  * @param  {String} contactEmail - Organization Contact Email
  * @param  {String} contactPhone - Organization Contact Phone
  * @param  {Number} [subscriptionLeft=0] - Subscription time for the Organization
@@ -240,12 +240,12 @@ const loginUser = (userEmail) => {
  * @param  {Boolean} [isActive= false] - Set organization Active defaults to false
  * @returns {Promise<Response>} - Returns a Promise with the executed state
  */
-const registerCompany = (orgName, address, orgAdmin, contactEmail, contactPhone, subscriptionLeft = 0, photoUrl = "https://google.com/imghp", isVerified = false, isActive = false) => {
+const registerCompany = (orgName, Address, orgAdmin, contactEmail, contactPhone, subscriptionLeft = 0, photoUrl = "https://google.com/imghp", isVerified = false, isActive = false) => {
     if (!orgName) {
         return (Promise.reject(new Error('Organization Name not supplied')));
     }
 
-    if (!address) {
+    if (!Address) {
         return (Promise.reject(new Error('Address not supplied')));
     }
 
@@ -264,9 +264,23 @@ const registerCompany = (orgName, address, orgAdmin, contactEmail, contactPhone,
     if (subscriptionLeft < 0) {
         return (new Error('Invalid Subscription provided'));
     }
+    // return (postgreDatabase.query("insert into organisations (name, address, orgAdmin, contactEmail, contactPhone, subscriptionLeft, photoUrl, isVerified, isActive) values ($1, $2, (Select id from user_table where email = $3), $4, $5, $6, $7, $8, $9) and update user_table set user_type='subAdmin' where email=$3 returning *;", [orgName, Address, orgAdmin, contactEmail, contactPhone, subscriptionLeft, photoUrl, isVerified, isActive]))
+    // return (postgreDatabase.query("insert into organisations (name, address, orgAdmin, contactEmail, contactPhone, subscriptionLeft, photoUrl, isVerified, isActive) values ($1, $2, (Select id from user_table where email = $3), $4, $5, $6, $7, $8, $9)", [orgName, Address, orgAdmin, contactEmail, contactPhone, subscriptionLeft, photoUrl, isVerified, isActive]))
+    return postgreDatabase.query("insert into organisations (name, address, orgAdmin, contactEmail, contactPhone, subscriptionLeft, photoUrl, isVerified, isActive) values ($1, $2, (Select id from user_table where email = $3), $4, $5, $6, $7, $8, $9) returning *;", [orgName, Address, orgAdmin, contactEmail, contactPhone, subscriptionLeft, photoUrl, isVerified, isActive])
+    .then((results)=>{
+        if(results.rows){
+            // console.log(results.rows)
+            return postgreDatabase.query("update user_table set user_type='subAdmin',organization=$2 where email=$1;",[orgAdmin,results.rows[0].id])
+        }else{
+            console.log(results);
+            return Promise.reject('Invalid response');
+        }
+    }).catch(err=>{
+        console.log(err);
+        return Promise.reject(err);
+    })
 
-    return (postgreDatabase.query("insert into organisations (name, address, orgAdmin, contactEmail, contactPhone, subscriptionLeft, photoUrl, isVerified, isActive) values ($1, $2, $3, $4, $5, $6, $7, $8, $9) and update user_table set user_type='subAdmin' where id=$3 returning *;", [orgName, address, orgAdmin, contactEmail, contactPhone, subscriptionLeft, photoUrl, isVerified, isActive]))
-};
+   };
 
 
 /**
@@ -295,7 +309,7 @@ const setAccountActivation = (accountId, accountType = 'user', setActive = true)
  */
 const getProfileData = (id) => {
     if(id) {
-        return(postgreDatabase.query('Select user_name, password, organization, email, phone_number, photo_url, description, address, city, country, state, pincode from user_table where id = $1', [id]));
+        return(postgreDatabase.query('Select user_name, organization, email, phone_number, photo_url, description, address, city, country, state, pincode from user_table where id = $1', [id]));
     } 
     return(Promise.reject('Invalid User id'));
 } 
@@ -345,7 +359,7 @@ const getUserList = (id) => {
 
 // User Data Update from sub-admin dashboard.
 /**
- * @param  {Number} id - User id as per stored in PostgresDatabase
+ * @param  {Number} user_id - User id as per stored in PostgresDatabase
  * @param  {String} phoneNumber - Phone number entered by the user
  * @param  {String} address - Address of residence of the user
  * @param  {String} city - City of residence of the user
@@ -363,6 +377,37 @@ const getUserList = (id) => {
     return(Promise.reject('Invalid User id'));
 } 
 
+
+/**
+ * @param {Number} orgId - Organization id for which the profile details has to be retrieved
+ * @returns {Promise} Promise
+ */
+const getOrgData = (orgId) => {
+    if(orgId) {
+        return(postgreDatabase.query('Select id, name, orgadmin, contactemail, contactphone, address from organisations where id = $1', [orgId]));
+    } 
+    return(Promise.reject('Invalid Org id'));
+} 
+
+/**
+ * @param  {Number} user_id - User id as per stored in PostgresDatabase
+ * @param  {String} phoneNumber - Phone number entered by the user
+ * @param  {String} address - Address of residence of the user
+ * @param  {String} city - City of residence of the user
+ * @param  {String} country - Country of residence of the user
+ * @param  {String} state - State of residence of the user
+ * @param  {Number} pinCode - Pin code of residence of the user
+ * @param  {String} [description='No description provided'] - Description provided by the user, default description given
+ * @returns {Promise} promise
+ */
+
+ const updateOrgData = (name, contactphone, contactemail, address, orgId) => {
+    if(orgId) {
+        return(postgreDatabase.query('Update organisations SET "name"=$1 ,"contactphone"=$2, "contactemail"=$3, "address"=$4 where id = $5', [name, contactphone, contactemail, address, orgId]));
+    } 
+    return(Promise.reject('Invalid Organization id'));
+}
+
 module.exports = {
     postgreDatabase,
     mongoClient,
@@ -375,7 +420,9 @@ module.exports = {
     updateProfileData,
     getUserList,
     getOrgId,
-    updateUserData
+    updateUserData,
+    getOrgData,
+    updateOrgData
 
 }
 
