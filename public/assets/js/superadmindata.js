@@ -31,7 +31,6 @@ document.addEventListener(
                 // console.log(text[0].name);
                 let profile_name = document.getElementById('profile_name')
                 profile_name.innerHTML = text[0].user_name
-            
             }
             return response.status;
           })

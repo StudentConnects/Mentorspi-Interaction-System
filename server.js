@@ -52,8 +52,8 @@ try {
   // app.use(
   //   helmet.contentSecurityPolicy({
   //     directives: {
-  //       defaultSrc: ["'self'", "'unsafe-inline'","fonts.googleapis.com", "fonts.gstatic.com","cdn.jsdelivr.net","cdnjs.cloudflare.com"],
-  //       scriptSrc: ["'self'","'unsafe-inline'","unpkg.com"],
+  //       defaultSrc: ["'self'", "maxcdn.bootstrapcdn.com", "fonts.googleapis.com", "fonts.gstatic.com", "cdnjs.cloudflare.com"],
+  //       scriptSrc: ["'self'", "cdnjs.cloudflare.com", "cdn.jsdelivr.net"],
   //       // "style-src-elem": ["'self'", "cdnjs.cloudflare.com", "maxcdn.bootstrapcdn.com", "cdn.jsdelivr.net", "fonts.googleapis.com"],
   //       "img-src": ["data:", "'self'"]
   //     },

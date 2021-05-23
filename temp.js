@@ -109,11 +109,13 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV !== "production") {
 //   console.log(await results.rows);
 //   await postgreDatabase.end();
 // })();
+
     // Query pool for all users
 
   // (async () => {
   //   const {postgreDatabase:pool} = require('./tools/database');
-  //   const result =  await pool.query('Select * from user_table')
+  //   // await pool.query('Update user_table SET "isActive"=$1 where id=$2', ['false', 15]);
+  //   const result =  await pool.query('select organization from user_table where id=$1', [20]);
   //   console.log(result.rows)
   //   })();
   
@@ -167,3 +169,12 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV !== "production") {
   // })();
 //   var a = 'sitfndsfjjfhf'
 //   console.log(`${a}`+' hdshfsdbffsdff')
+// (async () => {
+//   const {
+//     postgreDatabase,
+//     getOrgId
+//   } = require('./tools/database');
+//   const results = await getOrgId(20);
+//   console.log(await results.rows);
+//   await postgreDatabase.end();
+// })();  
