@@ -2,18 +2,6 @@ console.log('studentuser.js file Loaded sucessfully.')
 document.addEventListener(
     "DOMContentLoaded",
     function () {
-        // var datastring;
-        // if(usertype=='superAdmin'){
-        //     datastring = '/users/super-admin/userdata'
-        // }else if(usertype=='subAdmin'){
-        //     datastring = '/users/admin/userdata'
-        // }else if(usertype=='mentor'){
-        //     datastring = '/users/mentor/userdata'
-        // }else if(usertype=='superadmin'){
-        //     datastring = '/users/student/userdata'
-        // }else{
-        //     alert('Invalid User Type')
-        // }
       fetch('/users/superAdmin/userdata', {
         method: "GET",
         headers: { "Content-type": "application/json; charset=UTF-8" },
