@@ -795,7 +795,7 @@ router.post('/register',
 router.get('/activeuserlist',(req,res)=>{
     db.postgreDatabase.query('select * from user_table where isactive = true')
     .then((results)=>{
-        // console.log(results.rows);
+        console.log(results.rows);
         res.send(results.rows);
     }).catch(err=>{
         console.log(err);
@@ -806,7 +806,7 @@ router.get('/activeuserlist',(req,res)=>{
 router.get('/inactiveuserlist',(req,res)=>{
     db.postgreDatabase.query('select * from user_table where isactive = false')
     .then((results)=>{
-        // console.log(results.rows);
+        console.log(results.rows);
         res.send(results.rows);
     }).catch(err=>{
         console.log(err);

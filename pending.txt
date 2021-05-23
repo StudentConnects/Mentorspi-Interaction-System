@@ -7,3 +7,5 @@ list users
 authenticated routing setup alllll
 register user for super and subadmin
 change company logo, subscription
+
+subadmin changes
