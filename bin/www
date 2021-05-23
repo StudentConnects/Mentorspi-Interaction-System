@@ -25,20 +25,6 @@ app.set('port', port);
 // making socketio to listen to server
 const server = http.createServer(app);
 
-
-  // on connection
-
-  global.io.on('connection',(socket,req)=>{
-    console.log(socket)
-   socket.emit('welcome','Welcome to websocket server')
-   socket.on('message',(msg)=>{
-       console.log(msg)
-   })
-   socket.on('newmessagetoServer',(newdata)=>{
-     console.log(newdata);
-      global.io.emit('messagetoClients',{message:newdata});
-  });
-  });
   
 /**
  * Listen on provided port, on all network interfaces.
