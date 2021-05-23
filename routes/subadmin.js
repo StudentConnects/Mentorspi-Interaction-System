@@ -42,7 +42,7 @@ router.post('/updateuserdata',(req,res)=>{
     // console.log('here come')
     // console.log(req.body)
     // console.log(req.body.email)
-    db.updateProfileData(req.body.phone_number, req.body.address, req.body.city, req.body.country, '', req.body.pincode, req.user.id)
+    db.updateProfileData(req.body.phone_number, req.body.address, req.body.city, req.body.country, req.body.state, req.body.pincode, req.user.id)
       .then((results) => {
         console.log(results[0])
         res.redirect('/users/student')

@@ -16,8 +16,8 @@ document.addEventListener(
                 city.value = text[0].city
                 let email = document.getElementById('email')
                 email.value = text[0].email
-                // let utype = document.getElementById('state')
-                // utype.value = text[0].state
+                let utype = document.getElementById('state')
+                utype.value = text[0].state
                 let add = document.getElementById('address')
                 add.value = text[0].address
                 let postal = document.getElementById('pincode')
