@@ -16,7 +16,7 @@
     />
     <link rel="stylesheet" href="../../assets/styles/tailwind.css" />
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
-    <title>Company Profile | Student Mentorship System</title>
+    <title>Organization Profile | Student Mentorship System</title>
   </head>
   <body class="text-blueGray-700 antialiased">
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -44,7 +44,7 @@
             <li class="inline-block relative">
               <a
                 class="text-blueGray-500 block"
-                href="#"
+                href=""
                 onclick="openDropdown(event,'user-responsive-dropdown')"
                 ><div class="items-center flex">
                   <span
@@ -60,7 +60,7 @@
                 id="user-responsive-dropdown"
               >
                 <a
-                  href="#"
+                  href="/logout"
                   class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
                   >Logout</a
                 >
@@ -110,7 +110,7 @@
               <li class="items-center">
                 <a href="companies.html" class="text-xs uppercase py-3 font-bold block text-red-500 hover:text-red-600">
                   <i class="fas fa-briefcase mr-2 text-sm opacity-75"></i>
-                  Company Profile
+                  Organization Profile
                 </a>
               </li>
               <li class="items-center">
@@ -136,7 +136,7 @@
             <a
               class="text-white text-sm uppercase hidden lg:inline-block font-semibold"
               href="companies.html"
-              >Company Profile</a
+              >Organization Profile</a
             >
             <ul
               class="flex-col md:flex-row list-none items-center hidden md:flex"
@@ -172,160 +172,6 @@
         <!-- Header -->
         <div class="relative bg-pink-600 md:pt-8 pb-32 pt-12">
         </div>
-        <!-- <div class="px-4 md:px-10 mx-auto w-full -m-24">
-          <div class="flex flex-wrap mt-4" id="tabs-id">
-            <div class="w-full mb-12 px-4">
-              <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-white">
-                <div class="rounded-t mb-0 px-4 py-3 border-0">
-                  <div class="flex flex-wrap items-center">
-                    <div class="relative w-full px-4 max-w-full flex-grow flex-1">
-                      <h3 class="font-semibold text-lg text-blueGray-700">
-                        Company List
-                      </h3>
-                    </div>
-                    <button
-                      class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                      type="button" onclick="toggleModal('add-company')" id="add_company">
-                      <i class="fas fa-plus"></i>
-                      ADD
-                    </button>
-                  </div>
-                </div>
-                <div class="w-full">
-                  <ul class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row">
-                    <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                      <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal text-white bg-pink-600"
-                        onclick="changeAtiveTab(event,'tab-active')">
-                        Active
-                      </a>
-                    </li>
-                    <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                      <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal text-pink-600 bg-white"
-                        onclick="changeAtiveTab(event,'tab-inactive')">
-                        Inactive
-                      </a>
-                    </li>
-                  </ul>
-                  <div class="tab-content tab-space">
-                    <div class="block w-full overflow-x-auto" id="tab-active"> 
-                      <table class="items-center w-full bg-transparent border-collapse">
-                        <thead>
-                          <tr>
-                            <th
-                              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100">
-                              <b>#</b>
-                            </th>
-                            <th
-                              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100">
-                              <b>Company Name</b>
-                            </th>
-                            <th
-                              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100">
-                              <b>Company Description</b>
-                            </th>
-                            <th
-                              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100">
-                              <b>Edit</b>
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td
-                              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                              1
-                            </td>
-                            <td
-                              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                              Tata Consultancy Services
-                            </td>
-                            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                              Service based company
-                            </td>
-                            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                              <button
-                                class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                type="button" onclick="toggleModal('add-company')"><i class="fas fa-edit"></i></button>
-                              <button
-                                class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                type="button"><i class="fas fa-trash-alt"></i></button>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td
-                              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                              2
-                            </td>
-                            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                              Infosys
-                            </td>
-                            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                              Service based company
-                            </td>
-                            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                              <button
-                                class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                type="button"><i class="fas fa-edit"></i></button>
-                              <button
-                                class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                type="button"><i class="fas fa-trash-alt"></i></button>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                    <div class="hidden w-full overflow-x-auto" id="tab-inactive">
-                      <table class="items-center w-full bg-transparent border-collapse">
-                        <thead>
-                          <tr>
-                            <th
-                              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100">
-                              <b>#</b>
-                            </th>
-                            <th
-                              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100">
-                              <b>Company Name</b>
-                            </th>
-                            <th
-                              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100">
-                              <b>Company Description</b>
-                            </th>
-                            <th
-                              class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100">
-                              <b>Edit</b>
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td
-                              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                              1
-                            </td>
-                            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                              Oracle
-                            </td>
-                            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                              Product based company
-                            </td>
-                            <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                              <button
-                                class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                type="button"><i class="fas fa-edit"></i></button>
-                              <button
-                                class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                type="button"><i class="fas fa-trash-alt"></i></button>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>  
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
         <div class="px-4 md:px-10 mx-auto w-full -m-20">
           <div class="flex flex-wrap">
             <div class="w-full lg:w-12/12 px-4">
@@ -333,54 +179,59 @@
                 <div class="rounded-t bg-white mb-0 px-6 py-6">
                   <div class="text-center flex justify-between">
                     <h6 class="text-blueGray-700 text-xl font-bold">
-                      Company Profile
+                      Organization Profile
                     </h6>
                   </div>
                 </div>
                 <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-                  <form>
-                    <!-- <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-                      User Information
-                    </h6> -->
+                  <!-- <form action="/users/subAdmin/updateorgdata" method="POST"> -->
                     <div class="flex flex-wrap pt-4">
-                      <div class="w-full lg:w-6/12 px-4">
+                      <div class="w-full lg:w-12/12 px-4">
                         <div class="relative w-full mb-3">
                           <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                            Company Name
+                            Organization Name
                           </label>
                           <input type="text"
                             class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                            placeholder="Company Name" />
+                            placeholder="Organization Name"
+                            id ="org_name"
+                            name="org_name" />
+                        </div>
+                      </div>
+                      <!-- <div class="w-full lg:w-6/12 px-4">
+                        <div class="relative w-full mb-3">
+                          <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                            Contact Person Email
+                          </label>
+                          <input type="text"
+                            class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                            placeholder="Contact Person Email" 
+                            id ="org_contactPerson"
+                            name="org_contactPerson"/>
+                        </div>
+                      </div> -->
+                      <div class="w-full lg:w-6/12 px-4">
+                        <div class="relative w-full mb-3">
+                          <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                            Organization Email
+                          </label>
+                          <input type="text"
+                            class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                            placeholder="Organization Email"
+                            id ="org_email"
+                            name="org_email"/>
                         </div>
                       </div>
                       <div class="w-full lg:w-6/12 px-4">
                         <div class="relative w-full mb-3">
                           <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                            Contact Person
+                            Organization Mobile Number
                           </label>
                           <input type="text"
                             class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                            placeholder="Contact Person" />
-                        </div>
-                      </div>
-                      <div class="w-full lg:w-6/12 px-4">
-                        <div class="relative w-full mb-3">
-                          <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                            Email
-                          </label>
-                          <input type="text"
-                            class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                            placeholder="Email">
-                        </div>
-                      </div>
-                      <div class="w-full lg:w-6/12 px-4">
-                        <div class="relative w-full mb-3">
-                          <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                            Mobile Number
-                          </label>
-                          <input type="text"
-                            class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                            placeholder="Mobile Number" />
+                            placeholder="Organization Mobile Number" 
+                            id ="org_mobile"
+                            name="org_mobile"/>
                         </div>
                       </div>
                     </div>
@@ -392,7 +243,9 @@
                           </label>
                           <input type="text"
                             class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                            placeholder="Address" />
+                            placeholder="Address" 
+                            id ="org_address"
+                            name="org_address"/>
                         </div>
                       </div>
                       <!-- <div class="w-full lg:w-4/12 px-4">
@@ -426,140 +279,24 @@
                         </div>
                       </div> -->
                     </div>
+                    <input hidden id="org_id" />
                     <div class="pt-4">
-                    <button
-                      class="bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
-                      type="button">
-                      Update
-                    </button></div>
-                  </form>
+                      <button
+                        class="bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                        type="submit" id="update_org">
+                        Update
+                      </button>
+                    </div>
+                  <!-- </form> -->
                 </div>
               </div>
-            </div>
-            <!-- <div class="w-full lg:w-4/12 px-4">
-              <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16">
-                <div class="px-6">
-                  <div class="flex flex-wrap justify-center">
-                    <div class="w-full px-4 flex justify-center">
-                      <div class="relative">
-                        <img alt="..." src="../../assets/img/user.png"
-                          class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px" />
-                      </div>
-                    </div>
-                    <div class="w-full px-4 text-center mt-20">
-                    </div>
-                  </div>
-                  <div class="text-center mt-12">
-                    <h3 class="text-xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
-                      Jenna Stones
-                    </h3>
-                    <div class="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
-                      <i class="fas fa-user mr-2 text-lg text-blueGray-400"></i>
-                      Sub - Admin
-                    </div>
-                  </div>
-                  <div class="mt-10 border-blueGray-200 text-center">
-                  </div>
-                </div>
-              </div>
-            </div> -->
-          </div>
-        </div>
-      </div>
-      <!-- Add Company Modal -->
-      <div
-        class="hidden overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex flex-col w-11/12 sm:w-5/6 lg:w-1/2 max-w-2xl mx-auto rounded-lg"
-        id="add-company">
-        <div class="relative w-auto my-6 mx-auto max-w-3xl">
-          <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-            <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-              <h3 class="text-3xl font-semibold">
-                Add Company
-              </h3>
-              <button
-                class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                onclick="toggleModal('add-company')">
-                <span class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
-                  ×
-                </span>
-              </button>
-            </div>
-            <div class="relative px-10 py-2 flex-auto">
-              <div class="w-full px-30">
-                <div class="relative w-full mb-3">
-                  <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                    Company Name
-                  </label>
-                  <input type="text"
-                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    placeholder="Company Name" id="company_name"/>
-                </div>
-                <div class="relative w-full mb-3">
-                  <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                    Contact Person
-                  </label>
-                  <input type="text"
-                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    placeholder="Contact Person" id="contact_person"/>
-                </div>
-                <div class="flex flex-col sm:flex-row items-center mb-5 sm:space-x-5">
-                  <div class="w-full sm:w-1/2">
-                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                      Email
-                    </label>
-                    <input type="text"
-                      class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="Email" id="company_email"/>
-                  </div>
-                  <div class="w-full sm:w-1/2 mt-2 sm:mt-0">
-                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                      Phone
-                    </label>
-                    <input type="text"
-                      class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="Phone" id="company_phone"/>
-                  </div>
-                </div>
-                <div class="relative w-full mb-3">
-                  <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                    Address
-                  </label>
-                  <input type="text"
-                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    placeholder="Address" id="company_address"/>
-                </div>
-                <div class="relative w-full mb-3">
-                  <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                    Logo
-                  </label>
-                  <input type="file" class="form-control-file" id="company_logo" name="company_logo"
-                    accept="image/jpeg, image/png, image/gif, image/svg+xm, image/webp" />
-                </div>
-                <div class="relative w-full mb-3">
-                  <label for="isActive"></label>
-                  <input type="checkbox" id="isActive" /><strong> Active </strong>
-                </div>
-              </div>
-            </div>
-            <div class="flex items-center justify-end p-4 border-t border-solid border-blueGray-200 rounded-b">
-              <button
-                class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                type="button" onclick="toggleModal('add-company')">
-                Close
-              </button>
-              <button
-                class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                type="button" onclick="toggleModal('add-company')" id="submit_addCompany">
-                Submit
-              </button>
             </div>
           </div>
         </div>
       </div>
-      <div class="hidden opacity-25 fixed inset-0 z-40 bg-black" id="add-company-backdrop"></div>
     </div>
     <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
-    <script src="../assets/js/companies.js"></script>
+    <script src="../../assets/js/orgdata.js"></script>
     <script type="text/javascript">
       /* Make dynamic date appear */
       (function () {

@@ -345,7 +345,7 @@ const getUserList = (id) => {
 
 // User Data Update from sub-admin dashboard.
 /**
- * @param  {Number} id - User id as per stored in PostgresDatabase
+ * @param  {Number} user_id - User id as per stored in PostgresDatabase
  * @param  {String} phoneNumber - Phone number entered by the user
  * @param  {String} address - Address of residence of the user
  * @param  {String} city - City of residence of the user
@@ -363,6 +363,37 @@ const getUserList = (id) => {
     return(Promise.reject('Invalid User id'));
 } 
 
+
+/**
+ * @param {Number} orgId - Organization id for which the profile details has to be retrieved
+ * @returns {Promise} Promise
+ */
+const getOrgData = (orgId) => {
+    if(orgId) {
+        return(postgreDatabase.query('Select id, name, orgadmin, contactemail, contactphone, address from organisations where id = $1', [orgId]));
+    } 
+    return(Promise.reject('Invalid Org id'));
+} 
+
+/**
+ * @param  {Number} user_id - User id as per stored in PostgresDatabase
+ * @param  {String} phoneNumber - Phone number entered by the user
+ * @param  {String} address - Address of residence of the user
+ * @param  {String} city - City of residence of the user
+ * @param  {String} country - Country of residence of the user
+ * @param  {String} state - State of residence of the user
+ * @param  {Number} pinCode - Pin code of residence of the user
+ * @param  {String} [description='No description provided'] - Description provided by the user, default description given
+ * @returns {Promise} promise
+ */
+
+ const updateOrgData = (name, contactphone, contactemail, address, orgId) => {
+    if(orgId) {
+        return(postgreDatabase.query('Update organisations SET "name"=$1 ,"contactphone"=$2, "contactemail"=$3, "address"=$4 where id = $5', [name, contactphone, contactemail, address, orgId]));
+    } 
+    return(Promise.reject('Invalid Organization id'));
+}
+
 module.exports = {
     postgreDatabase,
     mongoClient,
@@ -375,7 +406,9 @@ module.exports = {
     updateProfileData,
     getUserList,
     getOrgId,
-    updateUserData
+    updateUserData,
+    getOrgData,
+    updateOrgData
 
 }
 

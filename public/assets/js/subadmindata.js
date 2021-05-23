@@ -45,7 +45,6 @@ document.addEventListener(
     function () {
       fetch('/users/subAdmin/userlist', {
         method: "GET",
-        // body: 
         headers: { "Content-type": "application/json; charset=UTF-8" },
       })
         .then((response) =>
@@ -227,3 +226,36 @@ function update_user() {
       });
 
 }
+
+// // fetching organization data
+// document.addEventListener(
+//     "DOMContentLoaded",
+//     function () {
+//       fetch('/users/subAdmin/orgdata', {
+//         method: "GET",
+//         headers: { "Content-type": "application/json; charset=UTF-8" },
+//       })
+//         .then((response) =>
+//           response.json().then((text) => {
+//             if (response.ok) {
+//                 let orgname = document.getElementById('org_name')
+//                 orgname.value = text[0].name
+//                 let contactperson = document.getElementById('org_contactPerson')
+//                 orgname.value = text[0].orgAdmin
+//                 let orgmobile = document.getElementById('org_mobile')
+//                 orgmobile.value = text[0].contactPhone
+//                 let email = document.getElementById('org_email')
+//                 email.value = text[0].contactEmail
+//                 let orgaddress = document.getElementById('org_address')
+//                 orgaddress.value = text[0].address
+
+                
+//             }
+//             return response.status;
+//           })
+//         )
+//         .then((json) => console.log(json))
+//         .catch((err) => console.log(err));
+//     },
+//     false
+// );

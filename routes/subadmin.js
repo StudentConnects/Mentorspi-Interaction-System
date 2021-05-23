@@ -11,6 +11,7 @@ router.get("/", (req, res) => {
     console.log('into path');
     res.sendFile(path.join(__dirname, "..", "public", "sub-admin", "profile.html"));
 });
+
 router.all('/test', function (req, res) {
     debug("into /test");
     if (req.session.viewCount) {
@@ -92,6 +93,38 @@ router.post('/updateusers',(req,res)=>{
         debug(err);
         res.status(500).send(err);
       });
+});
+
+router.get('/orgdata', (req, res) => {
+  db.getOrgId(req.user.id)
+    .then((results) => {
+        orgId = results.rows[0].organization;
+        db.getOrgData(orgId)
+          .then((result) => {
+            res.send(result.rows)
+          })
+        // res.send(results.rows);
+      })
+      .catch((err) => {
+        debug(err);
+        res.status(500).send(err);
+      });
+});
+
+router.post('/updateorgdata', (req, res) => {
+  db.updateOrgData(req.body.name, req.body.mobile, req.body.email, req.body.address, req.body.orgId)
+      .then((results) => {
+        // res.redirect('/users/subAdmin')
+        res.send(200);
+      })
+      .catch((err) => {
+        debug(err);
+        res.status(500).send(err);
+      });
+});
+
+router.delete('/disableUser', (req, res) =>{
+
 });
 
 module.exports = router;
