@@ -47,7 +47,7 @@ try {
   // });
 
   // attach all the middleware
-  // app.use(compression());
+  app.use(compression());
   // app.use(helmet());
   // app.use(
   //   helmet.contentSecurityPolicy({
