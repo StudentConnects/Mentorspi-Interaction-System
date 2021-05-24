@@ -61,8 +61,8 @@ router.get("/login", function (req, res, next) {
         next();
     }
 }, (req, res) => {
-    // res.sendFile(path.join(__dirname, "login.html"));
-    res.send("INTO LOGIN ---> GET");
+    res.sendFile(path.join(__dirname, "..", "public", "login.html"));
+    // res.send("INTO LOGIN ---> GET");
 });
 
 router.post("/login", (req, res, next) => {
@@ -281,7 +281,7 @@ router.post('/register',
             db.registerUser(req.body.userName, req.body.institute_id, req.body.email, req.body.password, req.body.mobile, req.body.address, req.body.city, req.body.country, req.body.state, req.body.postcode, 'www.google.com' ,'Decription not Provided','',false,req.body.isActive,req.body.user_type)
             .then((data) =>{
                 console.log(data)
-                res.redirect('/login.html')
+                res.sendFile(path.join(__dirname, "..", "public", "login.html"));
             }).catch((err)=>{
                 console.log(err)
                 if(err.code == '23505'){
