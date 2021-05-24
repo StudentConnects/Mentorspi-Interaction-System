@@ -61,8 +61,8 @@ router.get("/login", function (req, res, next) {
         next();
     }
 }, (req, res) => {
-    // res.sendFile(path.join(__dirname, "login.html"));
-    res.send("INTO LOGIN ---> GET");
+    res.sendFile(path.join(__dirname, "..", "public", "login.html"));
+    // res.send("INTO LOGIN ---> GET");
 });
 
 router.post("/login", (req, res, next) => {
