@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="../../assets/styles/tailwind.css" />
     <!-- <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.1.2/tailwind.min.css" integrity="sha512-RntatPOhEcQEA81gC/esYoCkGkL7AYV7TeTPoU+R9zE44/yWxVvLIBfBSaMu78rhoDd73ZeRHXRJN5+aPEK53Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Companies | Student Mentorship System</title>
+    <title>Organisations | Student Mentorship System</title>
   </head>
   <body class="text-blueGray-700 antialiased">
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -111,7 +111,7 @@
               <li class="items-center">
                 <a href="companies.html" class="text-xs uppercase py-3 font-bold block text-red-500 hover:text-red-600">
                   <i class="fas fa-briefcase mr-2 text-sm opacity-75"></i>
-                  Companies
+                  Organisations
                 </a>
               </li>
               <li class="items-center">
@@ -143,7 +143,7 @@
             <a
               class="text-white text-sm uppercase hidden lg:inline-block font-semibold"
               href="./companies.html"
-              >Companies</a
+              >Organisations</a
             >
             <ul
               class="flex-col md:flex-row list-none items-center hidden md:flex"
@@ -187,7 +187,7 @@
                   <div class="flex flex-wrap items-center">
                     <div class="relative w-full px-4 max-w-full flex-grow flex-1">
                       <h3 class="font-semibold text-lg text-blueGray-700">
-                        Company List
+                        Organisations List
                       </h3>
                     </div>
                     <button
@@ -203,13 +203,13 @@
                     <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
                       <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal text-white bg-pink-600"
                         onclick="changeAtiveTab(event,'tab-active')">
-                        Active
+                        Active Organisations
                       </a>
                     </li>
                     <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
                       <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal text-pink-600 bg-white"
                         onclick="changeAtiveTab(event,'tab-inactive')">
-                        Inactive
+                        Inactive Organisations
                       </a>
                     </li>
                   </ul>
@@ -224,7 +224,7 @@
                             </th>
                             <th
                               class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100">
-                              <b>Organization Name</b>
+                              <b>Organisation Name</b>
                             </th>
                             <th
                               class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100">
@@ -278,7 +278,7 @@
                             </th>
                             <th
                               class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100">
-                              <b>Organization Name</b>
+                              <b>Organisation Name</b>
                             </th>
                             <th
                               class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-blueGray-50 text-blueGray-500 border-blueGray-100">
@@ -337,7 +337,7 @@
           <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
             <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
               <h3 class="text-3xl font-semibold">
-                Add Organization
+                Add Organisation
               </h3>
               <button
                 class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
@@ -351,11 +351,11 @@
               <div class="w-full px-30">
                 <div class="relative w-full mb-3">
                   <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                    Organization Name
+                    Organisation Name
                   </label>
                   <input type="text"
                     class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    placeholder="Company Name" id="company_name"/>
+                    placeholder="Organisation Name" id="company_name"/>
                 </div>
                 <div class="relative w-full mb-3">
                   <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
@@ -363,33 +363,33 @@
                   </label>
                   <input type="text"
                     class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    placeholder="Contact Person" id="contact_person"/>
+                    placeholder="Admin Email" id="contact_person"/>
                 </div>
                 <div class="flex flex-col sm:flex-row items-center mb-5 sm:space-x-5">
                   <div class="w-full sm:w-1/2">
                     <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                      Organization Email
+                      Organisation Email
                     </label>
                     <input type="text"
                       class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="Email" id="company_email"/>
+                      placeholder="Organisation Email" id="company_email"/>
                   </div>
                   <div class="w-full sm:w-1/2 mt-2 sm:mt-0">
                     <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                      Organization Phone
+                      Organisation Phone
                     </label>
                     <input type="text"
                       class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="Phone" id="company_phone"/>
+                      placeholder="Organisation Phone" id="company_phone"/>
                   </div>
                 </div>
                 <div class="relative w-full mb-3">
                   <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                    Organization Address
+                    Organisation Address
                   </label>
                   <input type="text"
                     class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    placeholder="Address" id="company_address"/>
+                    placeholder="Organisation Address" id="company_address"/>
                 </div>
                 <div class="relative w-full mb-3">
                   <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
@@ -427,7 +427,7 @@
           <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
             <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
               <h3 class="text-3xl font-semibold">
-                Edit Organization
+                Edit Organisation
               </h3>
               <button
                 class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
@@ -442,11 +442,11 @@
                 <div class="relative w-full mb-3">
                   <input type="text" id="orgid" hidden>
                   <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                    Organization Name
+                    Organisation Name
                   </label>
                   <input type="text"
                     class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    placeholder="Company Name" id="company_name1"/>
+                    placeholder="Organisation Name" id="company_name1"/>
                 </div>
                 <div class="relative w-full mb-3"> 
                   <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
@@ -454,33 +454,33 @@
                   </label>
                   <input type="text" disabled
                     class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    placeholder="Contact Person" id="contact_person1"/>
+                    placeholder="Admin ID" id="contact_person1"/>
                 </div>
                 <div class="flex flex-col sm:flex-row items-center mb-5 sm:space-x-5">
                   <div class="w-full sm:w-1/2">
                     <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                      Organization Email
+                      Organisation Email
                     </label>
                     <input type="text"
                       class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="Email" id="company_email1"/>
+                      placeholder="Organisation Email" id="company_email1"/>
                   </div>
                   <div class="w-full sm:w-1/2 mt-2 sm:mt-0">
                     <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                      Organization Phone
+                      Organisation Phone
                     </label>
                     <input type="text"
                       class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="Phone" id="company_phone1"/>
+                      placeholder="Organisation Phone" id="company_phone1"/>
                   </div>
                 </div>
                 <div class="relative w-full mb-3">
                   <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
-                    Organization Address
+                    Organisation Address
                   </label>
                   <input type="text"
                     class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    placeholder="Address" id="company_address1"/>
+                    placeholder="Organisation Address" id="company_address1"/>
                 </div>
                 <!-- <div class="relative w-full mb-3">
                   <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
@@ -539,6 +539,6 @@
         document.getElementById(dropdownID).classList.toggle("block");
       }
     </script>
-    <script src="../../assets/js/organizationdata.js"></script>
+    <script src="../../assets/js/rganizationdata.js"></script>
   </body>
 </html>

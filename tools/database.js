@@ -264,6 +264,7 @@ const registerCompany = (orgName, Address, orgAdmin, contactEmail, contactPhone,
     if (subscriptionLeft < 0) {
         return (new Error('Invalid Subscription provided'));
     }
+
     // return (postgreDatabase.query("insert into organisations (name, address, orgAdmin, contactEmail, contactPhone, subscriptionLeft, photoUrl, isVerified, isActive) values ($1, $2, (Select id from user_table where email = $3), $4, $5, $6, $7, $8, $9) and update user_table set user_type='subAdmin' where email=$3 returning *;", [orgName, Address, orgAdmin, contactEmail, contactPhone, subscriptionLeft, photoUrl, isVerified, isActive]))
     // return (postgreDatabase.query("insert into organisations (name, address, orgAdmin, contactEmail, contactPhone, subscriptionLeft, photoUrl, isVerified, isActive) values ($1, $2, (Select id from user_table where email = $3), $4, $5, $6, $7, $8, $9)", [orgName, Address, orgAdmin, contactEmail, contactPhone, subscriptionLeft, photoUrl, isVerified, isActive]))
     return postgreDatabase.query("insert into organisations (name, address, orgAdmin, contactEmail, contactPhone, subscriptionLeft, photoUrl, isVerified, isActive) values ($1, $2, (Select id from user_table where email = $3), $4, $5, $6, $7, $8, $9) returning *;", [orgName, Address, orgAdmin, contactEmail, contactPhone, subscriptionLeft, photoUrl, isVerified, isActive])
@@ -370,9 +371,9 @@ const getUserList = (id) => {
  * @returns {Promise} promise
  */
 
- const updateUserData = (name, email, password, mobile, org, add, city, postal, state, country, user_id) => {
+ const updateUserData = (name, email, password, mobile, org, add, city, postal, state, country, user_type, user_id) => {
     if(user_id) {
-        return(postgreDatabase.query('Update user_table SET "user_name"=$1 ,"email"=$2, "password"=$3, "phone_number"=$4, "organization"=$5, "address"=$6, "city"=$7, "pincode"=$8, "state"=$9, "country"=$10 where id = $11', [name, email, password, mobile, org, add, city, postal, state, country, user_id]));
+        return(postgreDatabase.query('Update user_table SET "user_name"=$1 ,"email"=$2, "password"=$3, "phone_number"=$4, "organization"=$5, "address"=$6, "city"=$7, "pincode"=$8, "state"=$9, "country"=$10, "user_type"=$11 where id = $12', [name, email, password, mobile, org, add, city, postal, state, country, user_type, user_id]));
     } 
     return(Promise.reject('Invalid User id'));
 } 

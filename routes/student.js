@@ -11,6 +11,7 @@ router.get("/", (req, res) => {
     console.log('into path');
     res.sendFile(path.join(__dirname, "..", "public/student", "profile.html"));
 });
+
 router.all('/test', function (req, res) {
     debug("into /test");
     if (req.session.viewCount) {
@@ -24,10 +25,7 @@ router.all('/test', function (req, res) {
 // get user data
 
 router.get('/userdata',(req,res)=>{
-    // console.log('route hit')
-    // console.log(req.user)
-    // req.db
-    //   .query('Select * from user where id = ?;', [req.user.id])
+
     db.getProfileData(req.user.id)
       .then((results) => {
         console.log(results.rows)
@@ -43,10 +41,7 @@ router.get('/userdata',(req,res)=>{
 
 router.post('/updateuserdata',(req,res)=>{
 
-    // console.log('here come')
-    // console.log(req.body)
-    // console.log(req.body.email)
-    db.updateProfileData(req.body.phone_number, req.body.address, req.body.city, req.body.country, '', req.body.pincode, req.user.id)
+    db.updateProfileData(req.body.phone_number, req.body.address, req.body.city, req.body.country, req.body.state , req.body.pincode, req.user.id)
       .then((results) => {
         console.log(results[0])
         res.redirect('/users/student')
@@ -55,7 +50,6 @@ router.post('/updateuserdata',(req,res)=>{
         debug(err);
         res.status(500).send(err);
       });
-    // res.redirect('/users/student')
 })
 
 module.exports = router;

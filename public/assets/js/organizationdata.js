@@ -57,9 +57,7 @@ function submit_addCompany() {
     })
     .then(function (data) {
       // do stuff with `data`, call second `fetch`
-      console.log(JSON.stringify(data));
-
-      let company_Infoadd = {
+        let company_Infoadd = {
         company_name: company_name,
         contact_person: contact_person,
         company_email: company_email,
@@ -68,7 +66,6 @@ function submit_addCompany() {
         company_logo: data,
         isActive: isActive,
       };
-      console.log("COMPANY DATA ----- ", company_Infoadd);
 
       return fetch("/users/superAdmin/addCompany", {
         method: "POST",
@@ -83,7 +80,7 @@ function submit_addCompany() {
     })
     .then(function (data) {
       // do stuff with `data`
-      if (!alert("Successfully Added :" + data)) {
+      if (!alert("Successfully Added Organization.")) {
         window.location.reload();
       }
     })
@@ -91,6 +88,7 @@ function submit_addCompany() {
       console.log("Requestfailed", error);
     });
 }
+
 function submit_editCompany(id){
   let id1 = document.getElementById("orgid").value;
   let company_name1 = document.getElementById("company_name1").value;
@@ -150,7 +148,6 @@ document.addEventListener(
       .then((response) =>
         response.json().then((text) => {
           if (response.ok) {
-            console.log(text);
             append_json_active(text);
           }
           return response.status;
@@ -169,8 +166,6 @@ function append_json_active(data) {
   var company = "";
   // ITERATING THROUGH OBJECTS
   data.forEach((value,key) => {
-    console.log(key,value)
-  // $.each(data, function (key, value) {
     // Making Buttons
     var button1 =
     `<button class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="editcompany(${value.id})">` +
@@ -178,28 +173,27 @@ function append_json_active(data) {
   "</button>"
     var button2 =
     `<button class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="disablecompany(${value.id})">` +
-  '<i class="fas fa-trash-alt">' +
+  '<i class="fas fa-minus">' +
   "</button>";
     
     // CONSTRUCTION OF ROWS HAVING
     // DATA FROM JSON OBJECT
     company += "<tr>";
-    company += "<td>" + (key + 1) + "</td>";
-    company += "<td>" + value.name + "</td>";
-    company += "<td>" + value.address + "</td>";
-    company += "<td>" + value.contactemail + "</td>";
-    company += "<td>" + value.contactphone + "</td>";
-    company += "<td>" + value.subscriptionleft + "</td>";
-    company += "<td>" + value.photourl + "</td>";
-    company += "<td>" + value.isverified + "</td>";
-    company += "<td>" + value.isactive + "</td>";
-    company += "<td>" + button1 + "</td>";
-    company += "<td>" + button2 + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + (key + 1) + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + value.name + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + value.address + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + value.contactemail + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + value.contactphone + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + value.subscriptionleft + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + value.photourl + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + value.isverified + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + value.isactive + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + button1 + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + button2 + "</td>";
     company += "</tr>";
   });
 
   // INSERTING ROWS INTO TABLE
-  // $("#activeCompany_list").append(company);
   document.getElementById('activeCompany_list').innerHTML = company
 }
 
@@ -226,15 +220,13 @@ document.addEventListener(
   },
   false
 );
+
 // this function appends the json data to the table 'company_list'
 function append_json_inactive(data) {
   compList = data;
-
   var company = "";
   // ITERATING THROUGH OBJECTS
   data.forEach((value,key) => {
-    console.log(key,value)
-    // $.each(data, function (key, value) {
     // Making Buttons
     var button1 =
     `<button class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="editcompany(${value.id})">` +
@@ -242,27 +234,26 @@ function append_json_inactive(data) {
   "</button>"
     var button2 =
     `<button class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="enablecompany(${value.id})">` +
-  '<i class="fas fa-trash-alt">' +
+  '<i class="fas fa-plus">' +
   "</button>";
     // CONSTRUCTION OF ROWS HAVING
     // DATA FROM JSON OBJECT
     company += "<tr>";
-    company += "<td>" + (key + 1) + "</td>";
-    company += "<td>" + value.name + "</td>";
-    company += "<td>" + value.address + "</td>";
-    company += "<td>" + value.contactemail + "</td>";
-    company += "<td>" + value.contactphone + "</td>";
-    company += "<td>" + value.subscriptionleft + "</td>";
-    company += "<td>" + value.photourl + "</td>";
-    company += "<td>" + value.isverified + "</td>";
-    company += "<td>" + value.isactive + "</td>";
-    company += "<td>" + button1 + "</td>";
-    company += "<td>" + button2 + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + (key + 1) + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + value.name + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + value.address + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + value.contactemail + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + value.contactphone + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + value.subscriptionleft + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + value.photourl + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + value.isverified + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + value.isactive + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + button1 + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + button2 + "</td>";
     company += "</tr>";
   });
 
   // INSERTING ROWS INTO TABLE
-  // $("#inactiveCompany_list").append(company);
   document.getElementById('inactiveCompany_list').innerHTML = company
 }
 
@@ -275,21 +266,19 @@ function editcompany(x) {
   })
     .then((response) =>
       response.json().then((text) => {
-        console.log(text);
         if (response.ok) {
-          console.log(text)
           let id = document.getElementById('orgid')
-                id.value = text.id
-              let name = document.getElementById('company_name1')
-                name.value = text.name
-              let adminid = document.getElementById('contact_person1')
-              adminid.value = text.orgadmin
-              let email = document.getElementById('company_email1')
-              email.value = text.contactemail
-              let mobile = document.getElementById('company_phone1')
-              mobile.value = text.contactphone
-              let address = document.getElementById('company_address1')
-              address.value = text.address
+          id.value = text.id
+          let name = document.getElementById('company_name1')
+          name.value = text.name
+          let adminid = document.getElementById('contact_person1')
+          adminid.value = text.orgadmin
+          let email = document.getElementById('company_email1')
+          email.value = text.contactemail
+          let mobile = document.getElementById('company_phone1')
+          mobile.value = text.contactphone
+          let address = document.getElementById('company_address1')
+          address.value = text.address
         }
         return text;
       })
@@ -300,10 +289,7 @@ function editcompany(x) {
 }
 
 function disablecompany(x) {
-  // alert('In edit func.'+'\nid ='+x)
   if (ConfirmDelete()) {
-    // let i = x.parentNode.parentNode.rowIndex;
-    // let companyid = compList[i - 1].id;
     let companydata = { id: x };
 
     fetch("/users/superAdmin/disableCompany", {
@@ -313,9 +299,8 @@ function disablecompany(x) {
     })
       .then((response) =>
         response.text().then((text) => {
-          console.log(text);
           if (response.ok) {
-            if (!alert("Successfully Deleted")) {
+            if (!alert("Successfully Deactivated.")) {
               window.location.reload();
             }
           }
@@ -328,7 +313,7 @@ function disablecompany(x) {
 }
 
 function ConfirmDelete() {
-  var x = confirm("Are you sure you want to delete?");
+  var x = confirm("Are you sure you want to deactivate?");
   if (x) return true;
   else return false;
 }
@@ -340,10 +325,7 @@ function ConfirmEnable() {
 }
 
 function enablecompany(x) {
-  // alert('In edit func.'+'\nid ='+x)
   if (ConfirmEnable()) {
-    // let i = x.parentNode.parentNode.rowIndex;
-    // let companyid = compList[i - 1].id;
     let companydata = { id: x };
 
     fetch("/users/superAdmin/enableCompany", {
@@ -353,9 +335,8 @@ function enablecompany(x) {
     })
       .then((response) =>
         response.text().then((text) => {
-          console.log(text);
           if (response.ok) {
-            if (!alert("Successfully Enabled")) {
+            if (!alert("Successfully Enabled.")) {
               window.location.reload();
             }
           }

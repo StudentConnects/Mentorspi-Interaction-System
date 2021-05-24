@@ -59,13 +59,6 @@ document.addEventListener(
 function append_json(data) {
 userList = data;
 var user = "";
-var buttons =
-    '<button class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="editcompany(value.id)">' +
-    '<i class="fas fa-edit"></i>' +
-    "</button>" +
-    '<button class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">' +
-    '<i class="fas fa-trash-alt">' +
-    "</button>";
   let cssClass = 'user1Details.classList = "border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left";';
   data.forEach((value, key) => {
   let user = document.createElement("tr")
@@ -112,15 +105,14 @@ var buttons =
   userDetails = document.createElement("td");
   // userDetails.innerHTML =  buttons;
   userDetails.innerHTML = `<button class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="edituser(${value.id})">` +
-  '<i class="fas fa-edit"></i>' +
-  "</button>" +
-  `<button class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="userdisable(${value.id})">` +
-  '<i class="fas fa-trash-alt">' +
-  "</button>";
+  '<i class="fas fa-edit"></i>' +  "</button>";
   userDetails.classList = cssClass;
   user.appendChild(userDetails);
   userDetails = document.createElement("td");
-
+  userDetails.innerHTML = `<button class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="userdisable(${value.id})">` +
+  '<i class="fas fa-minus">' +  "</button>";
+  userDetails.classList = cssClass;
+  user.appendChild(userDetails);
   document.getElementById("active_user_list").appendChild(user);
 });
 }
@@ -207,14 +199,14 @@ var user = "";
   userDetails = document.createElement("td");
   // userDetails.innerHTML =  buttons;
   userDetails.innerHTML = `<button class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="edituser(${value.id})">` +
-    '<i class="fas fa-edit"></i>' +
-    "</button>" +
-    `<button class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="enableuser(${value.id})">` +
-    '<i class="fas fa-trash-alt">' +
-    "</button>";
+  '<i class="fas fa-edit"></i>' +  "</button>";
   userDetails.classList = cssClass;
   user.appendChild(userDetails);
   userDetails = document.createElement("td");
+  userDetails.innerHTML = `<button class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="enableuser(${value.id})">` +
+  '<i class="fas fa-plus">' +  "</button>";
+  userDetails.classList = cssClass;
+  user.appendChild(userDetails);
 
   document.getElementById("inactive_user_list").appendChild(user);
 });
@@ -236,7 +228,7 @@ function userdisable(x) {
         response.text().then((text) => {
           console.log(text);
           if (response.ok) {
-            if (!alert("Successfully Deleted")) {
+            if (!alert("Successfully deactivated user.")) {
               window.location.reload();
             }
           }
@@ -249,7 +241,7 @@ function userdisable(x) {
 }
 
 function ConfirmDelete() {
-  var x = confirm("Are you sure you want to delete?");
+  var x = confirm("Are you sure you want to deactivate?");
   if (x) return true;
   else return false;
 }
@@ -276,7 +268,7 @@ function enableuser(x) {
         response.text().then((text) => {
           console.log(text);
           if (response.ok) {
-            if (!alert("Successfully Enabled")) {
+            if (!alert("Successfully enabled user.")) {
               window.location.reload();
             }
           }

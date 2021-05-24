@@ -4,7 +4,11 @@ const router = express.Router();
 const debug = require('debug')('abc:server:index.js');
 const {checkSchema,validationResult} = require('express-validator')
 // db functions
-const db = require('../tools/database')
+const db = require('../tools/database');
+const { resolveSoa } = require('dns');
+const ValidatorPizzaClient = require("validator-pizza-node");
+const { Router } = require('express');
+const emailVerifier = new ValidatorPizzaClient().validate;
 
 router.get("/", (req, res) => {
     debug("into /");
@@ -42,7 +46,7 @@ router.post('/updateuserdata',(req,res)=>{
     // console.log('here come')
     // console.log(req.body)
     // console.log(req.body.email)
-    db.updateProfileData(req.body.phone_number, req.body.address, req.body.city, req.body.country, '', req.body.pincode, req.user.id)
+    db.updateProfileData(req.body.phone_number, req.body.address, req.body.city, req.body.country, req.body.state, req.body.pincode, req.user.id)
       .then((results) => {
         console.log(results[0])
         res.redirect('/users/student')
@@ -322,8 +326,470 @@ router.post('/updateorgdata', (req, res) => {
 //       }
 // });
 
-router.delete('/disableUser', (req, res) =>{
+// ---------------------- NEW ROUTES ------------------------
 
+router.post('/specificuser',(req,res)=>{
+    console.log('route hit')
+    db.postgreDatabase.query('select * from user_table where id=$1',[req.body.id])
+    .then((results) => {
+        console.log(results.rows);
+        console.log('data sent')
+        res.send(results.rows[0]);
+    }).catch(err=>{
+        res.status(500).send(err)
+    });
+});
+
+router.post('/updatespecificuser',
+checkSchema({
+    "userName": {
+        in: ["body"],
+        notEmpty: true,
+        isString: true,
+        trim: true,
+        isLength: {
+            options: {
+                max: 50,
+                min: 5
+            },
+            errorMessage: "Needs to be min: 5 Max 50"
+        }
+    },
+    "email": {
+        in: ["body"],
+        notEmpty: true,
+        isString: true,
+        trim: true,
+        normalizeEmail: true,
+        custom: {
+            options: (value, data) => {
+                // console.table([{...data}]);
+                return (new Promise((resolve, reject) => {
+                    // deepcode ignore javascript%2Fdc_interfile_project%2FEqualityMisplacedParentheses: <please specify a reason of ignoring this>
+                    if (data.location !== "body") {
+                        debug("Rejecting because not in body");
+                        reject("Invalid Request");
+                    } else {
+                        debug("Sending Request");
+                        emailVerifier("email", value).then(
+                            validated => {
+                                debug("Remaining: " + validated.data.remaining_requests);
+                                if (validated.data.status != 200) {
+                                    debug("Failed Status + " + JSON.stringify(validated.data));
+                                    reject("INVALID Email because of:\n" + JSON.stringify(validated.data));
+                                } else if (validated.data.did_you_mean || validated.data.disposable || !validated.data.mx || !validated.valid() || !validated.successful()) {
+                                    // debug(validated.did_you_mean || validated.disposable || !validated.mx || !validated.valid() || !validated.successful())
+                                    const reason = "INVALID Email because of:\n" + JSON.stringify(validated.data) + "\n Valid: " + validated.valid() + "\n Successful: " + validated.successful();
+                                    debug("Rejecting Email in else if because of \n" + reason);
+                                    reject(reason);
+                                } else {
+                                    debug("Resolving Request");
+                                    resolve(validated.email);
+                                }
+                            }
+                        ).catch(
+                            err => {
+                                debug(err);
+                                reject("INVALID Email because of: \n" + err);
+                            }
+                        )
+                    }
+                }));
+            }
+        },
+        isLength: {
+            options: {
+                max: 50,
+                min: 10
+            },
+            errorMessage: "Needs to be min: 10 Max 50"
+        }
+    },
+    "password": {
+        in: ["body"],
+        notEmpty: true,
+        isString: true,
+        trim: true,
+        isLength: {
+            options: {
+                max: 50,
+                min: 8
+            },
+            errorMessage: "Needs to be min: 8 Max: 50"
+        },
+        custom: {
+            options: (value, data) => {
+                if (data.location != "body") {
+                    throw new Error("Invalid Request")
+                } else if (RegExp(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=.\-_*])([a-zA-Z0-9@#$%^&+=*.₹_\-]){8,}$/).test(value)) {
+                    return true
+                } else {
+                    return Promise.reject("Password of min length 8 should contain at least 1 lowercase character, min of 1 UPPERCASE CHARACTER, a number and a special character");
+                }
+            }
+        }
+    },
+    "institute_id": {
+        in: ["body"],
+        notEmpty: true,
+        // isString: true,
+        // isAlpha: true,
+        trim: true,
+        isLength: {
+            options: {
+                max: 50,
+                min: 1
+            },
+            errorMessage: "Needs to be min: 4 Max 50"
+        }
+    },
+    "mobile": {
+        in: ["body"],
+        errorMessage: "Invalid input for Mobile",
+        notEmpty: true,
+        trim: true,
+        isNumeric: true,
+        isInt: true,
+        isMobilePhone: {
+            locale: "en-IN"
+        },
+        toInt: true,
+    },
+    "address": {
+        in: ["body"],
+        notEmpty: true,
+        isString: true,
+        trim: true,
+        isLength: {
+            options: {
+                max: 255,
+                min: 5
+            },
+            errorMessage: "Needs to be min: 5 Max 255"
+        }
+    },
+    "city": {
+        in: ["body"],
+        notEmpty: true,
+        isString: true,
+        isAlpha: true,
+        trim: true,
+        isLength: {
+            options: {
+                max: 15,
+                min: 5
+            },
+            errorMessage: "Needs to be min: 5 Max 15"
+        }
+    },
+    "country": {
+        in: ["body"],
+        notEmpty: true,
+        isString: true,
+        trim: true,
+        isAlpha: true,
+        isLength: {
+            options: {
+                max: 25,
+                min: 5
+            },
+            errorMessage: "Needs to be min: 5 Max 25"
+        }
+    },
+    "postcode": {
+        in: ["body"],
+        errorMessage: "Invalid input for Postcode",
+        notEmpty: true,
+        trim: true,
+        isNumeric: true,
+        isInt: true,
+        isPostalCode: {
+            options: "IN"
+        },
+        toInt: true,
+    },
+    
+}), (req, res) => {
+    const results = validationResult(req)
+    if (!results.isEmpty()) {
+        debug(req.body);
+        res.status(400).json({
+            errors: results.array()
+        });
+    } else {        
+        db.postgreDatabase.query('Update user_table set user_name=$1, organization=$2, email=$3, password=$4, phone_number=$5, user_type=$6, address=$7, city=$8, country=$9, state=$10, pincode=$11 where id=$12',[req.body.userName, req.body.institute_id, req.body.email, req.body.password, req.body.mobile,req.body.user_type, req.body.address, req.body.city, req.body.country, req.body.state, req.body.postcode,req.body.id])
+        .then((data) =>{
+            console.log(data)
+            // res.sendFile(path.join(__dirname, "..", "public", "super-admin", "users.html"));
+            res.redirect("users.html");
+        }).catch((err)=>{
+            console.log(err)
+                res.send(err.detail);
+        })
+    }
+});
+
+router.post('/register',
+        checkSchema({
+            "userName": {
+                in: ["body"],
+                notEmpty: true,
+                isString: true,
+                trim: true,
+                isLength: {
+                    options: {
+                        max: 50,
+                        min: 5
+                    },
+                    errorMessage: "Needs to be min: 5 Max 50"
+                }
+            },
+            "email": {
+                in: ["body"],
+                notEmpty: true,
+                isString: true,
+                trim: true,
+                normalizeEmail: true,
+                custom: {
+                    options: (value, data) => {
+                        // console.table([{...data}]);
+                        return (new Promise((resolve, reject) => {
+                            // deepcode ignore javascript%2Fdc_interfile_project%2FEqualityMisplacedParentheses: <please specify a reason of ignoring this>
+                            if (data.location !== "body") {
+                                debug("Rejecting because not in body");
+                                reject("Invalid Request");
+                            } else {
+                                debug("Sending Request");
+                                emailVerifier("email", value).then(
+                                    validated => {
+                                        debug("Remaining: " + validated.data.remaining_requests);
+                                        if (validated.data.status != 200) {
+                                            debug("Failed Status + " + JSON.stringify(validated.data));
+                                            reject("INVALID Email because of:\n" + JSON.stringify(validated.data));
+                                        } else if (validated.data.did_you_mean || validated.data.disposable || !validated.data.mx || !validated.valid() || !validated.successful()) {
+                                            // debug(validated.did_you_mean || validated.disposable || !validated.mx || !validated.valid() || !validated.successful())
+                                            const reason = "INVALID Email because of:\n" + JSON.stringify(validated.data) + "\n Valid: " + validated.valid() + "\n Successful: " + validated.successful();
+                                            debug("Rejecting Email in else if because of \n" + reason);
+                                            reject(reason);
+                                        } else {
+                                            debug("Resolving Request");
+                                            resolve(validated.email);
+                                        }
+                                    }
+                                ).catch(
+                                    err => {
+                                        debug(err);
+                                        reject("INVALID Email because of: \n" + err);
+                                    }
+                                )
+                            }
+                        }));
+                    }
+                },
+                isLength: {
+                    options: {
+                        max: 50,
+                        min: 10
+                    },
+                    errorMessage: "Needs to be min: 10 Max 50"
+                }
+            },
+            "password": {
+                in: ["body"],
+                notEmpty: true,
+                isString: true,
+                trim: true,
+                isLength: {
+                    options: {
+                        max: 50,
+                        min: 8
+                    },
+                    errorMessage: "Needs to be min: 8 Max: 50"
+                },
+                custom: {
+                    options: (value, data) => {
+                        if (data.location != "body") {
+                            throw new Error("Invalid Request")
+                        } else if (RegExp(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=.\-_*])([a-zA-Z0-9@#$%^&+=*.₹_\-]){8,}$/).test(value)) {
+                            return true
+                        } else {
+                            return Promise.reject("Password of min length 8 should contain at least 1 lowercase character, min of 1 UPPERCASE CHARACTER, a number and a special character");
+                        }
+                    }
+                }
+            },
+            "institute_id": {
+                in: ["body"],
+                notEmpty: true,
+                // isString: true,
+                // isAlpha: true,
+                trim: true,
+                isLength: {
+                    options: {
+                        max: 50,
+                        min: 1
+                    },
+                    errorMessage: "Needs to be min: 4 Max 50"
+                }
+            },
+            "mobile": {
+                in: ["body"],
+                errorMessage: "Invalid input for Mobile",
+                notEmpty: true,
+                trim: true,
+                isNumeric: true,
+                isInt: true,
+                isMobilePhone: {
+                    locale: "en-IN"
+                },
+                toInt: true,
+            },
+            "address": {
+                in: ["body"],
+                notEmpty: true,
+                isString: true,
+                trim: true,
+                isLength: {
+                    options: {
+                        max: 255,
+                        min: 5
+                    },
+                    errorMessage: "Needs to be min: 5 Max 255"
+                }
+            },
+            "city": {
+                in: ["body"],
+                notEmpty: true,
+                isString: true,
+                isAlpha: true,
+                trim: true,
+                isLength: {
+                    options: {
+                        max: 15,
+                        min: 5
+                    },
+                    errorMessage: "Needs to be min: 5 Max 15"
+                }
+            },
+            "country": {
+                in: ["body"],
+                notEmpty: true,
+                isString: true,
+                trim: true,
+                isAlpha: true,
+                isLength: {
+                    options: {
+                        max: 25,
+                        min: 5
+                    },
+                    errorMessage: "Needs to be min: 5 Max 25"
+                }
+            },
+            "postcode": {
+                in: ["body"],
+                errorMessage: "Invalid input for Postcode",
+                notEmpty: true,
+                trim: true,
+                isNumeric: true,
+                isInt: true,
+                isPostalCode: {
+                    options: "IN"
+                },
+                toInt: true,
+            },
+            
+        }), (req, res) => {
+            const results = validationResult(req)
+            if (!results.isEmpty()) {
+                debug(req.body);
+                res.status(400).json({
+                    errors: results.array()
+                });
+            } else {
+                console.log(req.body)
+                if(req.body.isActive){
+                    req.body.isActive == true
+                }else{
+                    req.body.isActive == false
+                }
+                
+                db.registerUser(req.body.userName, req.body.institute_id, req.body.email, req.body.password, req.body.mobile, req.body.address, req.body.city, req.body.country, req.body.state, req.body.postcode, 'www.google.com' ,'Decription not Provided','',false,req.body.isActive,req.body.user_type)
+                .then((data) =>{
+                    console.log(data)
+                    res.sendFile(path.join(__dirname, "..", "public", "super-admin", "users.html"));
+                }).catch((err)=>{
+                    console.log(err)
+                    if(err.code == '23505'){
+                        res.json({message:'User already Exists.'})
+                    }else{
+                        res.send(err.detail);
+                    }
+                })
+            }
+});
+
+router.get('/activeuserlist',(req,res)=>{
+    db.postgreDatabase.query('select * from user_table where isactive = true')
+    .then((results)=>{
+        console.log(results.rows);
+        res.send(results.rows);
+    }).catch(err=>{
+        console.log(err);
+        res.status(500).send(err);
+    })
+});
+
+router.get('/inactiveuserlist',(req,res)=>{
+    db.postgreDatabase.query('select * from user_table where isactive = false')
+    .then((results)=>{
+        console.log(results.rows);
+        res.send(results.rows);
+    }).catch(err=>{
+        console.log(err);
+        res.status(500).send(err);
+    })
+});
+
+router.delete("/disableuser",
+  checkSchema({
+    id: {
+      in: ["body"],
+      errorMessage: 'ID is wrong',
+      isInt: true,
+      toInt: true,
+    }
+  }),
+ (req, res) => {
+  const { id } = req.body;
+  db.postgreDatabase
+    .query("update user_table set isactive = false where id = $1", [id])
+    .then((results) => {
+      console.log(results);
+      res.send(results[0]);
+    }).catch(err=>{
+        res.status(500).send(err)
+    })
+});
+  
+router.patch("/enableuser",
+checkSchema({
+    id: {
+      in: ["body"],
+      errorMessage: 'ID is wrong',
+      isInt: true,
+      toInt: true,
+    }
+  }),
+  (req, res) => {
+  const { id } = req.body;
+  db.postgreDatabase
+    .query("update user_table set isactive = true where id = $1", [id])
+    .then((results) => {
+      console.log(results);
+      res.send(results[0]);
+    }).catch(err=>{
+        res.status(500).send(err)
+    });
 });
 
 module.exports = router;
