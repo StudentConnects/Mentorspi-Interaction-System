@@ -43,7 +43,6 @@ document.addEventListener(
       .then((response) =>
         response.json().then((text) => {
           if (response.ok) {
-            console.log(text)
               append_json(text)
           }
           return response.status;
@@ -130,7 +129,6 @@ document.addEventListener(
       .then((response) =>
         response.json().then((text) => {
           if (response.ok) {
-            console.log(text)
               append_json_new(text)
           }
           return response.status;
@@ -144,15 +142,8 @@ document.addEventListener(
 
 // creating dynamic rows for each record
 function append_json_new(data) {
-userList = data;
-var user = "";
-// var buttons =
-//     '<button class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="editcompany(value.id)">' +
-//     '<i class="fas fa-edit"></i>' +
-//     "</button>" +
-//     '<button class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">' +
-//     '<i class="fas fa-trash-alt">' +
-//     "</button>";
+  userList = data;
+
   let cssClass = 'user1Details.classList = "border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left";';
   data.forEach((value, key) => {
   let user = document.createElement("tr")
@@ -213,10 +204,7 @@ var user = "";
 }
 
 function userdisable(x) {
-  // alert('In edit func.'+'\nid ='+x)
   if (ConfirmDelete()) {
-    // let i = x.parentNode.parentNode.rowIndex;
-    // let companyid = compList[i - 1].id;
     let companydata = { id: x };
 
     fetch("/users/superAdmin/disableuser", {
@@ -226,7 +214,6 @@ function userdisable(x) {
     })
       .then((response) =>
         response.text().then((text) => {
-          console.log(text);
           if (response.ok) {
             if (!alert("Successfully deactivated user.")) {
               window.location.reload();

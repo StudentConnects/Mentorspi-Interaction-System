@@ -162,12 +162,13 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV !== "production") {
   //   console.log(await result.rows)
   // })();
 
-  //  (async ()=>{
-  //   const {postgreDatabase} = require('./tools/database')
-  //   // await postgreDatabase.query('update user_table set user_name=$1 where id=$2', [`subAdmin`, 20])
-  //   const result = await postgreDatabase.query('select * from user_table where id=$1', []);
-  //   console.log(await result.rows)
-  // })();
+// (async ()=>{
+//   const {postgreDatabase} = require('./tools/database')
+//   // await postgreDatabase.query('update user_table set user_name=$1 where id=$2', [`subAdmin`, 20])
+//   const result = await postgreDatabase.query("select * from user_table where isactive = true AND user_type=$1 OR user_type=$2", [`mentor`, `student`]);
+//   console.log(await result.rows)
+// })();
+
 //   var a = 'sitfndsfjjfhf'
 //   console.log(`${a}`+' hdshfsdbffsdff')
 // (async () => {

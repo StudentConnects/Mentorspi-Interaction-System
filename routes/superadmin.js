@@ -386,7 +386,8 @@ checkSchema({
         .then((data) =>{
             console.log(data)
             console.log('data updated')
-            res.sendFile(path.join(__dirname, "..", "public", "super-admin", "users.html"));
+            // res.sendFile(path.join(__dirname, "..", "public", "super-admin", "users.html"));
+            res.redirect('users.html');
         }).catch((err)=>{
             console.log(err)
                 res.send(err.detail);
