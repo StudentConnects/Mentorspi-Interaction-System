@@ -43,28 +43,12 @@
           </a>
           <ul class="md:hidden items-center flex flex-wrap list-none">
             <li class="inline-block relative">
-              <a
-                class="text-blueGray-500 block"
-                href="#"
-                onclick="openDropdown(event,'user-responsive-dropdown')"
-                ><div class="items-center flex">
-                  <span
-                    class="w-12 h-12 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center rounded-full"
-                    ><img
-                      alt="..."
-                      class="w-full rounded-full align-middle border-none shadow-lg"
-                      src="../../assets/img/user.png"
-                  /></span></div
-              ></a>
-              <div
-                class="hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
-                id="user-responsive-dropdown"
-              >
-                <a
-                  href="#"
-                  class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-                  >Logout</a
-                >
+              <div class="items-center flex">
+                <a href="/logout"><button
+                  class="bg-white text-blueGray-700 active:bg-blueGray-50 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
+                  type="submit">
+                  <i class="fas fa-sign-out-alt"></i> Logout
+                </button></a>
               </div>
             </li>
           </ul>
@@ -148,31 +132,13 @@
             <ul
               class="flex-col md:flex-row list-none items-center hidden md:flex"
             >
-              <a
-                class="text-blueGray-500 block"
-                href="#"
-                onclick="openDropdown(event,'user-dropdown')"
-              >
-                <div class="items-center flex">
-                  <span
-                    class="w-12 h-12 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center rounded-full"
-                    ><img
-                      alt="..."
-                      class="w-full rounded-full align-middle border-none shadow-lg"
-                      src="../../assets/img/user.png"
-                  /></span>
-                </div>
-              </a>
-              <div
-                class="hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
-                id="user-dropdown"
-              >
-                <a
-                  href=""
-                  class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-                  >Logout</a
-                >
-              </div>
+              <li class="flex items-center">
+                <a href="/logout"><button
+                  class="bg-white text-blueGray-700 active:bg-blueGray-50 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
+                  type="submit">
+                  <i class="fas fa-sign-in-alt"></i> Logout
+                </button></a>
+              </li>
             </ul>
           </div>
         </nav>
