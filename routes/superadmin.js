@@ -148,9 +148,8 @@ router.post('/addCompany',
                 errors: results.array()
             });
         } else {
-            console.log("COMPANY DATA ------- ",req.body)
 
-            db.registerCompany(req.body.company_name, req.body.company_address, req.body.contact_person, req.body.company_email, req.body.company_phone,0,req.body.company_logo,true,req.body.isActive)
+            db.registerCompany(req.body.company_name, req.body.company_address, req.body.contact_person, req.body.company_email, req.body.company_phone, 0, req.body.company_logo ,true, req.body.isActive)
             .then((_) =>{
                 // console.log(data)
                 res.send('Company added successfully.');
@@ -780,7 +779,8 @@ router.post('/register',
                 db.registerUser(req.body.userName, req.body.institute_id, req.body.email, req.body.password, req.body.mobile, req.body.address, req.body.city, req.body.country, req.body.state, req.body.postcode, 'www.google.com' ,'Decription not Provided','',false,req.body.isActive,req.body.user_type)
                 .then((data) =>{
                     console.log(data)
-                    res.sendFile(path.join(__dirname, "..", "public", "super-admin", "users.html"));
+                    // res.sendFile(path.join(__dirname, "..", "public", "super-admin", "users.html"));
+                    res.redirect("users.html");
                 }).catch((err)=>{
                     console.log(err)
                     if(err.code == '23505'){

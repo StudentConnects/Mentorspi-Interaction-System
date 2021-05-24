@@ -264,6 +264,7 @@ const registerCompany = (orgName, Address, orgAdmin, contactEmail, contactPhone,
     if (subscriptionLeft < 0) {
         return (new Error('Invalid Subscription provided'));
     }
+
     // return (postgreDatabase.query("insert into organisations (name, address, orgAdmin, contactEmail, contactPhone, subscriptionLeft, photoUrl, isVerified, isActive) values ($1, $2, (Select id from user_table where email = $3), $4, $5, $6, $7, $8, $9) and update user_table set user_type='subAdmin' where email=$3 returning *;", [orgName, Address, orgAdmin, contactEmail, contactPhone, subscriptionLeft, photoUrl, isVerified, isActive]))
     // return (postgreDatabase.query("insert into organisations (name, address, orgAdmin, contactEmail, contactPhone, subscriptionLeft, photoUrl, isVerified, isActive) values ($1, $2, (Select id from user_table where email = $3), $4, $5, $6, $7, $8, $9)", [orgName, Address, orgAdmin, contactEmail, contactPhone, subscriptionLeft, photoUrl, isVerified, isActive]))
     return postgreDatabase.query("insert into organisations (name, address, orgAdmin, contactEmail, contactPhone, subscriptionLeft, photoUrl, isVerified, isActive) values ($1, $2, (Select id from user_table where email = $3), $4, $5, $6, $7, $8, $9) returning *;", [orgName, Address, orgAdmin, contactEmail, contactPhone, subscriptionLeft, photoUrl, isVerified, isActive])

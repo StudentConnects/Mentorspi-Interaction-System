@@ -67,7 +67,6 @@ function submit_addCompany() {
         company_logo: data,
         isActive: isActive,
       };
-      console.log("COMPANY DATA ----- ", company_Infoadd);
 
       return fetch("/users/superAdmin/addCompany", {
         method: "POST",
