@@ -164,7 +164,8 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV !== "production") {
 
   //  (async ()=>{
   //   const {postgreDatabase} = require('./tools/database')
-  //   const result = await postgreDatabase.query('select * from user_table')
+  //   // await postgreDatabase.query('update user_table set user_name=$1 where id=$2', [`subAdmin`, 20])
+  //   const result = await postgreDatabase.query('select * from user_table where id=$1', []);
   //   console.log(await result.rows)
   // })();
 //   var a = 'sitfndsfjjfhf'

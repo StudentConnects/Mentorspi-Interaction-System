@@ -178,23 +178,23 @@ function append_json_active(data) {
   "</button>"
     var button2 =
     `<button class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="disablecompany(${value.id})">` +
-  '<i class="fas fa-trash-alt">' +
+  '<i class="fas fa-minus">' +
   "</button>";
     
     // CONSTRUCTION OF ROWS HAVING
     // DATA FROM JSON OBJECT
     company += "<tr>";
-    company += "<td>" + (key + 1) + "</td>";
-    company += "<td>" + value.name + "</td>";
-    company += "<td>" + value.address + "</td>";
-    company += "<td>" + value.contactemail + "</td>";
-    company += "<td>" + value.contactphone + "</td>";
-    company += "<td>" + value.subscriptionleft + "</td>";
-    company += "<td>" + value.photourl + "</td>";
-    company += "<td>" + value.isverified + "</td>";
-    company += "<td>" + value.isactive + "</td>";
-    company += "<td>" + button1 + "</td>";
-    company += "<td>" + button2 + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + (key + 1) + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + value.name + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + value.address + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + value.contactemail + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + value.contactphone + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + value.subscriptionleft + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + value.photourl + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + value.isverified + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + value.isactive + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + button1 + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + button2 + "</td>";
     company += "</tr>";
   });
 
@@ -242,22 +242,22 @@ function append_json_inactive(data) {
   "</button>"
     var button2 =
     `<button class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded-full shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onclick="enablecompany(${value.id})">` +
-  '<i class="fas fa-trash-alt">' +
+  '<i class="fas fa-plus">' +
   "</button>";
     // CONSTRUCTION OF ROWS HAVING
     // DATA FROM JSON OBJECT
     company += "<tr>";
-    company += "<td>" + (key + 1) + "</td>";
-    company += "<td>" + value.name + "</td>";
-    company += "<td>" + value.address + "</td>";
-    company += "<td>" + value.contactemail + "</td>";
-    company += "<td>" + value.contactphone + "</td>";
-    company += "<td>" + value.subscriptionleft + "</td>";
-    company += "<td>" + value.photourl + "</td>";
-    company += "<td>" + value.isverified + "</td>";
-    company += "<td>" + value.isactive + "</td>";
-    company += "<td>" + button1 + "</td>";
-    company += "<td>" + button2 + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + (key + 1) + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + value.name + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + value.address + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + value.contactemail + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + value.contactphone + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + value.subscriptionleft + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + value.photourl + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + value.isverified + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + value.isactive + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + button1 + "</td>";
+    company += `<td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">` + button2 + "</td>";
     company += "</tr>";
   });
 

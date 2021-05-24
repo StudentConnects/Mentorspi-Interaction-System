@@ -393,7 +393,7 @@ checkSchema({
                 res.send(err.detail);
         })
     }
-})
+});
 
 
 router.get("/listActiveCompanies", (req, res) => {
@@ -793,6 +793,7 @@ router.post('/register',
 });
 
 router.get('/activeuserlist',(req,res)=>{
+    console.log("IN ACTIVE ROUTE -----------------------------------")
     db.postgreDatabase.query('select * from user_table where isactive = true')
     .then((results)=>{
         console.log(results.rows);
@@ -804,6 +805,7 @@ router.get('/activeuserlist',(req,res)=>{
 });
 
 router.get('/inactiveuserlist',(req,res)=>{
+    console.log("IN INACTIVE ROUTE ===============================")
     db.postgreDatabase.query('select * from user_table where isactive = false')
     .then((results)=>{
         console.log(results.rows);

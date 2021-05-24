@@ -370,9 +370,9 @@ const getUserList = (id) => {
  * @returns {Promise} promise
  */
 
- const updateUserData = (name, email, password, mobile, org, add, city, postal, state, country, user_id) => {
+ const updateUserData = (name, email, password, mobile, org, add, city, postal, state, country, user_type, user_id) => {
     if(user_id) {
-        return(postgreDatabase.query('Update user_table SET "user_name"=$1 ,"email"=$2, "password"=$3, "phone_number"=$4, "organization"=$5, "address"=$6, "city"=$7, "pincode"=$8, "state"=$9, "country"=$10 where id = $11', [name, email, password, mobile, org, add, city, postal, state, country, user_id]));
+        return(postgreDatabase.query('Update user_table SET "user_name"=$1 ,"email"=$2, "password"=$3, "phone_number"=$4, "organization"=$5, "address"=$6, "city"=$7, "pincode"=$8, "state"=$9, "country"=$10, "user_type"=$11 where id = $12', [name, email, password, mobile, org, add, city, postal, state, country, user_type, user_id]));
     } 
     return(Promise.reject('Invalid User id'));
 } 
