@@ -38,7 +38,18 @@ router.get('/userdata',(req,res)=>{
   });
 
 // Submit user data
+router.get('/mentordata',(req,res)=>{
 
+  db.postgreDatabase.query("Select user_name,organization from user_table where user_type=$1 ",["mentor"])
+    .then((results) => {
+      console.log(results.rows)
+      res.send(results.rows);
+    })
+    .catch((err) => {
+      debug(err);
+      res.status(500).send(err);
+    });
+});
 router.post('/updateuserdata',(req,res)=>{
 
     db.updateProfileData(req.body.phone_number, req.body.address, req.body.city, req.body.country, req.body.state , req.body.pincode, req.user.id)
