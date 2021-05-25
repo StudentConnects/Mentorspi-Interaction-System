@@ -21,7 +21,9 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV !== "production") {
     postgreDatabase = new Pool({
         connectionString: process.env.DATABASE_URL,
         max: 20,
-        ssl: true
+        ssl: {
+            rejectUnauthorized: false
+        }
     });
 }
 
