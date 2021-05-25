@@ -271,7 +271,7 @@ router.post('/register',
                 errors: results.array()
             });
         } else {
-            console.log(req.body)
+            console.log("USER DATA FROM REGISTER", req.body)
             if(req.body.isActive){
                 req.body.isActive == true
             }else{
@@ -280,8 +280,8 @@ router.post('/register',
             
             db.registerUser(req.body.userName, req.body.institute_id, req.body.email, req.body.password, req.body.mobile, req.body.address, req.body.city, req.body.country, req.body.state, req.body.postcode, 'www.google.com' ,'Decription not Provided','',false,req.body.isActive,req.body.user_type)
             .then((data) =>{
-                console.log(data)
-                res.sendFile(path.join(__dirname, "..", "public", "login.html"));
+                // res.sendFile(path.join(__dirname, "..", "public", "login.html"));
+                res.send('User registration successful.');
             }).catch((err)=>{
                 console.log(err)
                 if(err.code == '23505'){
