@@ -1,7 +1,7 @@
 if (!process.env.NODE_ENV || process.env.NODE_ENV !== "production") {
   const dotenv = require("dotenv").config()
 }
-
+const assert = require('assert');
 // const {
 //   expect
 // } = require("chai");
@@ -180,3 +180,62 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV !== "production") {
 //   console.log(await results.rows);
 //   await postgreDatabase.end();
 // })();  
+// const MongoClient = require('mongodb').MongoClient;
+// // const assert = require('assert');
+
+// // Connection URL
+// const url = process.env.MongoURL;
+
+// // Database Name
+// const dbname ='mentorship';
+
+// // Use connect method to connect to the server
+// MongoClient.connect(url, function(err, client) {
+//   assert.equal(null, err);
+//   console.log("Connected successfully to server");
+
+//   const db = client.db(dbname);
+//   db.collection('chats').insertOne({x:1})
+//   db.collection('inserts').insertOne({a:1}, function(err, r) {
+//     assert.equal(null, err);
+//     assert.equal(1, r.insertedCount);
+
+//     // Insert multiple documents
+//       client.close();
+//     });
+//   });
+  
+// const dbname ='mentorship';
+
+//   mongoClient.connect(process.env.MongoURL, function(err, client) {
+//     assert.equal(null, err);
+//     console.log("Connected successfully to server");
+  
+//     const db = client.db(dbname).collections('chats').insertone({x:1});
+  
+//     client.close();
+//   })
+//   .then((data)=>{
+//     console.log(data)
+//   }).catch(err=>{
+//     console.log(err)
+//   })
+// const mongoose = require('mongoose');
+// mongoose.connect(process.env.MongoURL,{
+//   useNewUrlParser:true,
+//   useUnifiedTopology:true,
+//   useCreateIndex:true
+// })
+// const Chat = mongoose.model('Chat', { id:Number,chats:Array });
+
+// const chat = new Chat({ id:1,chats:['text1','text2','text3'] });
+// chat.save().then((result) => console.log(result)).catch(err=>{
+//   console.log(err)
+// })
+// const chat = new Chat();
+
+// Chat.find({id:1}).then((result) => console.log(result)).catch(err=>{
+//     console.log(err)
+//   })
+// const data=['text1','text2','text3','text4']
+// Chat.updateOne( {id:1},{ $set:{chats: data}},{upsert:true,new:true,setDefaultsOnInsert:true}).then((result) => console.log(result)).catch(err=>{console.log(err)})

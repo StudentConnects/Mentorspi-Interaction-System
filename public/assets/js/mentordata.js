@@ -8,6 +8,7 @@ document.addEventListener(
         .then((response) =>
           response.json().then((text) => {
             if (response.ok) {
+              
                 let name = document.getElementById('name')
                 name.value = text[0].user_name
                 let mobile = document.getElementById('mobile')
