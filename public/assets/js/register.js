@@ -122,13 +122,15 @@ function submit_details(fullname, email, password, institute_id, mobile, address
                 "Content-type": "application/json; charset=UTF-8"
             }
         })
-        .then(response => response.text())
-        .then(text => {
-            console.log(text);
-            // showmodal(text);
-            alert(text);
+        // .then(response => response.text())
+        // .then(text => {
+        //     // showmodal(text);
+        //     alert(text);
+        // })
+        .then(response =>  {
+            alert('User registration successful.');
+            window.location = "/login.html";
         })
-        .then(json => console.log(json))
         .catch(err => console.log(err));
 }
 
