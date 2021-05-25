@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../../assets/styles/tailwind.css" />
     <link rel="stylesheet" href="../../assets/styles/app.css" />   
     <title>Chats | Student Mentorship System</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script> -->
     <!-- <script src="/assets/js/chat.js"></script> -->
     <!-- <script src="/socket.io/socket.io.js"></script> -->
     <style>
@@ -475,7 +475,35 @@
         document.getElementById(dropdownID).classList.toggle("block");
     }
 </script>
+<script src="/socket.io/socket.io.js"></script>
+        <script>
+          const socket = io();
+        //   const socketIdSpan = document.getElementById("socketId");
+        //   const usernameSpan = document.getElementById("username");
 
+          socket.on('connect', () => {
+            // socketIdSpan.innerText = socket.id;
+            socket.emit('message',{data: 'I am excited to get connected !!!!!'})
+            socket.on('server',(data)=>{console.log(data)})
+        document.querySelector('#message-form').addEventListener('submit',(event)=>{
+            event.preventDefault();
+            console.log('form submitted');
+            const message = document.querySelector('#user-message').value
+            console.log(message);
+            socket.emit('newmessagetoServer',{text:message})
+        })
+        socket.on('messagetoClients',(data)=>{
+        console.log(data)
+        // console.log(data.mgs)
+        document.getElementById('messages').innerHTML += `<li>${data.mgs}</li><br/>` 
+    }); 
+
+})
+        
+    
+   
+        </script>
+<!-- 
 <script>
 const socket = io('http://localhost:8081')
 console.log(socket)
@@ -497,7 +525,7 @@ socket.on('connect',(data)=>{
         document.querySelector('#messages').innerHTML += `<li>${data.message.text}</li><br/>` 
     })
 })
-</script>
+</script> -->
 <script>
 //     function createspace() {
 //   var btn = document.createElement("p");

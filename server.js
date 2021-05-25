@@ -24,6 +24,10 @@ const passportLocal = require('passport-local').Strategy;
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 // const { countReset } = require('console');
+const io = require('socket.io')
+
+// convert a connect middleware to a Socket.IO middleware
+const wrap = middleware => (socket, next) => middleware(socket.request, {}, next);
 
 // Variables Required
 const app = express();
@@ -67,46 +71,66 @@ try {
   app.use(cookieParser(process.env.sessionSecret));
   app.use(express.static(path.join(__dirname, 'public')));
 
-  if (app.get('env') === 'production') {
-    app.set('trust proxy', 1) // trust first proxy
-    // sess.cookie.secure = true // serve secure cookies
-    // const csurf = require('csurf');
-    // app.use(csurf);
+//   if (app.get('env') === 'production') {
+//     app.set('trust proxy', 1) // trust first proxy
+//     // sess.cookie.secure = true // serve secure cookies
+//     // const csurf = require('csurf');
+//     // app.use(csurf);
 
-    app.use(session({
-      name: "cookie_id",
-      secret: process.env.sessionSecret,
-      resave: false,
-      saveUninitialized: false,
-      store: sessionStore,
-      cookie: {
-        maxAge: ONE_DAY,
-        sameSite: true,
-        secure: true,
-        httpOnly: true
-      },
-      // unset: 'destroy',
-      // rolling: true
-    }));
-  } else {
-    const cors = require('cors');
-    app.use(cors());
-    app.use(session({
-      name: "cookie_id",
-      secret: process.env.sessionSecret,
-      resave: false,
-      saveUninitialized: false,
-      store: sessionStore,
-      cookie: {
-        maxAge: ONE_DAY,
-        sameSite: true,
-        // secure: true,
-        httpOnly: true
-      },
-      // unset: 'destroy',
-      // rolling: true
-    }));
-  }
+//     const sessionMiddleware =session({
+//       name: "cookie_id",
+//       secret: process.env.sessionSecret,
+//       resave: false,
+//       saveUninitialized: false,
+//       store: sessionStore,
+//       cookie: {
+//         maxAge: ONE_DAY,
+//         sameSite: true,
+//         secure: true,
+//         httpOnly: true
+//       },
+//       // unset: 'destroy',
+//       // rolling: true
+//     })
+//     app.use(sessionMiddleware);
+//   } else {
+//     const cors = require('cors');
+//     app.use(cors());
+    
+//     const sessionMiddleware = session({
+//       name: "cookie_id",
+//       secret: process.env.sessionSecret,
+//       resave: false,
+//       saveUninitialized: false,
+//       store: sessionStore,
+//       cookie: {
+//         maxAge: ONE_DAY,
+//         sameSite: true,
+//         // secure: true,
+//         httpOnly: true
+//       },
+//       // unset: 'destroy',
+//       // rolling: true
+//     })   
+// app.use(sessionMiddleware);
+//   }
+
+const sessionMiddleware = session({
+        name: "cookie_id",
+        secret: process.env.sessionSecret,
+        resave: false,
+        saveUninitialized: false,
+        store: sessionStore,
+        cookie: {
+          maxAge: ONE_DAY,
+          sameSite: true,
+          // secure: true,
+          httpOnly: true
+        },
+        // unset: 'destroy',
+        // rolling: true
+      })   
+  app.use(sessionMiddleware);
 
   app.use((req, res, next) => {
     req.db = pool;
@@ -170,11 +194,23 @@ try {
   // app.use('/users',(req, res, next) => {if(req.isAuthenticated()){debug("IN /users while Authenticated");next();} else {debug("IN /users while UnAuthenticated"); res.redirect("/login");}}, usersRouter);
   app.use('/users', usersRouter);
   app.use('/', indexRouter);
-
+  
+  io.use(wrap(sessionMiddleware));
+  io.use(wrap(passport.initialize()));
+  io.use(wrap(passport.session()));
+  
+  io.use((socket, next) => {
+    if (socket.request.user) {
+      next();
+    } else {
+      next(new Error('unauthorized'))
+    }
+  });
 
 } catch (e) {
   debug(e);
 }
+
 process.on('unhandledRejection', (reason) => {
   // I just caught an unhandled promise rejection,
   // since we already have fallback handler for unhandled errors (see below),
@@ -182,4 +218,18 @@ process.on('unhandledRejection', (reason) => {
   debug(reason);
   return reason;
 });
+
+
+// io.use(wrap(sessionMiddleware));
+// io.use(wrap(passport.initialize()));
+// io.use(wrap(passport.session()));
+
+// io.use((socket, next) => {
+//   if (socket.request.user) {
+//     next();
+//   } else {
+//     next(new Error('unauthorized'))
+//   }
+// });
+
 module.exports = app;
