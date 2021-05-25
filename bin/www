@@ -10,9 +10,19 @@ if(! process.env.NODE_ENV || process.env.NODE_ENV !== "production") {
 
 const debug = require('debug')('mentorship:server:www');
 const http = require('http');
-const session = require('express-session');
+// const session = require('express-session');
 const app = require('../server');
-const mongodb = require('../tools/database');
+
+const mongoose = require('mongoose');
+// mongoose collection
+mongoose.connect(process.env.MongoURL,{
+  useNewUrlParser:true,
+  useUnifiedTopology:true,
+  useCreateIndex:true
+})
+// chat modal
+const Chat = mongoose.model('Chat', { id:Number,chats:Array });
+
 
 /**
  * Get port from environment and store in Express.
@@ -28,15 +38,33 @@ app.set('port', port);
 const server = http.createServer(app);
 const io = require('socket.io')(server);
 
+var chathistory = new Array;
 io.on('connect', (socket) => {
   socket.on('message',(data)=>{
     console.log(data)
     //add all chat history here
-    
-    socket.emit('server',{data: 'Server here'})
+    Chat.find({id:1})
+    .then((result) =>{
+      // if(result=[]){
+      //   socket.emit('server',{data:['Chat History Unavailable']})
+      // }else{
+      // console.log(typeof(result[0].chats))
+      // var values1 = Object.values(result[0].chats)
+      // console.log(typeof(values1))
+      // console.log(values1)
+       chathistory=result[0].chats;
+      // console.log(typeof(result[0].chats))
+      socket.emit('server',{data: result[0].chats})
+      // }
+    }).catch((err)=>{
+      console.log(err)
+      socket.emit('server',{data:['Chat History Unavailable']})
+    })
 
     socket.on('newmessagetoServer',(message)=>{
       console.log(message)
+      chathistory.push(message.text)
+      Chat.updateOne( {id:1},{ $set:{chats:chathistory}},{upsert:true,new:true,setDefaultsOnInsert:true}).then((result) => console.log(result)).catch(err=>{console.log(err)})
       io.emit('messagetoClients',{mgs:message.text})
       // databse import mongodb connector
 
