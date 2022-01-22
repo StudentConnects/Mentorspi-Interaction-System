@@ -31,7 +31,7 @@
     "mongodb": "3.6.6",
     "mongoose": "^5.12.11",
     "morgan": "^1.10.0",
-    "nanoid": "3.1.22",
+    "nanoid": "3.1.31",
     "passport": "0.4.1",
     "passport-custom": "1.1.1",
     "passport-local": "1.0.0",
