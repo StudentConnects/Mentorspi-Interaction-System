@@ -37,7 +37,7 @@
     "passport-local": "1.0.0",
     "pg": "8.6.0",
     "rate-limiter-flexible": "2.2.1",
-    "socket.io": "^4.1.2",
+    "socket.io": "^4.5.3",
     "validator-pizza-node": "1.0.3"
   },
   "repository": {
