@@ -21,7 +21,7 @@
     "csurf": "1.11.0",
     "debug": "2.6.9",
     "ejs": "~3.1.6",
-    "express": "~4.16.1",
+    "express": "~4.17.3",
     "express-session": "1.17.1",
     "express-validator": "6.6.0",
     "formidable": "1.2.2",
